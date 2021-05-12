@@ -138,44 +138,43 @@ public class Main {
     sorteioItem.remove(i);
   }
 
-  public static void mostraItens(Jogador j) {
-    int x = 0;
-    System.out.println("Esses são os itens do jogador " + j.getNome());
-    for (Item i : j.getInventario()) {
-      System.out.println(x + "-" + i.getNome());
+  public static void mostraItens(Jogador j){
+    int x=0;
+    System.out.println("Esses são os itens do jogador "+j.getNome());
+    for(Item i: j.getInventario()){
+      System.out.println(x+ "-" +i.getNome());
       x++;
     }
   }
-
-  public static void utilizarItem(Jogador j, Jogador j2) {
+  
+  public static void utilizarItem(Jogador j, Jogador j2){
     borda();
     mostraItens(j);
     borda();
     int opInt;
     String escolhido;
     int escolhidoInt;
-    String op = JOptionPane.showInputDialog(j.getNome() + " escolha um item para utilizar");
-    opInt = Integer.parseInt(op);
+    String op = JOptionPane.showInputDialog( j.getNome() + " escolha um item para utilizar");
+    opInt=Integer.parseInt(op);
 
-    if (j.getInventario().get(opInt) instanceof Espada || j.getInventario().get(opInt) instanceof Pocao
-        || j.getInventario().get(opInt) instanceof Couraca || j.getInventario().get(opInt) instanceof Estilingue) {
+    if(j.getInventario().get(opInt) instanceof Espada || j.getInventario().get(opInt) instanceof Pocao || j.getInventario().get(opInt) instanceof Couraca || j.getInventario().get(opInt) instanceof Estilingue){
       printaPersonagens(j);
-      escolhido = JOptionPane
-          .showInputDialog(j.getNome() + " escolha um personagem aliado para utilizar o item escolhido");
-      escolhidoInt = Integer.parseInt(escolhido);
+      escolhido = JOptionPane.showInputDialog( j.getNome() + " escolha um personagem aliado para utilizar o item escolhido");
+      escolhidoInt=Integer.parseInt(escolhido);
       j.getInventario().get(opInt).efeito(j.getPersonagens().get(escolhidoInt));
-    } else {
+    }
+    else{
       printaPersonagens(j2);
-      escolhido = JOptionPane
-          .showInputDialog(j.getNome() + " escolha um personagem inimigo para utilizar o item escolhido");
-      escolhidoInt = Integer.parseInt(escolhido);
+      escolhido = JOptionPane.showInputDialog( j.getNome() + " escolha um personagem inimigo para utilizar o item escolhido");
+      escolhidoInt=Integer.parseInt(escolhido);
       j.getInventario().get(opInt).efeito(j2.getPersonagens().get(escolhidoInt));
     }
 
-    if (j.getInventario().get(opInt).getDurabilidade() <= 0) {
+    if(j.getInventario().get(opInt).getDurabilidade()<=0){
       j.removerItem(opInt);
-    } else {
-      j.getInventario().get(opInt).setDurabilidade(j.getInventario().get(opInt).getDurabilidade() - 1);
+    }
+    else{
+    j.getInventario().get(opInt).setDurabilidade(j.getInventario().get(opInt).getDurabilidade()-1);
     }
   }
 
@@ -342,10 +341,10 @@ public class Main {
           jogadorAtual.getNome() + ", escolha o que fazer: 1-Movimentar/2-Ataque basico/3-Ataque especial");
 
       if (escolhido.equals("1")) {
-        if (jogadorAtual.getInventario().size() > 0) {
+        if(jogadorAtual.getInventario().size()>0){
           op = JOptionPane.showInputDialog(jogadorAtual.getNome() + ", deseja utilizar um item? (1-Sim/2-Não)");
-          opInt = Integer.parseInt(op);
-          if (opInt == 1) {
+          opInt=Integer.parseInt(op);
+            if(opInt==1){
             utilizarItem(jogadorAtual, jogadorProxRodada);
           }
         }
@@ -353,10 +352,10 @@ public class Main {
           ehVezDeJ1 = !ehVezDeJ1;
         }
       } else if (escolhido.equals("2")) {
-        if (jogadorAtual.getInventario().size() > 0) {
+        if(jogadorAtual.getInventario().size()>0){
           op = JOptionPane.showInputDialog(jogadorAtual.getNome() + ", deseja utilizar um item? (1-Sim/2-Não)");
-          opInt = Integer.parseInt(op);
-          if (opInt == 1) {
+          opInt=Integer.parseInt(op);
+            if(opInt==1){
             utilizarItem(jogadorAtual, jogadorProxRodada);
           }
         }
@@ -369,9 +368,9 @@ public class Main {
             atacado = JOptionPane.showInputDialog(jogadorAtual.getNome() + ", escolha qual personagem atacar:");
             atacadoInt = Integer.parseInt(atacado);
             if (atacadoInt >= 0 && atacadoInt < jogadorProxRodada.getPersonagens().size()) {
-              if (calcularDistanciaPersonagens((jogadorAtual.getPersonagens().get(opInt)), jogadorProxRodada
-                  .getPersonagens().get(atacadoInt)) <= jogadorAtual.getPersonagens().get(opInt).getAlcance()) {// Ação
-                                                                                                                // validada
+              if (calcularDistanciaPersonagens((jogadorAtual.getPersonagens().get(opInt)),
+                  jogadorProxRodada.getPersonagens().get(atacadoInt)) <= jogadorAtual.getPersonagens().get(opInt)
+                      .getAlcance()) {// Ação validada
                 jogadorAtual.getPersonagens().get(opInt).atkBasico(jogadorProxRodada.getPersonagens().get(atacadoInt));
                 mostraAtributos(jogadorAtual.getPersonagens().get(opInt),
                     jogadorProxRodada.getPersonagens().get(atacadoInt));
@@ -394,10 +393,10 @@ public class Main {
           JOptionPane.showMessageDialog(null, "Entrada inválida");
         }
       } else if (escolhido.equals("3")) {
-        if (jogadorAtual.getInventario().size() > 0) {
+        if(jogadorAtual.getInventario().size()>0){
           op = JOptionPane.showInputDialog(jogadorAtual.getNome() + ", deseja utilizar um item? (1-Sim/2-Não)");
-          opInt = Integer.parseInt(op);
-          if (opInt == 1) {
+          opInt=Integer.parseInt(op);
+            if(opInt==1){
             utilizarItem(jogadorAtual, jogadorProxRodada);
           }
         }
@@ -414,9 +413,9 @@ public class Main {
               atacado = JOptionPane.showInputDialog(jogadorAtual.getNome() + " escolha o personagem para atacar");
               atacadoInt = Integer.parseInt(atacado);
               if (atacadoInt >= 0 && atacadoInt < jogadorProxRodada.getPersonagens().size()) {
-                if (calcularDistanciaPersonagens(jogadorAtual.getPersonagens().get(opInt), jogadorProxRodada
-                    .getPersonagens().get(atacadoInt)) <= jogadorAtual.getPersonagens().get(opInt).getAlcance()) {// Ação
-                                                                                                                  // validada
+                if (calcularDistanciaPersonagens(jogadorAtual.getPersonagens().get(opInt),
+                    jogadorProxRodada.getPersonagens().get(atacadoInt)) <= jogadorAtual.getPersonagens().get(opInt)
+                        .getAlcance()) {// Ação validada
                   jogadorAtual.getPersonagens().get(opInt)
                       .atkEspecial(jogadorProxRodada.getPersonagens().get(atacadoInt));
                   if (jogadorProxRodada.getPersonagens().get(atacadoInt).getQuantVital() <= 0) {
@@ -435,6 +434,9 @@ public class Main {
                 || jogadorAtual.getPersonagens().get(opInt) instanceof Construtor) {
               printaPersonagens(jogadorAtual);
               if (jogadorAtual.getPersonagens().get(opInt).atkEspecial(jogadorAtual) == 1) // Ação validada
+                ehVezDeJ1 = !ehVezDeJ1;
+            } else if (jogadorAtual.getPersonagens().get(opInt) instanceof Pescador) {
+              if (jogadorAtual.getPersonagens().get(opInt).atkEspecial(jogadorProxRodada) == 1) // Ação validada
                 ehVezDeJ1 = !ehVezDeJ1;
             } else if (jogadorAtual.getPersonagens().get(opInt) instanceof Engenheiro) {
               printaPersonagens(jogadorProxRodada);
@@ -557,17 +559,17 @@ public class Main {
     while (tamanhoMapa == 0) {
       escolheTamanhoMapa = JOptionPane.showInputDialog("Digite o tamanho do mapa: (1 - 8x8) (2 - 10x10) (3 - 12x12)");
       switch (escolheTamanhoMapa) {
-        case "1":
-          tamanhoMapa = 8;
-          break;
-        case "2":
-          tamanhoMapa = 10;
-          break;
-        case "3":
-          tamanhoMapa = 12;
-          break;
-        default:
-          JOptionPane.showMessageDialog(null, "Entrada inválida");
+      case "1":
+        tamanhoMapa = 8;
+        break;
+      case "2":
+        tamanhoMapa = 10;
+        break;
+      case "3":
+        tamanhoMapa = 12;
+        break;
+      default:
+        JOptionPane.showMessageDialog(null, "Entrada inválida");
       }
     }
     tabuleiro = new Tabuleiro(tamanhoMapa, tamanhoMapa);
