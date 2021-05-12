@@ -3,8 +3,7 @@ package Personagens;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
-import Funcionalidades.Jogador;
-import Funcionalidades.Main;
+import Funcionalidades.*;
 
 public class Padre extends Personagem {
   private int quantTentativas;
