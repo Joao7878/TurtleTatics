@@ -2,8 +2,7 @@ package Personagens;
 
 import java.util.Random;
 
-import Funcionalidades.ExplosaoAtomica;
-import Funcionalidades.Jogador;
+import Funcionalidades.*;
 
 public abstract class Personagem {
   private String nome;
