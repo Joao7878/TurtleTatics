@@ -140,11 +140,16 @@ public class Main {
 
   public static void mostraItens(Jogador j){
     int x=0;
+    if(j.getInventario().size()>0){
     System.out.println("Esses são os itens do jogador "+j.getNome());
     for(Item i: j.getInventario()){
       System.out.println(x+ "-" +i.getNome());
       x++;
     }
+  }
+  else{
+    System.out.println("O jogador "+j.getNome()+" nao tem itens.");
+  }
   }
   
   public static void utilizarItem(Jogador j, Jogador j2){
@@ -341,6 +346,7 @@ public class Main {
           jogadorAtual.getNome() + ", escolha o que fazer: 1-Movimentar/2-Ataque basico/3-Ataque especial");
 
       if (escolhido.equals("1")) {
+        mostraItens(jogadorAtual);
         if(jogadorAtual.getInventario().size()>0){
           op = JOptionPane.showInputDialog(jogadorAtual.getNome() + ", deseja utilizar um item? (1-Sim/2-Não)");
           opInt=Integer.parseInt(op);
@@ -352,6 +358,7 @@ public class Main {
           ehVezDeJ1 = !ehVezDeJ1;
         }
       } else if (escolhido.equals("2")) {
+        mostraItens(jogadorAtual);
         if(jogadorAtual.getInventario().size()>0){
           op = JOptionPane.showInputDialog(jogadorAtual.getNome() + ", deseja utilizar um item? (1-Sim/2-Não)");
           opInt=Integer.parseInt(op);
@@ -393,6 +400,7 @@ public class Main {
           JOptionPane.showMessageDialog(null, "Entrada inválida");
         }
       } else if (escolhido.equals("3")) {
+        mostraItens(jogadorAtual);
         if(jogadorAtual.getInventario().size()>0){
           op = JOptionPane.showInputDialog(jogadorAtual.getNome() + ", deseja utilizar um item? (1-Sim/2-Não)");
           opInt=Integer.parseInt(op);
