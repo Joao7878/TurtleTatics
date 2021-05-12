@@ -32,7 +32,7 @@ public class Cozinheiro extends Personagem {
     }
 
     aliados.getPersonagens().get(opcPersonagemInt)
-        .setQuantVital(aliados.getPersonagens().get(opcPersonagemInt).getQuantVital() + 20);
+        .setQuantVital(aliados.getPersonagens().get(opcPersonagemInt).getQuantVital() + 50);
     aliados.getPersonagens().get(opcPersonagemInt)
         .setValorDefesa(aliados.getPersonagens().get(opcPersonagemInt).getValorDefesa() + 5);
 
