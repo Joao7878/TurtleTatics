@@ -1,7 +1,7 @@
-package Jogo.personagens;
-import Jogo.funcionalidades.*;
+package personagens;
+import funcionalidades.*;
 import java.util.Random;
-import Jogo.itens.*;
+import itens.*;
 public abstract class Personagem {
   private String nome;
   private double quantVital;

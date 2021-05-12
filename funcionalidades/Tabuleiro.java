@@ -1,5 +1,5 @@
-package Jogo.funcionalidades;
-import Jogo.personagens.Personagem;
+
+
 
 public class Tabuleiro {
   private String[][] mapa = new String[255][255];

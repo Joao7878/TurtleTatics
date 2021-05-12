@@ -1,7 +1,7 @@
-package Jogo.funcionalidades;
+package funcionalidades;
 import java.util.ArrayList;
-import Jogo.itens.*;
-import Jogo.personagens.Personagem;
+import itens.*;
+import personagens.Personagem;
 
 public class Jogador {
   private String nome;
