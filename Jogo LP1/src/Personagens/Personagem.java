@@ -37,6 +37,8 @@ public abstract class Personagem {
   }
 
   public void setQuantVital(double vida) {
+    if(vida<0)
+    vida=0;
     this.quantVital = vida;
   }
 

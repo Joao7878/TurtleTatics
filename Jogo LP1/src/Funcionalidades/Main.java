@@ -394,16 +394,17 @@ public class Main {
   }
 
   // =======================Função da batalha===============
-  public static void batalha(Jogador j1, Jogador j2, Tabuleiro tabuleiro, ArrayList<Item> sorteioItem) {
+  public static void batalha(Jogador j1, Jogador j2, Tabuleiro tabuleiro, ArrayList<Item> sorteioItem) throws IOException {
     System.out.println("=========================== HORA DE LUTAR ========================");
-
+    Item itemSorteado = sortearItens(sorteioItem);
     String op, escolhido, atacado, aliado;
-    int opInt, atacadoInt, aliadoInt;
+    int opInt, atacadoInt, aliadoInt, quantTurnos=0;
+    double cont1=0, cont2=0;
     boolean ehVezDeJ1 = true, especialEspiaoEstaAtivado = false;
     Jogador jogadorAtual = j1, jogadorProxRodada = j2;
     ExplosaoAtomica explosao = new ExplosaoAtomica(-1, -1);
 
-    while (j1.getPersonagens().size() != 0 || j2.getPersonagens().size() != 0) {
+    while (j1.getPersonagens().size() != 0 || j2.getPersonagens().size() != 0||quantTurnos!=15) {
       if (passouTurno(ehVezDeJ1, jogadorAtual, j1, j2)) {
         if (especialEspiaoEstaAtivado) {
           ehVezDeJ1 = !ehVezDeJ1;
@@ -595,8 +596,36 @@ public class Main {
         JOptionPane.showMessageDialog(null, "Entrada inválida");
       }
       tabuleiro.printMapa(j1, j2);
-      // Apenas para teste com arquivos. Apagar o 'break' abaixo posteriormente
-      break;// APAGA ESSE BREAK DEPOIS
+      quantTurnos++;
+    }
+    if(quantTurnos==15){
+      if(jogadorAtual.getPersonagens().size()>jogadorProxRodada.getPersonagens().size()){
+        salvarGanhadorArquivo(jogadorAtual, itemSorteado);
+      }
+      else if(jogadorProxRodada.getPersonagens().size()>jogadorAtual.getPersonagens().size()){
+        salvarGanhadorArquivo(jogadorProxRodada, itemSorteado);
+      }
+      else{
+        for (Personagem p : jogadorAtual.getPersonagens()) {
+          cont1+=p.getQuantVital();
+        }
+        for (Personagem p : jogadorProxRodada.getPersonagens()) {
+          cont2+=p.getQuantVital();
+        }
+        if(cont1>cont2){
+          JOptionPane.showMessageDialog(null, "Parabéns " + jogadorAtual.getNome() + "! Você é o grande campeão");
+          salvarGanhadorArquivo(jogadorAtual, itemSorteado);
+          JOptionPane.showMessageDialog(null, "Por ter vencido a partida, " + jogadorAtual.getNome() + " recebeu o item " + itemSorteado.getNome());
+        }
+        else if(cont2>cont1){
+        JOptionPane.showMessageDialog(null, "Parabéns " + jogadorProxRodada.getNome() + "! Você é o grande campeão");
+        salvarGanhadorArquivo(jogadorProxRodada, itemSorteado);
+        JOptionPane.showMessageDialog(null, "Por ter vencido a partida, " + jogadorProxRodada.getNome() + " recebeu o item " + itemSorteado.getNome());
+        }
+        else{
+        JOptionPane.showMessageDialog(null, "Empate entre " + jogadorAtual.getNome() + " e "+ jogadorProxRodada.getNome() +" , disputem mais uma partida!");
+        }
+      }
     }
   }
 
