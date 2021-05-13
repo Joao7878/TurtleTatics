@@ -281,7 +281,7 @@ public class Main {
     boolean ehVezDeJ1 = true;
     String coordenada;
     Jogador jogadorAtual;
-
+    tabuleiro.printMapa(j1, j2);
     while (posPersonagemAtual < 10) {
       if (ehVezDeJ1)
         jogadorAtual = j1;
