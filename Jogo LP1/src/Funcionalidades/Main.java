@@ -404,7 +404,7 @@ public class Main {
     Jogador jogadorAtual = j1, jogadorProxRodada = j2;
     ExplosaoAtomica explosao = new ExplosaoAtomica(-1, -1);
 
-    while (j1.getPersonagens().size() != 0 || j2.getPersonagens().size() != 0||quantTurnos!=15) {
+    while (jogadorAtual.getPersonagens().size() != 0 || jogadorProxRodada.getPersonagens().size() != 0|| quantTurnos!=15) {
       if (passouTurno(ehVezDeJ1, jogadorAtual, j1, j2)) {
         if (especialEspiaoEstaAtivado) {
           ehVezDeJ1 = !ehVezDeJ1;
