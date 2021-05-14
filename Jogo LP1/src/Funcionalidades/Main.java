@@ -13,7 +13,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.Math;
-
+//matei todos os pernagem do inimigo porem o jogo não acabou
+//especial do cientista não está funcionando
 public class Main {
   public static void limparTelaConsole() {
     System.out.print("\033[H\033[2J");
