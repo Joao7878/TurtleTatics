@@ -13,8 +13,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.Math;
-//matei todos os pernagem do inimigo porem o jogo não acabou
-//especial do cientista não está funcionando
+
+/*Equipe: Guilherme Martinho Chumbinho De Andrade,Luan Machado Silva Vidal, Antonio Mesquita da Silveiro Neto,
+Rafael Santos de Jesus,João Pedro Moreira de Almeida Santos*/
 public class Main {
   public static void limparTelaConsole() {
     System.out.print("\033[H\033[2J");
@@ -170,7 +171,7 @@ public class Main {
     BufferedReader leitor;
 
     try {
-      arqR = new FileReader("C:\\Users\\rafas\\Desktop\\Java\\Jogo LP1\\src\\Funcionalidades\\arqJogadores.txt");
+      arqR = new FileReader("arqJogadores.txt");
       leitor = new BufferedReader(arqR);
     } catch (Exception ex) {
       JOptionPane.showMessageDialog(null, "Falha ao tentar abrir o arquivo");
@@ -183,18 +184,18 @@ public class Main {
           linha = leitor.readLine();
           String itensSalvos[] = linha.split(",");
 
-          for(String item : itensSalvos) {
-            if(item.equals("Couraça"))
+          for (String item : itensSalvos) {
+            if (item.equals("Couraça"))
               j.inserirItem(new Couraca());
-            else if(item.equals("Espada"))
+            else if (item.equals("Espada"))
               j.inserirItem(new Espada());
-            else if(item.equals("Estilingue"))
+            else if (item.equals("Estilingue"))
               j.inserirItem(new Estilingue());
-            else if(item.equals("Poção de Cura"))
+            else if (item.equals("Poção de Cura"))
               j.inserirItem(new Pocao());
-            else if(item.equals("Porrete"))
+            else if (item.equals("Porrete"))
               j.inserirItem(new Porrete());
-            else //item == Veneno
+            else // item == Veneno
               j.inserirItem(new Veneno());
           }
         } else
@@ -217,7 +218,7 @@ public class Main {
     BufferedReader leitor;
 
     try {
-      arqR = new FileReader("C:\\Users\\rafas\\Desktop\\Java\\Jogo LP1\\src\\Funcionalidades\\arqJogadores.txt");
+      arqR = new FileReader("arqJogadores.txt");
       leitor = new BufferedReader(arqR);
     } catch (Exception ex) {
       JOptionPane.showMessageDialog(null, "Falha ao tentar abrir o arquivo");
@@ -254,7 +255,7 @@ public class Main {
     PrintWriter gravador;
 
     try {
-      arqW = new FileWriter("C:\\Users\\rafas\\Desktop\\Java\\Jogo LP1\\src\\Funcionalidades\\arqJogadores.txt");
+      arqW = new FileWriter("arqJogadores.txt");
       gravador = new PrintWriter(arqW);
     } catch (Exception ex) {
       JOptionPane.showMessageDialog(null, "Falha ao tentar abrir o arquivo");
@@ -395,17 +396,18 @@ public class Main {
   }
 
   // =======================Função da batalha===============
-  public static void batalha(Jogador j1, Jogador j2, Tabuleiro tabuleiro, ArrayList<Item> sorteioItem) throws IOException {
+  public static void batalha(Jogador j1, Jogador j2, Tabuleiro tabuleiro, ArrayList<Item> sorteioItem)
+      throws IOException {
     System.out.println("=========================== HORA DE LUTAR ========================");
-    Item itemSorteado = sortearItens(sorteioItem);
+
     String op, escolhido, atacado, aliado;
-    int opInt, atacadoInt, aliadoInt, quantTurnos=0;
-    double cont1=0, cont2=0;
+    int opInt, atacadoInt, aliadoInt, quantTurnos = 0;
     boolean ehVezDeJ1 = true, especialEspiaoEstaAtivado = false;
     Jogador jogadorAtual = j1, jogadorProxRodada = j2;
     ExplosaoAtomica explosao = new ExplosaoAtomica(-1, -1);
 
-    while (jogadorAtual.getPersonagens().size() != 0 || jogadorProxRodada.getPersonagens().size() != 0|| quantTurnos!=15) {
+    while (jogadorAtual.getPersonagens().size() != 0 && jogadorProxRodada.getPersonagens().size() != 0
+        && quantTurnos != 15) {
       if (passouTurno(ehVezDeJ1, jogadorAtual, j1, j2)) {
         if (especialEspiaoEstaAtivado) {
           ehVezDeJ1 = !ehVezDeJ1;
@@ -599,49 +601,47 @@ public class Main {
       tabuleiro.printMapa(j1, j2);
       quantTurnos++;
     }
-    if(quantTurnos==15){
-      if(jogadorAtual.getPersonagens().size()>jogadorProxRodada.getPersonagens().size()){
-        salvarGanhadorArquivo(jogadorAtual, itemSorteado);
-      }
-      else if(jogadorProxRodada.getPersonagens().size()>jogadorAtual.getPersonagens().size()){
-        salvarGanhadorArquivo(jogadorProxRodada, itemSorteado);
-      }
-      else{
+
+    // Fim da partida:
+    Jogador ganhador;
+    if (quantTurnos == 15) { // limite de turnos atingido
+      if (jogadorAtual.getPersonagens().size() > jogadorProxRodada.getPersonagens().size()) {
+        ganhador = jogadorAtual;
+      } else if (jogadorProxRodada.getPersonagens().size() > jogadorAtual.getPersonagens().size()) {
+        ganhador = jogadorProxRodada;
+      } else {
+        double somaQuantVital1 = 0.0, somaQuantVital2 = 0.0;
+
         for (Personagem p : jogadorAtual.getPersonagens()) {
-          cont1+=p.getQuantVital();
+          somaQuantVital1 += p.getQuantVital();
         }
         for (Personagem p : jogadorProxRodada.getPersonagens()) {
-          cont2+=p.getQuantVital();
+          somaQuantVital2 += p.getQuantVital();
         }
-        if(cont1>cont2){
-          JOptionPane.showMessageDialog(null, "Parabéns " + jogadorAtual.getNome() + "! Você é o grande campeão");
-          salvarGanhadorArquivo(jogadorAtual, itemSorteado);
-          JOptionPane.showMessageDialog(null, "Por ter vencido a partida, " + jogadorAtual.getNome() + " recebeu o item " + itemSorteado.getNome());
-        }
-        else if(cont2>cont1){
-        JOptionPane.showMessageDialog(null, "Parabéns " + jogadorProxRodada.getNome() + "! Você é o grande campeão");
-        salvarGanhadorArquivo(jogadorProxRodada, itemSorteado);
-        JOptionPane.showMessageDialog(null, "Por ter vencido a partida, " + jogadorProxRodada.getNome() + " recebeu o item " + itemSorteado.getNome());
-        }
-        else{
-        JOptionPane.showMessageDialog(null, "Empate entre " + jogadorAtual.getNome() + " e "+ jogadorProxRodada.getNome() +" , disputem mais uma partida!");
+        if (somaQuantVital1 > somaQuantVital2) {
+          ganhador = jogadorAtual;
+        } else if (somaQuantVital2 > somaQuantVital1) {
+          ganhador = jogadorProxRodada;
+        } else {
+          JOptionPane.showMessageDialog(null, "Empate entre " + jogadorAtual.getNome() + " e "
+              + jogadorProxRodada.getNome() + ", disputem mais uma partida!");
+          return;
         }
       }
+    } else { // Algum dos jogadores ficou sem personagems
+      if (jogadorAtual.getPersonagens().size() == 0) {
+        ganhador = jogadorProxRodada;
+      } else {
+        ganhador = jogadorAtual;
+      }
     }
-  }
 
-  public static void verificaVencedor(Jogador j1, Jogador j2, ArrayList<Item> listaSorteio) throws IOException {
-    Item itemSorteado = sortearItens(listaSorteio);
-    Jogador vencedor;
+    Item itemSorteado = sortearItens(sorteioItem);
 
-    if (j1.getPersonagens().size() == 0) 
-      vencedor = j2;
-    else
-      vencedor = j1;
-
-    JOptionPane.showMessageDialog(null, "Parabéns " + vencedor.getNome() + "! Você é o grande campeão");
-    salvarGanhadorArquivo(vencedor, itemSorteado);
-    JOptionPane.showMessageDialog(null, "Por ter vencido a partida, " + vencedor.getNome() + " recebeu o item " + itemSorteado.getNome());
+    JOptionPane.showMessageDialog(null, "Parabéns " + ganhador.getNome() + "! Você é o grande campeão");
+    salvarGanhadorArquivo(ganhador, itemSorteado);
+    JOptionPane.showMessageDialog(null,
+        "Por ter vencido a partida, " + ganhador.getNome() + " recebeu o item " + itemSorteado.getNome());
   }
 
   // =====================================================================================
@@ -715,22 +715,19 @@ public class Main {
       posicionarPersonagens(j2, j1, tabuleiro);
     }
     // ======================================================
-    
     pegarItensSalvos(j1);
     pegarItensSalvos(j2);
     System.out.println("Item de " + j1.getNome());
-    for(Item item : j1.getInventario()) {
+    for (Item item : j1.getInventario()) {
       System.out.println(item.getNome());
     }
     System.out.println("Item de " + j2.getNome());
-    for(Item item : j2.getInventario()) {
+    for (Item item : j2.getInventario()) {
       System.out.println(item.getNome());
     }
     if (sorteio % 2 == 0)
       batalha(j1, j2, tabuleiro, sorteioItem);
     else
-      batalha(j2, j1, tabuleiro, sorteioItem);
-
-    verificaVencedor(j1, j2, sorteioItem);
+      batalha(j2, j1, tabuleiro, sorteioItem);  
   }
 }
