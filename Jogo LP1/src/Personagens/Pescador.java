@@ -47,6 +47,4 @@ public class Pescador extends Personagem {
     }
   }
 }
-/*
- * habilidade especial: Lançar a vara no inigimo e destruir um item escolhido
- */
+/* habilidade especial: Lançar a vara no inigimo e destruir um item escolhido*/

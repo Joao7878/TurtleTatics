@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import Itens.*;
 import Personagens.*;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.io.BufferedReader;
@@ -291,7 +292,7 @@ public class Main {
         jogadorAtual = j2;
 
       while (true) {
-        coordenada = JOptionPane.showInputDialog(jogadorAtual.getNome() + ", insira a coordenada X do "
+        coordenada = JOptionPane.showInputDialog(jogadorAtual.getNome() + ", insira a linha do "
             + jogadorAtual.getPersonagens().get((int) (posPersonagemAtual / 2.0)).getNome());
         try {
           x = Integer.parseInt(coordenada);
@@ -305,7 +306,7 @@ public class Main {
         }
       }
       while (true) {
-        coordenada = JOptionPane.showInputDialog(jogadorAtual.getNome() + ", insira a coordenada Y do "
+        coordenada = JOptionPane.showInputDialog(jogadorAtual.getNome() + ", insira a coluna do "
             + jogadorAtual.getPersonagens().get((int) (posPersonagemAtual / 2.0)).getNome());
         try {
           y = Integer.parseInt(coordenada);
@@ -651,6 +652,43 @@ public class Main {
     int tamanhoMapa = 0;
     String escolheTamanhoMapa;
     // ======================================================
+    //Menu explicando os personagens=========================
+    String menu_escolha = "-1";
+    while(!menu_escolha.equals("0")){
+      System.out.println("Juão Santos Tatics:\n\nPor favor escolha uma opção:\n\n0-Jogar\n1-Regras\n\n");
+      menu_escolha = JOptionPane.showInputDialog(null,"Escolha:");
+      if(menu_escolha.equals("1")) {
+        System.out.println("============================================================================================================");
+        System.out.println("O jogo Juão Santos Tatics é um jogo em baseados em turnos.");
+        System.out.println("Após isso, o jogo começará, onde cada jogador escolherá um personagem para realizar uma ação.");
+        System.out.println("Essa ação poderá ser um movimento, para deslocar a peça escolhida, atacar, onde a vida do personagem alvo é subtraída pelo ataque do atacante menos a defesa do defensor, e finalmente poderá também usar a habilidade especial do personagem.");
+        System.out.println("Cada um dos 10 personagens tem uma habilidade especial. Essas são:");
+        System.out.println("============================================================================================================");
+        System.out.println("Carcereiro: Diminuir a defesa do inimigo.");
+        System.out.println("============================================================================================================");
+        System.out.println("Cavaleiro: Aumenta o dano do especial a cada ataque especial.");
+        System.out.println("============================================================================================================");
+        System.out.println("Cientista Maluco: Lançar um missíl no inimigo.");
+        System.out.println("============================================================================================================");
+        System.out.println("Comandante: Lança uma bomba atomica durante o jogo apenas uma vez que ataca qualquer inimigo do mapa. O inimigo atingido toma 70 dano e as casas em volta são contaminadas com radiação. Quem estiver em uma casa contaminada perde vida por turno. A contaminação diminui por rodada mas nunca acaba.");
+        System.out.println("============================================================================================================");
+        System.out.println("Construtor: Constrói aleatoriamente ou uma arma para aumentar o ataque ou um escudo para aumentar a defesa de um aliado.");
+        System.out.println("============================================================================================================");
+        System.out.println("Cozinheiro: Aumenta a defesa e um pouco da quantidade vital de aliados próximos ao cozinheiros.");
+        System.out.println("============================================================================================================");
+        System.out.println("Engenheiro: Ataca um inimigo roubando sua vida e dando ela para si mesmo ou um alido.");
+        System.out.println("============================================================================================================");
+        System.out.println("Espião: Pula a vez do inimigo em 2.");
+        System.out.println("============================================================================================================");
+        System.out.println("Padre: Tenta converter um inimigo em aliado.");
+        System.out.println("============================================================================================================");
+        System.out.println("Pescador:Destrói um item do adversário.");
+        System.out.println("============================================================================================================");
+      }
+      else if(!menu_escolha.equals("0")){
+        System.out.println("Escolha invalida!!!!!!");
+      }
+    }
     // Variáveis dos jogadores===============================
     Jogador j1 = new Jogador(JOptionPane.showInputDialog("Insira o nome do jogador 1:"));
     Jogador j2 = new Jogador(JOptionPane.showInputDialog("Insira o nome do jogador 2:"));
@@ -729,5 +767,8 @@ public class Main {
       batalha(j1, j2, tabuleiro, sorteioItem);
     else
       batalha(j2, j1, tabuleiro, sorteioItem);  
+  }
+
+  private static void While(boolean b) {
   }
 }

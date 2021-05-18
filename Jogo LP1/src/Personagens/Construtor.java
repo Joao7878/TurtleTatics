@@ -51,4 +51,4 @@ public class Construtor extends Personagem {
     return 1;
   }
 }
-/**/
+/*o construtor pode melhorar o equipamento da sua equipe podendo aumentar a def ou o ataque do personagem*/
