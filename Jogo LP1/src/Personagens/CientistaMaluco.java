@@ -1,7 +1,7 @@
 package Personagens;
 
 import javax.swing.JOptionPane;
-
+//Criado por Luan
 public class CientistaMaluco extends Personagem {
   public CientistaMaluco() {
     super("Cientista Maluco", 100, 25, 3, 35);
@@ -15,3 +15,4 @@ public class CientistaMaluco extends Personagem {
     this.setCargaEspecial(4);
   }
 }
+/*lança um míssil em seu inimigo*/

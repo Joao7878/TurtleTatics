@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 
 import Funcionalidades.Jogador;
 import Itens.Item;
-
+//Criado por Guilherme
 public class Pescador extends Personagem {
   public Pescador() {
     super("Pescador", 150, 18, 5, 25);

@@ -1,7 +1,7 @@
 package Personagens;
 
 import javax.swing.JOptionPane;
-
+//Criado por Luan
 public class Cavaleiro extends Personagem {
   private double coefEspecial;
 
@@ -28,6 +28,6 @@ public class Cavaleiro extends Personagem {
     this.setCargaEspecial(6);
   }
 }
-// habilidade especial: Utilizar a Samehada, dividindo a vida atual do atacado a
-// partir do coeficiente de ataque especial. O atacado deve estar no raio de
-// ação do cavaleiro
+/* habilidade especial: Utilizar a Samehada, dividindo a vida atual do atacado a
+partir do coeficiente de ataque especial. O atacado deve estar no raio de
+ ação do cavaleiro*/

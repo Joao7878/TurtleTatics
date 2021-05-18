@@ -1,7 +1,7 @@
 package Personagens;
 
 import javax.swing.JOptionPane;
-
+//Criado por João
 public class Carcereiro extends Personagem {
   public Carcereiro() {
     super("Carcereiro", 250, 50, 1, 25);
@@ -15,3 +15,4 @@ public class Carcereiro extends Personagem {
     this.setCargaEspecial(3);
   }
 }
+/*reduz a defeso do imigo que foi atacado pelo atkEspecial*/

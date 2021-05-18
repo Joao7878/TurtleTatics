@@ -1,7 +1,7 @@
 package Personagens;
 
 import javax.swing.JOptionPane;
-
+//Criado por João
 public class Engenheiro extends Personagem {
   public Engenheiro() {
     super("Engenheiro", 120, 40, 3, 30);
@@ -17,3 +17,4 @@ public class Engenheiro extends Personagem {
     this.setCargaEspecial(4);
   }
 }
+/* ataca um inimigo roubando sua vida e dando ela para si mesmo ou um alido*/

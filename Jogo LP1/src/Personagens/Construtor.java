@@ -4,7 +4,7 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 import Funcionalidades.Jogador;
-
+//Criado por Antonio
 public class Construtor extends Personagem {
   public Construtor() {
     super("Construtor", 120, 25, 2, 30);
@@ -51,3 +51,4 @@ public class Construtor extends Personagem {
     return 1;
   }
 }
+/**/

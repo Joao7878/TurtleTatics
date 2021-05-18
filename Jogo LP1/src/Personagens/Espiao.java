@@ -1,7 +1,7 @@
 package Personagens;
 
 import javax.swing.JOptionPane;
-
+//Criado por Rafel
 public class Espiao extends Personagem {
   public Espiao() {
     super("Espião", 100, 40, 2, 25);

@@ -4,7 +4,7 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 import Funcionalidades.*;
-
+//Criado por Rafel
 public class Padre extends Personagem {
   private int quantTentativas;
 
@@ -67,10 +67,10 @@ public class Padre extends Personagem {
   }
 }
 
-// habilidade especial: Tenta converter um inimigo dentro do seu raio de ação em
-// aliado
-// permanentemente.
-// Ao tentar conveter um inimigo, o padre tem 25% de chance de sucesso
-// O padre pode tentar realizar a conversão até 5 vezes durante a partida
-// Caso a conversão seja bem sucessida, o padre não poderá mais utilizar a
-// habilidade especial
+/* habilidade especial: Tenta converter um inimigo dentro do seu raio de ação em
+ aliado
+ permanentemente.
+ Ao tentar conveter um inimigo, o padre tem 25% de chance de sucesso
+ O padre pode tentar realizar a conversão até 5 vezes durante a partida
+Caso a conversão seja bem sucessida, o padre não poderá mais utilizar a
+ habilidade especial*/

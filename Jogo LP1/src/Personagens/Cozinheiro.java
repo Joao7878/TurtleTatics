@@ -3,7 +3,7 @@ package Personagens;
 import javax.swing.JOptionPane;
 
 import Funcionalidades.Jogador;
-
+//Criado por Antonio
 public class Cozinheiro extends Personagem {
   public Cozinheiro() {
     super("Cozinheiro", 220, 50, 1, 20);

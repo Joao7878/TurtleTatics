@@ -3,7 +3,7 @@ package Personagens;
 import javax.swing.JOptionPane;
 
 import Funcionalidades.ExplosaoAtomica;
-
+//Criado por Guilherme
 public class Comandante extends Personagem {
   public Comandante() {
     super("Comandante", 150, 20, 4, 30);
