@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="460.0" prefWidth="861.0" styleClass="planoDeFundo" stylesheets="@estiloTelas.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="turtletatics.controller.TelaHabEspPersController">
+   <children>
+      <Label layoutX="35.0" layoutY="94.0" text="Carcereiro: Diminuir a defesa de um inimigo a seu alcance." textFill="#1c4d13">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="115.0" text="Cavaleiro: Divide a vida de um inimigo a seu alcance. A vida dividida aumenta a cada ataque especial." textFill="#1c4d13">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="136.0" text="Cientista Maluco: Atira um raio laser em qualquer inimigo do mapa." textFill="#1c4d13">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="157.0" text="Comandante: Lança uma bomba atomica durante o jogo apenas uma vez que ataca qualquer inimigo do mapa." textFill="#1c4d13">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="178.0" text="                      O inimigo atingido toma 70 dano e as casas em volta são contaminadas com radiação." textFill="#1c4d13">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="200.0" text="                      Quem estiver em uma casa contaminada perde vida por turno." textFill="#1c4d13">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="221.0" text="                      A contaminação diminui por rodada mas nunca acaba." textFill="#1c4d13">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="37.0" layoutY="242.0" text="Construtor: Constrói aleatoriamente uma arma para aumentar o ataque ou um escudo para aumentar a defesa de um aliado." textFill="#1c4d13">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="37.0" layoutY="263.0" text="Cozinheiro: Aumenta a defesa e um pouco da quantidade vital de aliados em qualquer local do mapa." textFill="#1c4d13">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="37.0" layoutY="284.0" text="Engenheiro: Ataca um inimigo roubando sua vida e dando para si mesmo ou um alido." textFill="#1c4d13">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="37.0" layoutY="305.0" text="Espião: Permite que o jogador jogue 2 vezes seguidas." textFill="#1c4d13">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="37.0" layoutY="326.0" text="Padre: Tenta converter um inimigo em aliado." textFill="#1c4d13">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="347.0" text="           Ele pode tentar a conversão 5 vezes, no máximo, tendo uma chance de sucesso de 25% em cada." textFill="#1c4d13">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="368.0" text="Pescador:Destrói um item do adversário." textFill="#1c4d13">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="botaoVoltarTelaIni" layoutX="285.0" layoutY="398.0" mnemonicParsing="false" onAction="#acaoClicarBotaoVoltarTelaIni" onKeyPressed="#acaoTeclarBotaoVoltarTelaIni" text="VOLTAR PARA A TELA INICIAL">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Label layoutX="112.0" layoutY="14.0" text="HABILIDADE ESPECIAL DOS PERSONAGENS" textFill="#1c4d13">
+         <font>
+            <Font name="Impact" size="40.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
