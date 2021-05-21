@@ -3,3 +3,62 @@
     -fx-background-size: 100% 100%;
     -fx-background-position: center;
 }
+.botaoCarcereiro {
+    -fx-background-image: url("imagens/imagensPersonagens/Carcereiro.jpg");
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center;
+}
+
+.botaoCavaleiro {
+    -fx-background-image: url("imagens/imagensPersonagens/Cavaleiro.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center;
+}
+
+.botaoCientistaMaluco {
+    -fx-background-image: url("imagens/imagensPersonagens/CientistaMaluco.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center;
+}
+
+.botaoComandante {
+    -fx-background-image: url("imagens/imagensPersonagens/Comandante.jpg");
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center;
+}
+
+.botaoConstrutor {
+    -fx-background-image: url("imagens/imagensPersonagens/Construtor.jpg");
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center;
+}
+
+.botaoCozinheiro {
+    -fx-background-image: url("imagens/imagensPersonagens/Cozinheiro.jpg");
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center;
+}
+
+.botaoEngenheiro {
+    -fx-background-image: url("imagens/imagensPersonagens/Engenheiro.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center;
+}
+
+.botaoEspiao {
+    -fx-background-image: url("imagens/imagensPersonagens/Espiao.jpg");
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center;
+}
+
+.botaoPadre {
+    -fx-background-image: url("imagens/imagensPersonagens/Padre.JPEG");
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center;
+}
+
+.botaoPescador {
+    -fx-background-image: url("imagens/imagensPersonagens/Pescador.jpg");
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center;
+}

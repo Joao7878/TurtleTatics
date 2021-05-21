@@ -1,16 +1,356 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="planoDeFundo" stylesheets="@estiloTelas.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="turtletatics.controller.TelaEscolhaPersonagensController">
+<AnchorPane id="AnchorPane" prefHeight="608.0" prefWidth="948.0" styleClass="planoDeFundo" stylesheets="@estiloTelas.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="turtletatics.controller.TelaEscolhaPersonagensController">
    <children>
-      <Label layoutX="92.0" layoutY="14.0" text="ESCOLHA DE PERSONAGENS" textFill="#1c4d13">
+      <Label layoutX="264.0" layoutY="14.0" text="ESCOLHA DE PERSONAGENS" textFill="#1c4d13">
          <font>
             <Font name="Impact" size="40.0" />
          </font>
       </Label>
+      <SplitPane dividerPositions="0.5" layoutX="7.0" layoutY="81.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="102.0" prefWidth="180.0" styleClass="botaoCarcereiro" stylesheets="@estiloTelas.css" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="180.0">
+               <children>
+                  <Label layoutX="41.0" layoutY="2.0" text="CARCEREIRO" textFill="#1c4d13">
+                     <font>
+                        <Font name="Impact" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="24.0" text="Quantidade vital: 250" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="45.0" text="Defesa: 50" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 1" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 25" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.5" layoutX="194.0" layoutY="81.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="102.0" prefWidth="180.0" styleClass="botaoCavaleiro" stylesheets="@estiloTelas.css" />
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="180.0">
+               <children>
+                  <Label layoutX="47.0" layoutY="2.0" text="CAVALEIRO" textFill="#1c4d13">
+                     <font>
+                        <Font name="Impact" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="24.0" text="Quantidade vital: 200" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="45.0" text="Defesa: 40" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 1" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 55" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.5" layoutX="381.0" layoutY="81.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="102.0" prefWidth="180.0" styleClass="botaoCientistaMaluco" stylesheets="@estiloTelas.css" />
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="180.0">
+               <children>
+                  <Label layoutX="15.0" layoutY="2.0" text="CIENTISTA MALUCO" textFill="#1c4d13">
+                     <font>
+                        <Font name="Impact" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="24.0" text="Quantidade vital: 100" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="45.0" text="Defesa: 25" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 3" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 35" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.5" layoutX="568.0" layoutY="81.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="102.0" prefWidth="180.0" styleClass="botaoComandante" stylesheets="@estiloTelas.css" />
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="180.0">
+               <children>
+                  <Label layoutX="37.0" layoutY="2.0" text="COMANDANTE" textFill="#1c4d13">
+                     <font>
+                        <Font name="Impact" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="24.0" text="Quantidade vital: 150" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="45.0" text="Defesa: 20" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 4" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 30" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.5" layoutX="755.0" layoutY="81.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="102.0" prefWidth="180.0" styleClass="botaoConstrutor" stylesheets="@estiloTelas.css" />
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="180.0">
+               <children>
+                  <Label layoutX="37.0" layoutY="2.0" text="CONSTRUTOR" textFill="#1c4d13">
+                     <font>
+                        <Font name="Impact" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="24.0" text="Quantidade vital: 120" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="45.0" text="Defesa: 25" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 2" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 30" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.5" layoutX="7.0" layoutY="341.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="102.0" prefWidth="180.0" styleClass="botaoCozinheiro" stylesheets="@estiloTelas.css" />
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="180.0">
+               <children>
+                  <Label layoutX="43.0" layoutY="2.0" text="COZINHEIRO" textFill="#1c4d13">
+                     <font>
+                        <Font name="Impact" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="24.0" text="Quantidade vital: 220" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="45.0" text="Defesa: 50" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 1" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 20" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.5" layoutX="194.0" layoutY="341.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="102.0" prefWidth="180.0" styleClass="botaoEngenheiro" stylesheets="@estiloTelas.css" />
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="180.0">
+               <children>
+                  <Label layoutX="42.0" layoutY="2.0" text="ENGENHEIRO" textFill="#1c4d13">
+                     <font>
+                        <Font name="Impact" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="24.0" text="Quantidade vital: 120" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="45.0" text="Defesa: 40" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 3" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 30" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.5" layoutX="381.0" layoutY="341.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="102.0" prefWidth="180.0" styleClass="botaoEspiao" stylesheets="@estiloTelas.css" />
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="180.0">
+               <children>
+                  <Label layoutX="62.0" layoutY="2.0" text="ESPIÃO" textFill="#1c4d13">
+                     <font>
+                        <Font name="Impact" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="24.0" text="Quantidade vital: 100" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="45.0" text="Defesa: 40" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 2" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 25" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.5" layoutX="568.0" layoutY="341.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="102.0" prefWidth="180.0" styleClass="botaoPadre" stylesheets="@estiloTelas.css" />
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="180.0">
+               <children>
+                  <Label layoutX="65.0" layoutY="2.0" text="PADRE" textFill="#1c4d13">
+                     <font>
+                        <Font name="Impact" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="24.0" text="Quantidade vital: 90" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="45.0" text="Defesa: 15" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 4" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 15" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.5" layoutX="755.0" layoutY="341.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="102.0" prefWidth="180.0" styleClass="botaoPescador" stylesheets="@estiloTelas.css" />
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="180.0">
+               <children>
+                  <Label layoutX="49.0" layoutY="2.0" text="PESCADOR" textFill="#1c4d13">
+                     <font>
+                        <Font name="Impact" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="24.0" text="Quantidade vital: 150" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="45.0" text="Defesa: 18" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 5" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 25" textFill="#1c4d13">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
    </children>
 </AnchorPane>
