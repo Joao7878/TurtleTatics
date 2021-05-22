@@ -4,8 +4,9 @@
     -fx-background-position: center;
 }
 .botaoCarcereiro {
-    -fx-background-image: url("imagens/imagensPersonagens/Carcereiro.jpg");
+    -fx-background-image: url("imagens/imagensPersonagens/Carcereiro.png");
     -fx-background-size: 100% 100%;
+    /*-fx-max-height: 50%;*/
     -fx-background-position: center;
 }
 
@@ -28,13 +29,13 @@
 }
 
 .botaoConstrutor {
-    -fx-background-image: url("imagens/imagensPersonagens/Construtor.jpg");
+    -fx-background-image: url("imagens/imagensPersonagens/Construtor.png");
     -fx-background-size: 100% 100%;
     -fx-background-position: center;
 }
 
 .botaoCozinheiro {
-    -fx-background-image: url("imagens/imagensPersonagens/Cozinheiro.jpg");
+    -fx-background-image: url("imagens/imagensPersonagens/Cozinheiro.png");
     -fx-background-size: 100% 100%;
     -fx-background-position: center;
 }
@@ -46,19 +47,19 @@
 }
 
 .botaoEspiao {
-    -fx-background-image: url("imagens/imagensPersonagens/Espiao.jpg");
+    -fx-background-image: url("imagens/imagensPersonagens/Espiao.png");
     -fx-background-size: 100% 100%;
     -fx-background-position: center;
 }
 
 .botaoPadre {
-    -fx-background-image: url("imagens/imagensPersonagens/Padre.JPEG");
+    -fx-background-image: url("imagens/imagensPersonagens/Padre.png");
     -fx-background-size: 100% 100%;
     -fx-background-position: center;
 }
 
 .botaoPescador {
-    -fx-background-image: url("imagens/imagensPersonagens/Pescador.jpg");
+    -fx-background-image: url("imagens/imagensPersonagens/Pescador.png");
     -fx-background-size: 100% 100%;
     -fx-background-position: center;
 }
