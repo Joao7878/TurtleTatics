@@ -1,10 +1,11 @@
 package turtletatics.classesJogo.personagens;
 
+import javafx.scene.image.Image;
 import javax.swing.JOptionPane;
 
 public class CientistaMaluco extends Personagem {
   public CientistaMaluco() {
-    super("Cientista Maluco", 100, 25, 3, 35);
+    super("Cientista Maluco", 100, 25, 3, 35, new Image("turtletatics/view/imagens/imagensPersonagens/CientistaMaluco.png"));
   }
 
   @Override

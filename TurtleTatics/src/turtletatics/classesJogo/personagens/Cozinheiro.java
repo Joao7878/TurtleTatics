@@ -1,12 +1,13 @@
 package turtletatics.classesJogo.personagens;
 
+import javafx.scene.image.Image;
 import javax.swing.JOptionPane;
 
 import turtletatics.classesJogo.funcionalidades.Jogador;
 
 public class Cozinheiro extends Personagem {
   public Cozinheiro() {
-    super("Cozinheiro", 220, 50, 1, 20);
+    super("Cozinheiro", 220, 50, 1, 20, new Image("turtletatics/view/imagens/imagensPersonagens/Cozinheiro.png"));
   }
 
   @Override

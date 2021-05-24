@@ -1,12 +1,13 @@
 package turtletatics.classesJogo.personagens;
 
+import javafx.scene.image.Image;
 import javax.swing.JOptionPane;
 
 public class Cavaleiro extends Personagem {
   private double coefEspecial;
 
   public Cavaleiro() {
-    super("Cavaleiro", 200, 40, 1, 55);
+    super("Cavaleiro", 200, 40, 1, 55, new Image("turtletatics/view/imagens/imagensPersonagens/Cavaleiro.png"));
     this.coefEspecial = 0.5;
   }
 

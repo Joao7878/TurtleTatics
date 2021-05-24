@@ -24,12 +24,12 @@
             <Image url="@imagens/ImagemTelaInicial.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="botaoSair" layoutX="159.0" layoutY="253.0" mnemonicParsing="false" onAction="#acaoClicarBotaoSair" onKeyPressed="#acaoTeclarBotaoSair" prefHeight="44.0" prefWidth="98.0" text="SAIR">
+      <Button layoutX="159.0" layoutY="253.0" mnemonicParsing="false" onAction="#acaoClicarBotaoSair" onKeyPressed="#acaoTeclarBotaoSair" prefHeight="44.0" prefWidth="98.0" text="SAIR">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="botaoJogar" layoutX="159.0" layoutY="155.0" mnemonicParsing="false" onAction="#acaoClicarBotaoJogar" onKeyPressed="#acaoTeclarBotaoJogar" prefHeight="44.0" prefWidth="98.0" text="JOGAR">
+      <Button layoutX="159.0" layoutY="155.0" mnemonicParsing="false" onAction="#acaoClicarBotaoJogar" onKeyPressed="#acaoTeclarBotaoJogar" prefHeight="44.0" prefWidth="98.0" text="JOGAR">
          <font>
             <Font size="20.0" />
          </font>

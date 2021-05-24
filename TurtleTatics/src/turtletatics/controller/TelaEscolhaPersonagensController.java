@@ -1,7 +1,7 @@
-
 package turtletatics.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,17 +10,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import turtletatics.classesJogo.personagens.Personagem;
+import javax.swing.JOptionPane;
 
 import turtletatics.classesTelas.*;
 
 public class TelaEscolhaPersonagensController implements Initializable {
-    
+
     String personagemSelecionado = null;
     boolean ehVezDeJ1 = true;
-    
+    ArrayList<SplitPane> listaPersonagens = new ArrayList<>();
+
     @FXML
     private SplitPane carcereiro;
     @FXML
@@ -43,186 +46,165 @@ public class TelaEscolhaPersonagensController implements Initializable {
     private SplitPane pescador;
     @FXML
     private Label labelJogadorAtual;
-    
-    public void resetarTela() {
-        carcereiro.opacityProperty().set(1);
-        cavaleiro.opacityProperty().set(1);
-        cientistaMaluco.opacityProperty().set(1);
-        comandante.opacityProperty().set(1);
-        construtor.opacityProperty().set(1);
-        cozinheiro.opacityProperty().set(1);
-        engenheiro.opacityProperty().set(1);
-        espiao.opacityProperty().set(1);
-        padre.opacityProperty().set(1);
-        pescador.opacityProperty().set(1);
+
+    void resetarTela() {
+        for (SplitPane sp : listaPersonagens) {
+            sp.opacityProperty().set(1);
+        }
+
         personagemSelecionado = null;
-        
-        if(ehVezDeJ1) labelJogadorAtual.setText(TelaEscolhaPersonagens.j1.getNome() + ", escolha um personagem");
-        else labelJogadorAtual.setText(TelaEscolhaPersonagens.j2.getNome() + ", escolha um personagem");
+
+        if (ehVezDeJ1) {
+            labelJogadorAtual.setText(TelaEscolhaPersonagens.j1.getNome() + ", escolha um personagem");
+        } else {
+            labelJogadorAtual.setText(TelaEscolhaPersonagens.j2.getNome() + ", escolha um personagem");
+        }
     }
-    
-    public void removerBotao() {
-        if(personagemSelecionado != null) {
-            switch (personagemSelecionado) {
-                case "Carcereiro":
-                    carcereiro.disableProperty().set(true);
+
+    void removerBotao() {
+        if (personagemSelecionado != null) {
+            for (SplitPane sp : listaPersonagens) {
+                if (personagemSelecionado.equals(sp.getId())) {
+                    sp.disableProperty().set(true);
                     break;
-                case "Cavaleiro":
-                    cavaleiro.disableProperty().set(true);
-                    break;
-                case "Cientista Maluco":
-                    cientistaMaluco.disableProperty().set(true);
-                    break;
-                case "Comandante":
-                    comandante.disableProperty().set(true);
-                    break;
-                case "Construtor":
-                    construtor.disableProperty().set(true);
-                    break;
-                case "Cozinheiro":
-                    cozinheiro.disableProperty().set(true);
-                    break;
-                case "Engenheiro":
-                    engenheiro.disableProperty().set(true);
-                    break;
-                case "Espião":
-                    espiao.disableProperty().set(true);
-                    break;
-                case "Padre":
-                    padre.disableProperty().set(true);
-                    break;
-                case "Pescador":
-                    pescador.disableProperty().set(true);
-                    break;
+                }
             }
         }
     }
-    
-    @FXML
-    private void inicializarLabel(MouseEvent event) {
-        if(ehVezDeJ1) labelJogadorAtual.setText(TelaEscolhaPersonagens.j1.getNome() + ", escolha um personagem");
-        else labelJogadorAtual.setText(TelaEscolhaPersonagens.j2.getNome() + ", escolha um personagem");
-    }
-    
-    public void fecharTela() {
+
+    void fecharTela() {
         ((Stage) carcereiro.getScene().getWindow()).close();
     }
-    
-    public void iniciarFasePosicionamento() {
+
+    void iniciarFasePosicionamento() {
         TelaPosicionamento tela = new TelaPosicionamento(TelaEscolhaPersonagens.j1,
-                                                         TelaEscolhaPersonagens.j2,
-                                                         TelaEscolhaPersonagens.tabuleiro);
-        
-        fecharTela();
-        
+                TelaEscolhaPersonagens.j2,
+                TelaEscolhaPersonagens.tamTabuleiro);
+
         try {
             tela.start(new Stage());
-        } catch(Exception ex) {
+            fecharTela();
+        } catch (Exception ex) {
             Logger.getLogger(TelaInicialController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Falha ao tentar abrir tela", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+
+        listaPersonagens.add(carcereiro);
+        listaPersonagens.add(cavaleiro);
+        listaPersonagens.add(cientistaMaluco);
+        listaPersonagens.add(comandante);
+        listaPersonagens.add(construtor);
+        listaPersonagens.add(cozinheiro);
+        listaPersonagens.add(engenheiro);
+        listaPersonagens.add(espiao);
+        listaPersonagens.add(padre);
+        listaPersonagens.add(pescador);
+
+        labelJogadorAtual.setText(TelaEscolhaPersonagens.j1.getNome() + ", escolha um personagem");
+        
+        //iniciarFasePosicionamento();//APAGA ESSA LINHA DEPOIS
     }
-    
+
     @FXML
-    private void acaoClicarCarcereiro(MouseEvent event) {        
+    private void acaoClicarCarcereiro(MouseEvent event) {
         resetarTela();
         carcereiro.opacityProperty().set(0.5);
-        personagemSelecionado = "Carcereiro";
+        personagemSelecionado = "carcereiro";
     }
 
     @FXML
     private void acaoClicarCavaleiro(MouseEvent event) {
         resetarTela();
         cavaleiro.opacityProperty().set(0.5);
-        personagemSelecionado = "Cavaleiro";
+        personagemSelecionado = "cavaleiro";
     }
 
     @FXML
     private void acaoClicarCientistaMaluco(MouseEvent event) {
         resetarTela();
         cientistaMaluco.opacityProperty().set(0.5);
-        personagemSelecionado = "Cientista Maluco";
+        personagemSelecionado = "cientistaMaluco";
     }
 
     @FXML
     private void acaoClicarComandante(MouseEvent event) {
         resetarTela();
         comandante.opacityProperty().set(0.5);
-        personagemSelecionado = "Comandante";
+        personagemSelecionado = "comandante";
     }
 
     @FXML
     private void acaoClicarConstrutor(MouseEvent event) {
         resetarTela();
         construtor.opacityProperty().set(0.5);
-        personagemSelecionado = "Construtor";
+        personagemSelecionado = "construtor";
     }
 
     @FXML
     private void acaoClicarCozinheiro(MouseEvent event) {
         resetarTela();
         cozinheiro.opacityProperty().set(0.5);
-        personagemSelecionado = "Cozinheiro";
+        personagemSelecionado = "cozinheiro";
     }
 
     @FXML
     private void acaoClicarEngenheiro(MouseEvent event) {
         resetarTela();
         engenheiro.opacityProperty().set(0.5);
-        personagemSelecionado = "Engenheiro";
+        personagemSelecionado = "engenheiro";
     }
 
     @FXML
     private void acaoClicarEspiao(MouseEvent event) {
         resetarTela();
         espiao.opacityProperty().set(0.5);
-        personagemSelecionado = "Espião";
+        personagemSelecionado = "espiao";
     }
 
     @FXML
     private void acaoClicarPadre(MouseEvent event) {
         resetarTela();
         padre.opacityProperty().set(0.5);
-        personagemSelecionado = "Padre";
+        personagemSelecionado = "padre";
     }
 
     @FXML
     private void acaoClicarPescador(MouseEvent event) {
         resetarTela();
         pescador.opacityProperty().set(0.5);
-        personagemSelecionado = "Pescador";
+        personagemSelecionado = "pescador";
     }
-    
+
     @FXML
     private void acaoClicarTela(MouseEvent event) {
         resetarTela();
     }
-    
+
     @FXML
     private void acaoClicarBotaoConfirmEsc(ActionEvent event) {
-        if(personagemSelecionado != null) {
+        if (personagemSelecionado != null) {
             removerBotao();
-            if(TelaEscolhaPersonagens.inserirPersonagemJ1(personagemSelecionado, ehVezDeJ1)) {
-                System.out.println("Peronagens de " + TelaEscolhaPersonagens.j1.getNome() + ":");
-                for(Personagem p : TelaEscolhaPersonagens.j1.getPersonagens()) {
-                    System.out.println(p.getNome());
-                }
-                System.out.println("\nPeronagens de " + TelaEscolhaPersonagens.j2.getNome() + ":");
-                for(Personagem p : TelaEscolhaPersonagens.j2.getPersonagens()) {
-                    System.out.println(p.getNome());
-                }
+            if (TelaEscolhaPersonagens.inserirPersonagem(personagemSelecionado, ehVezDeJ1)) {
                 iniciarFasePosicionamento();
             }
+
             ehVezDeJ1 = !ehVezDeJ1;
             resetarTela();
         }
     }
-    
+
+    @FXML
+    private void acaoTeclarBotaoConfirmEsc(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            acaoClicarBotaoConfirmEsc(new ActionEvent());
+        }
+    }
 }

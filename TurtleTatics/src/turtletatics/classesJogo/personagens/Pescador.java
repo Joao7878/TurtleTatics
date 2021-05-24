@@ -1,6 +1,7 @@
 
 package turtletatics.classesJogo.personagens;
 
+import javafx.scene.image.Image;
 import javax.swing.JOptionPane;
 
 import turtletatics.classesJogo.funcionalidades.Jogador;
@@ -8,7 +9,7 @@ import turtletatics.classesJogo.itens.Item;
 
 public class Pescador extends Personagem {
   public Pescador() {
-    super("Pescador", 150, 18, 5, 25);
+    super("Pescador", 150, 18, 5, 25, new Image("turtletatics/view/imagens/imagensPersonagens/Pescador.png"));
   }
 
   @Override

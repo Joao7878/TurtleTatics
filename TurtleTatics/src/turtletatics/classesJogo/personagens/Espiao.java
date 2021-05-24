@@ -1,10 +1,11 @@
 package turtletatics.classesJogo.personagens;
 
+import javafx.scene.image.Image;
 import javax.swing.JOptionPane;
 
 public class Espiao extends Personagem {
   public Espiao() {
-    super("Espião", 100, 40, 2, 25);
+    super("Espião", 100, 40, 2, 25, new Image("turtletatics/view/imagens/imagensPersonagens/Espiao.png"));
   }
 
   @Override

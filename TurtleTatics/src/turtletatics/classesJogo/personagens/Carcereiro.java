@@ -1,10 +1,11 @@
 package turtletatics.classesJogo.personagens;
 
+import javafx.scene.image.Image;
 import javax.swing.JOptionPane;
 
 public class Carcereiro extends Personagem {
   public Carcereiro() {
-    super("Carcereiro", 250, 50, 1, 25);
+    super("Carcereiro", 250, 50, 1, 25, new Image("turtletatics/view/imagens/imagensPersonagens/Carcereiro.png"));
   }
 
   @Override

@@ -1,6 +1,7 @@
 package turtletatics.classesJogo.personagens;
 
 import java.util.Random;
+import javafx.scene.image.Image;
 import javax.swing.JOptionPane;
 
 import turtletatics.classesJogo.funcionalidades.Jogador;
@@ -10,7 +11,7 @@ public class Padre extends Personagem {
   private int quantTentativas;
 
   public Padre() {
-    super("Padre", 90, 15, 4, 15);
+    super("Padre", 90, 15, 4, 15, new Image("turtletatics/view/imagens/imagensPersonagens/Padre.png"));
     quantTentativas = 0;
   }
 

@@ -1,6 +1,9 @@
 
 package turtletatics.classesTelas;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -9,30 +12,75 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 import turtletatics.classesJogo.funcionalidades.*;
+import turtletatics.classesJogo.itens.*;
 import turtletatics.classesJogo.personagens.*;
 
 public class TelaEscolhaPersonagens extends Application {
     
     public static Jogador j1;
     public static Jogador j2;
-    public static Tabuleiro tabuleiro;
+    public static int tamTabuleiro;
     static ArrayList<Personagem> selecaoPersonagens = new ArrayList<Personagem>();
     
-    public Jogador getJ1() {
-        return this.j1;
+    public static void pegarItensSalvos(Jogador j) throws IOException {
+    FileReader arqR;
+    BufferedReader leitor;
+        
+    try {
+      arqR = new FileReader("arqJogadores.txt");
+      leitor = new BufferedReader(arqR);
+    } catch (Exception ex) {
+      JOptionPane.showMessageDialog(null, "Falha ao tentar abrir o arquivo", "Erro", JOptionPane.ERROR_MESSAGE);
+      return;
     }
-    public Jogador getJ2() {
-        return this.j2;
+    try {
+      String linha = leitor.readLine();
+      while (linha != null) {
+        if (linha.equals(j.getNome())) {
+          linha = leitor.readLine();
+          String itensSalvos[] = linha.split(",");
+
+          for (String item : itensSalvos) {
+            if (item.equals("Couraça"))
+              j.inserirItem(new Couraca());
+            else if (item.equals("Espada"))
+              j.inserirItem(new Espada());
+            else if (item.equals("Estilingue"))
+              j.inserirItem(new Estilingue());
+            else if (item.equals("Poção de Cura"))
+              j.inserirItem(new Pocao());
+            else if (item.equals("Porrete"))
+              j.inserirItem(new Porrete());
+            else // item == Veneno
+              j.inserirItem(new Veneno());
+          }
+          break;
+        } else
+          linha = leitor.readLine();
+
+        linha = leitor.readLine();
+      }
+    } catch (Exception ex) {
+      System.out.println(ex.getMessage());
+      JOptionPane.showMessageDialog(null, "Falha durante a leiruta do arquivo", "Erro", JOptionPane.ERROR_MESSAGE);
+      arqR.close();
+      leitor.close();
     }
-    public ArrayList<Personagem> getSelecaoPersonagens() {
-        return this.selecaoPersonagens;
-    }
+
+    arqR.close();
+    leitor.close();
+  }
     
-    public TelaEscolhaPersonagens(Jogador j1, Jogador j2, Tabuleiro tabuleiro) {
+    public TelaEscolhaPersonagens(Jogador j1, Jogador j2, int tamTabuleiro) throws IOException {
         this.j1 = j1;
         this.j2 = j2;
+        this.tamTabuleiro = tamTabuleiro;
+        
+        pegarItensSalvos(this.j1);
+        pegarItensSalvos(this.j2);
         
         this.selecaoPersonagens.add(new Carcereiro());
         this.selecaoPersonagens.add(new Cavaleiro());
@@ -46,11 +94,15 @@ public class TelaEscolhaPersonagens extends Application {
         this.selecaoPersonagens.add(new Pescador());
     }
     
-    public static boolean inserirPersonagemJ1(String nomePersonagem, boolean ehVezDeJ1) {
+    public static boolean inserirPersonagem(String nomePersonagem, boolean ehVezDeJ1) {
+        if(nomePersonagem.equals("espiao")) nomePersonagem = "Espião";
+        else if(nomePersonagem.equals("cientistaMaluco")) nomePersonagem = "Cientista Maluco";
+        
         for(Personagem p : selecaoPersonagens) {
-            if(p.getNome().equals(nomePersonagem)) {
+            if(p.getNome().equalsIgnoreCase(nomePersonagem)) {
                 if(ehVezDeJ1) j1.inserirPersonagem(p);
                 else j2.inserirPersonagem(p);
+                
                 selecaoPersonagens.remove(p);
                 break;
             }

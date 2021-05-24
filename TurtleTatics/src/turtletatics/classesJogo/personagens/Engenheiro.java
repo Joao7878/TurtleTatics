@@ -1,8 +1,10 @@
 package turtletatics.classesJogo.personagens;
 
+import javafx.scene.image.Image;
+
 public class Engenheiro extends Personagem {
   public Engenheiro() {
-    super("Engenheiro", 120, 40, 3, 30);
+    super("Engenheiro", 120, 40, 3, 30, new Image("turtletatics/view/imagens/imagensPersonagens/Engenheiro.png"));
   }
 
   @Override

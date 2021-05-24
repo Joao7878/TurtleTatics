@@ -1,6 +1,7 @@
 
 package turtletatics.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -9,7 +10,6 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -22,10 +22,6 @@ public class TelaInicialController implements Initializable {
     
     @FXML
     private javafx.scene.control.Button botaoRegras;
-    @FXML
-    private Button botaoSair;
-    @FXML
-    private Button botaoJogar;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -36,12 +32,14 @@ public class TelaInicialController implements Initializable {
         ((Stage) botaoRegras.getScene().getWindow()).close();
     }
     
-    public void abrirTelaRegras() {
+    public boolean abrirTelaRegras() {
         TelaRegras tela = new TelaRegras();
         try {
             tela.start(new Stage());
+            return true;
         } catch(Exception ex) {
             Logger.getLogger(TelaInicialController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
     
@@ -67,13 +65,13 @@ public class TelaInicialController implements Initializable {
         return resposta == 0;
     }
     
-    public void iniciarFasePosicionamento() {
+    public void iniciarFasePosicionamento() throws IOException {
         Jogador j1 = new Jogador(JOptionPane.showInputDialog(null, "Insira o nome do 1º jogador", "Inserir nome", JOptionPane.INFORMATION_MESSAGE));
         if(!jogadorEhValido(j1)) return;
         Jogador j2 = new Jogador(JOptionPane.showInputDialog(null, "Insira o nome do 2º jogador", "Inserir nome", JOptionPane.INFORMATION_MESSAGE));
         if(!jogadorEhValido(j2)) {
             return;
-        } else if(j2.getNome().equalsIgnoreCase(j1.getNome())) {
+        } else if(j2.getNome().equals(j1.getNome())) {
             JOptionPane.showMessageDialog(null, "O nome dos jogadores não podem ser iguais", "Erro", 0);
             return;
         }
@@ -101,37 +99,37 @@ public class TelaInicialController implements Initializable {
         
         if(!dadosEstaoCorretas(j1.getNome(), j2.getNome(), tamEscolhido)) return;
         
-        fecharTela();
-        
         TelaEscolhaPersonagens tela;
         Random gerador = new Random();
         int sorteio = gerador.nextInt();
         if (sorteio % 2 == 0) {// Jogador 1 foi sorteado o 1º a jogar
-            tela = new TelaEscolhaPersonagens(j1, j2, tabuleiro);
+            tela = new TelaEscolhaPersonagens(j1, j2, tamEscolhido);
             JOptionPane.showMessageDialog(null, j1.getNome() + " foi sorteado como 1º a jogar", "Sorteio", JOptionPane.INFORMATION_MESSAGE);
         } else {// Jogador 2 foi sorteado o 1º a jogar
-            tela = new TelaEscolhaPersonagens(j2, j1, tabuleiro);
+            tela = new TelaEscolhaPersonagens(j2, j1, tamEscolhido);
             JOptionPane.showMessageDialog(null, j2.getNome() + " foi sorteado como 1º a jogar", "Sorteio", JOptionPane.INFORMATION_MESSAGE);
         }
         
         try {
             tela.start(new Stage());
+            fecharTela();
         } catch(Exception ex) {
             Logger.getLogger(TelaInicialController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Falha ao tentar abrir tela", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     @FXML
     private void acaoClicarBotaoRegras(javafx.event.ActionEvent event) {
-        fecharTela();
-        abrirTelaRegras();
+        if(abrirTelaRegras()) fecharTela();
+        else JOptionPane.showMessageDialog(null, "Falha ao tentar abrir tela", "Erro", JOptionPane.ERROR_MESSAGE);
     }
 
     @FXML
     private void acaoTeclarBotaoRegras(KeyEvent event) {
         if(event.getCode() == KeyCode.ENTER) {
-            fecharTela();
-            abrirTelaRegras();
+            if(abrirTelaRegras()) fecharTela();
+            else JOptionPane.showMessageDialog(null, "Falha ao tentar abrir tela", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -148,12 +146,12 @@ public class TelaInicialController implements Initializable {
     }
 
     @FXML
-    private void acaoClicarBotaoJogar(ActionEvent event) {
+    private void acaoClicarBotaoJogar(ActionEvent event) throws IOException {
         iniciarFasePosicionamento();
     }
     
     @FXML
-    private void acaoTeclarBotaoJogar(KeyEvent event) {
+    private void acaoTeclarBotaoJogar(KeyEvent event) throws IOException {
         if(event.getCode() == KeyCode.ENTER) {
             iniciarFasePosicionamento();
         }

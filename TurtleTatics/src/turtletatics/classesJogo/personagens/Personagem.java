@@ -1,6 +1,7 @@
 package turtletatics.classesJogo.personagens;
 
 import java.util.Random;
+import javafx.scene.image.Image;
 
 import turtletatics.classesJogo.funcionalidades.*;
 
@@ -13,8 +14,9 @@ public abstract class Personagem {
   private int x;
   private int y;
   private int cargaEspecial;
+  private Image imagem;
 
-  public Personagem(String nome, double quantVital, double valorDefesa, int alcance, double ataque) {
+  public Personagem(String nome, double quantVital, double valorDefesa, int alcance, double ataque, Image imagem) {
     this.alcance = alcance;
     this.nome = nome;
     this.quantVital = quantVital;
@@ -22,6 +24,7 @@ public abstract class Personagem {
     this.quantAtaque = ataque;
     this.cargaEspecial = 0;
     this.x = this.y = -1;
+    this.imagem = imagem;
   }
 
   public void printStatus() {
@@ -90,6 +93,10 @@ public abstract class Personagem {
 
   public int getAlcance() {
     return this.alcance;
+  }
+  
+  public Image getImagem() {
+      return this.imagem;
   }
 
   public void atkBasico(Personagem Patacado) {

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" onMouseClicked="#acaoClicarTela" onMouseEntered="#inicializarLabel" prefHeight="706.0" prefWidth="948.0" styleClass="planoDeFundo" stylesheets="@estiloTelas.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="turtletatics.controller.TelaEscolhaPersonagensController">
+<AnchorPane id="AnchorPane" onMouseClicked="#acaoClicarTela" prefHeight="706.0" prefWidth="948.0" styleClass="planoDeFundo" stylesheets="@estiloTelas.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="turtletatics.controller.TelaEscolhaPersonagensController">
    <children>
       <Label layoutX="264.0" layoutY="14.0" text="ESCOLHA DE PERSONAGENS" textFill="#1c4d13">
          <font>
@@ -353,7 +353,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <Button layoutX="358.0" layoutY="646.0" mnemonicParsing="false" onAction="#acaoClicarBotaoConfirmEsc" text="CONFIRMAR ESCOLHA">
+      <Button layoutX="358.0" layoutY="646.0" mnemonicParsing="false" onAction="#acaoClicarBotaoConfirmEsc" onKeyPressed="#acaoTeclarBotaoConfirmEsc" text="CONFIRMAR ESCOLHA">
          <font>
             <Font size="20.0" />
          </font>

@@ -4,12 +4,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="planoDeFundo" stylesheets="@estiloTelas.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="turtletatics.controller.TelaPosicionamentoController">
+<AnchorPane id="AnchorPane" fx:id="panePrincipal" prefHeight="544.0" prefWidth="745.0" styleClass="planoDeFundo" stylesheets="@estiloTelas.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="turtletatics.controller.TelaPosicionamentoController">
    <children>
-      <Label layoutX="97.0" layoutY="14.0" text="FASE DE POSICIONAMENTO" textFill="#1c4d13">
+      <Label layoutX="170.0" layoutY="14.0" text="FASE DE POSICIONAMENTO" textFill="#1c4d13">
          <font>
             <Font name="Impact" size="40.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelJ1" layoutX="29.0" layoutY="93.0" textFill="#1c4d13">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelJ2" layoutX="29.0" layoutY="244.0" textFill="#1c4d13">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelJogadorAtual" layoutX="29.0" layoutY="429.0" textFill="#1c4d13">
+         <font>
+            <Font size="20.0" />
          </font>
       </Label>
    </children>

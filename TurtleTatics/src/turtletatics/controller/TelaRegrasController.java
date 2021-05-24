@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 
 public class TelaRegrasController implements Initializable {
@@ -35,21 +36,25 @@ public class TelaRegrasController implements Initializable {
         ((Stage) botaoVoltarTelaIni.getScene().getWindow()).close();
     }
     
-    public void abrirTelaInicial() {
+    public boolean abrirTelaInicial() {
         TelaInicial tela = new TelaInicial();
         try {
             tela.start(new Stage());
+            return true;
         } catch(Exception ex) {
             Logger.getLogger(TelaInicialController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
     
-    public void abrirTelaHabEspPers() {
+    public boolean abrirTelaHabEspPers() {
         TelaHabEspPers tela = new TelaHabEspPers();
         try {
             tela.start(new Stage());
+            return true;
         } catch(Exception ex) {
             Logger.getLogger(TelaInicialController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 
@@ -69,15 +74,15 @@ public class TelaRegrasController implements Initializable {
     
     @FXML
     private void acaoClicarBotaoVerHabEsp(ActionEvent event) {
-        fecharTela();
-        abrirTelaHabEspPers();
+        if(abrirTelaHabEspPers()) fecharTela();
+        else JOptionPane.showMessageDialog(null, "Falha ao tentar abrir tela", "Erro", JOptionPane.ERROR_MESSAGE);
     }
 
     @FXML
     private void acaoTeclarBotaoVerHabEsp(KeyEvent event) {
         if(event.getCode() == KeyCode.ENTER) {
-            fecharTela();
-            abrirTelaHabEspPers();
+            if(abrirTelaHabEspPers()) fecharTela();
+            else JOptionPane.showMessageDialog(null, "Falha ao tentar abrir tela", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
     

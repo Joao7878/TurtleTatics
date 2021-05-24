@@ -6,7 +6,6 @@
 .botaoCarcereiro {
     -fx-background-image: url("imagens/imagensPersonagens/Carcereiro.png");
     -fx-background-size: 100% 100%;
-    /*-fx-max-height: 50%;*/
     -fx-background-position: center;
 }
 
@@ -63,3 +62,4 @@
     -fx-background-size: 100% 100%;
     -fx-background-position: center;
 }
+

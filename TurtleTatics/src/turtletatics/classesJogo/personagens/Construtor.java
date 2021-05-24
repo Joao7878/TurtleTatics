@@ -1,13 +1,14 @@
 package turtletatics.classesJogo.personagens;
 
 import java.util.Random;
+import javafx.scene.image.Image;
 import javax.swing.JOptionPane;
 
 import turtletatics.classesJogo.funcionalidades.Jogador;
 
 public class Construtor extends Personagem {
   public Construtor() {
-    super("Construtor", 120, 25, 2, 30);
+    super("Construtor", 120, 25, 2, 30, new Image("turtletatics/view/imagens/imagensPersonagens/Construtor.png"));
   }
 
   @Override

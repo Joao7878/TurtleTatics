@@ -1,12 +1,13 @@
 package turtletatics.classesJogo.personagens;
 
+import javafx.scene.image.Image;
 import javax.swing.JOptionPane;
 
 import turtletatics.classesJogo.funcionalidades.ExplosaoAtomica;
 
 public class Comandante extends Personagem {
   public Comandante() {
-    super("Comandante", 150, 20, 4, 30);
+    super("Comandante", 150, 20, 4, 30, new Image("turtletatics/view/imagens/imagensPersonagens/Comandante.jpg"));
   }
 
   @Override
