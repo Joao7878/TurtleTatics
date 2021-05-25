@@ -1,4 +1,3 @@
-
 package turtletatics.controller;
 
 import java.net.URL;
@@ -27,17 +26,17 @@ public class TelaHabEspPersController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
+
     public void fecharTela() {
         ((Stage) botaoVoltarTelaIni.getScene().getWindow()).close();
     }
-    
+
     public boolean abrirTelaInicial() {
         TelaInicial tela = new TelaInicial();
         try {
             tela.start(new Stage());
             return true;
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(TelaInicialController.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
@@ -45,16 +44,22 @@ public class TelaHabEspPersController implements Initializable {
 
     @FXML
     private void acaoClicarBotaoVoltarTelaIni(ActionEvent event) {
-        if(abrirTelaInicial()) fecharTela();
-        else JOptionPane.showMessageDialog(null, "Falha ao tentar abrir tela", "Erro", JOptionPane.ERROR_MESSAGE);
-    }
-    
-    @FXML
-    private void acaoTeclarBotaoVoltarTelaIni(KeyEvent event) {
-        if(event.getCode() == KeyCode.ENTER) {
-            if(abrirTelaInicial()) fecharTela();
-            else JOptionPane.showMessageDialog(null, "Falha ao tentar abrir tela", "Erro", JOptionPane.ERROR_MESSAGE);
+        if (abrirTelaInicial()) {
+            fecharTela();
+        } else {
+            JOptionPane.showMessageDialog(null, "Falha ao tentar abrir tela", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
+    @FXML
+    private void acaoTeclarBotaoVoltarTelaIni(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            if (abrirTelaInicial()) {
+                fecharTela();
+            } else {
+                JOptionPane.showMessageDialog(null, "Falha ao tentar abrir tela", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
 }

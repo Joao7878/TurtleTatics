@@ -1,4 +1,3 @@
-
 package turtletatics.classesTelas;
 
 import javafx.application.Application;
@@ -10,13 +9,13 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class TelaRegras extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/turtletatics/view/TelaRegras.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.getIcons().add(new Image("/turtletatics/view/imagens/IconeAbas.png"));
         stage.setTitle("Regras");
@@ -30,5 +29,5 @@ public class TelaRegras extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

@@ -1,4 +1,3 @@
-
 package turtletatics.controller;
 
 import turtletatics.classesTelas.TelaHabEspPers;
@@ -16,11 +15,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
-
 public class TelaRegrasController implements Initializable {
 
-    @FXML
-    private Button botaoVerHabEsp;
     @FXML
     private Button botaoVoltarTelaIni;
 
@@ -31,28 +27,28 @@ public class TelaRegrasController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
+
     public void fecharTela() {
         ((Stage) botaoVoltarTelaIni.getScene().getWindow()).close();
     }
-    
+
     public boolean abrirTelaInicial() {
         TelaInicial tela = new TelaInicial();
         try {
             tela.start(new Stage());
             return true;
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(TelaInicialController.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
-    
+
     public boolean abrirTelaHabEspPers() {
         TelaHabEspPers tela = new TelaHabEspPers();
         try {
             tela.start(new Stage());
             return true;
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(TelaInicialController.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
@@ -66,24 +62,30 @@ public class TelaRegrasController implements Initializable {
 
     @FXML
     private void acaoTeclarBotaoVoltarTelaIni(KeyEvent event) {
-        if(event.getCode() == KeyCode.ENTER) {
+        if (event.getCode() == KeyCode.ENTER) {
             fecharTela();
             abrirTelaInicial();
         }
     }
-    
+
     @FXML
     private void acaoClicarBotaoVerHabEsp(ActionEvent event) {
-        if(abrirTelaHabEspPers()) fecharTela();
-        else JOptionPane.showMessageDialog(null, "Falha ao tentar abrir tela", "Erro", JOptionPane.ERROR_MESSAGE);
+        if (abrirTelaHabEspPers()) {
+            fecharTela();
+        } else {
+            JOptionPane.showMessageDialog(null, "Falha ao tentar abrir tela", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     @FXML
     private void acaoTeclarBotaoVerHabEsp(KeyEvent event) {
-        if(event.getCode() == KeyCode.ENTER) {
-            if(abrirTelaHabEspPers()) fecharTela();
-            else JOptionPane.showMessageDialog(null, "Falha ao tentar abrir tela", "Erro", JOptionPane.ERROR_MESSAGE);
+        if (event.getCode() == KeyCode.ENTER) {
+            if (abrirTelaHabEspPers()) {
+                fecharTela();
+            } else {
+                JOptionPane.showMessageDialog(null, "Falha ao tentar abrir tela", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
-    
+
 }

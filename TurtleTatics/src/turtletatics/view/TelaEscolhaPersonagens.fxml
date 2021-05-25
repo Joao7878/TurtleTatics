@@ -13,7 +13,7 @@
             <Font name="Impact" size="40.0" />
          </font>
       </Label>
-      <SplitPane fx:id="carcereiro" dividerPositions="0.5" layoutX="7.0" layoutY="116.0" onMouseClicked="#acaoClicarCarcereiro" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+      <SplitPane fx:id="carcereiro" dividerPositions="0.5" layoutX="7.0" layoutY="116.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
         <items>
           <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="124.0" prefWidth="180.0" styleClass="botaoCarcereiro" stylesheets="@estiloTelas.css" />
           <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="123.0" prefWidth="180.0">
@@ -47,7 +47,7 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <SplitPane fx:id="cavaleiro" dividerPositions="0.5" layoutX="194.0" layoutY="116.0" onMouseClicked="#acaoClicarCavaleiro" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+      <SplitPane fx:id="cavaleiro" dividerPositions="0.5" layoutX="194.0" layoutY="116.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
          <items>
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="124.0" prefWidth="180.0" styleClass="botaoCavaleiro" stylesheets="@estiloTelas.css" />
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="123.0" prefWidth="180.0">
@@ -81,7 +81,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane fx:id="cientistaMaluco" dividerPositions="0.5" layoutX="381.0" layoutY="116.0" onMouseClicked="#acaoClicarCientistaMaluco" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+      <SplitPane fx:id="cientistaMaluco" dividerPositions="0.5" layoutX="381.0" layoutY="116.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
          <items>
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="124.0" prefWidth="180.0" styleClass="botaoCientistaMaluco" stylesheets="@estiloTelas.css" />
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="123.0" prefWidth="180.0">
@@ -115,7 +115,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane fx:id="comandante" dividerPositions="0.5" layoutX="568.0" layoutY="116.0" onMouseClicked="#acaoClicarComandante" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+      <SplitPane fx:id="comandante" dividerPositions="0.5" layoutX="568.0" layoutY="116.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
          <items>
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="124.0" prefWidth="180.0" styleClass="botaoComandante" stylesheets="@estiloTelas.css" />
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="123.0" prefWidth="180.0">
@@ -149,7 +149,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane fx:id="construtor" dividerPositions="0.5" layoutX="755.0" layoutY="116.0" onMouseClicked="#acaoClicarConstrutor" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+      <SplitPane fx:id="construtor" dividerPositions="0.5" layoutX="755.0" layoutY="116.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
          <items>
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="124.0" prefWidth="180.0" styleClass="botaoConstrutor" stylesheets="@estiloTelas.css" />
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="123.0" prefWidth="180.0">
@@ -183,7 +183,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane fx:id="cozinheiro" dividerPositions="0.5" layoutX="7.0" layoutY="376.0" onMouseClicked="#acaoClicarCozinheiro" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+      <SplitPane fx:id="cozinheiro" dividerPositions="0.5" layoutX="7.0" layoutY="376.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
          <items>
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="124.0" prefWidth="180.0" styleClass="botaoCozinheiro" stylesheets="@estiloTelas.css" />
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="123.0" prefWidth="180.0">
@@ -217,7 +217,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane fx:id="engenheiro" dividerPositions="0.5" layoutX="194.0" layoutY="376.0" onMouseClicked="#acaoClicarEngenheiro" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+      <SplitPane fx:id="engenheiro" dividerPositions="0.5" layoutX="194.0" layoutY="376.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
          <items>
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="124.0" prefWidth="180.0" styleClass="botaoEngenheiro" stylesheets="@estiloTelas.css" />
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="123.0" prefWidth="180.0">
@@ -251,7 +251,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane fx:id="espiao" dividerPositions="0.5" layoutX="381.0" layoutY="376.0" onMouseClicked="#acaoClicarEspiao" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+      <SplitPane fx:id="espiao" dividerPositions="0.5" layoutX="381.0" layoutY="376.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
          <items>
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="124.0" prefWidth="180.0" styleClass="botaoEspiao" stylesheets="@estiloTelas.css" />
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="123.0" prefWidth="180.0">
@@ -285,7 +285,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane fx:id="padre" dividerPositions="0.5" layoutX="568.0" layoutY="376.0" onMouseClicked="#acaoClicarPadre" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+      <SplitPane fx:id="padre" dividerPositions="0.5" layoutX="568.0" layoutY="376.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
          <items>
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="124.0" prefWidth="180.0" styleClass="botaoPadre" stylesheets="@estiloTelas.css" />
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="123.0" prefWidth="180.0">
@@ -319,7 +319,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane fx:id="pescador" dividerPositions="0.5" layoutX="755.0" layoutY="376.0" onMouseClicked="#acaoClicarPescador" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
+      <SplitPane fx:id="pescador" dividerPositions="0.5" layoutX="755.0" layoutY="376.0" orientation="VERTICAL" prefHeight="255.0" prefWidth="182.0">
          <items>
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="124.0" prefWidth="180.0" styleClass="botaoPescador" stylesheets="@estiloTelas.css" />
             <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="123.0" prefWidth="180.0">

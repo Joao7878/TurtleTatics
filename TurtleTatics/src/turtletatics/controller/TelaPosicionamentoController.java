@@ -13,17 +13,19 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import turtletatics.classesJogo.funcionalidades.Jogador;
+import turtletatics.classesJogo.funcionalidades.Main;
+import turtletatics.classesJogo.personagens.Personagem;
 
 import turtletatics.classesTelas.*;
 
 public class TelaPosicionamentoController implements Initializable {
 
-    static final int TAM_CASA = 70;
-    static final int TAM_PERS_CASA = 60;
+    static final int TAM_CASA = 60;
+    static final int TAM_PERS_CASA = 55;
     static final int ESP_CASA_PERS = (TAM_CASA - TAM_PERS_CASA) / 2;
-    
+
     boolean ehVezDeJ1 = true;
-    Rectangle[][] tabuleiro = new Rectangle[TelaPosicionamento.tamTabuleiro][TelaPosicionamento.tamTabuleiro];
     ArrayList<ImageView> persJ1 = new ArrayList<ImageView>();
     ArrayList<ImageView> persJ2 = new ArrayList<ImageView>();
     ImageView personagemSelecionado = null;
@@ -62,15 +64,15 @@ public class TelaPosicionamentoController implements Initializable {
     void resetarTela() {
         personagemSelecionado = null;
 
-        for (int i = 0; i < TelaPosicionamento.tamTabuleiro; i++) {
-            for (int j = 0; j < TelaPosicionamento.tamTabuleiro; j++) {
-                tabuleiro[i][j].setOpacity(1);
-                tabuleiro[i][j].toBack();
+        for (int i = 0; i < Main.tamTabuleiro; i++) {
+            for (int j = 0; j < Main.tamTabuleiro; j++) {
+                Main.tabuleiro[i][j].setOpacity(1);
+                Main.tabuleiro[i][j].toBack();
             }
         }
 
         if (ehVezDeJ1) {
-            labelJogadorAtual.setText(TelaPosicionamento.j1.getNome() + ", posicione um personagem");
+            labelJogadorAtual.setText(Main.j1.getNome() + ", posicione um personagem");
 
             for (ImageView im : persJ1) {
                 im.setOpacity(1);
@@ -83,7 +85,7 @@ public class TelaPosicionamentoController implements Initializable {
                 }
             }
         } else {
-            labelJogadorAtual.setText(TelaPosicionamento.j2.getNome() + ", posicione um personagem");
+            labelJogadorAtual.setText(Main.j2.getNome() + ", posicione um personagem");
 
             for (ImageView im : persJ2) {
                 im.setOpacity(1);
@@ -116,7 +118,7 @@ public class TelaPosicionamentoController implements Initializable {
         }
         return true;
     }
-    
+
     void fecharTela() {
         ((Stage) panePrincipal.getScene().getWindow()).close();
     }
@@ -131,6 +133,24 @@ public class TelaPosicionamentoController implements Initializable {
             Logger.getLogger(TelaInicialController.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Falha ao tentar abrir tela", "Erro", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    void inserirNoTabuleiro(Rectangle casa, Jogador j, int x, int y) {
+        for (Personagem p : j.getPersonagens()) {
+            if (p.getImagem().equals(personagemSelecionado)) {
+                p.setX(x);
+                p.setY(y);
+                break;
+            }
+        }
+
+        personagemSelecionado.setLayoutX(casa.getX() + ESP_CASA_PERS);
+        personagemSelecionado.setLayoutY(casa.getY() + ESP_CASA_PERS);
+
+        personagemSelecionado.fitWidthProperty().set(TAM_PERS_CASA);
+        personagemSelecionado.fitHeightProperty().set(TAM_PERS_CASA);
+
+        removerPers();
     }
 
     void removerPers() {
@@ -153,14 +173,14 @@ public class TelaPosicionamentoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
-        labelJ1.setText("Personagens de " + TelaPosicionamento.j1.getNome() + ":");
-        labelJ2.setText("Personagens de " + TelaPosicionamento.j2.getNome() + ":");
+        labelJ1.setText("Personagens de " + Main.j1.getNome() + ":");
+        labelJ2.setText("Personagens de " + Main.j2.getNome() + ":");
 
-        labelJogadorAtual.setText(TelaEscolhaPersonagens.j1.getNome() + ", posicione um personagem");
+        labelJogadorAtual.setText(Main.j1.getNome() + ", posicione um personagem");
 
         //Insere os personagens de J1
         for (int i = 0; i < 5; i++) {
-            ImageView im = new ImageView(TelaPosicionamento.j1.getPersonagens().get(i).getImagem());
+            ImageView im = Main.j1.getPersonagens().get(i).getImagem();
 
             im.fitWidthProperty().set(109);
             im.fitHeightProperty().set(113);
@@ -174,7 +194,7 @@ public class TelaPosicionamentoController implements Initializable {
 
         //Insere os personagens de J2
         for (int i = 0; i < 5; i++) {
-            ImageView im = new ImageView(TelaPosicionamento.j2.getPersonagens().get(i).getImagem());
+            ImageView im = Main.j2.getPersonagens().get(i).getImagem();
 
             im.fitWidthProperty().set(109);
             im.fitHeightProperty().set(113);
@@ -187,9 +207,9 @@ public class TelaPosicionamentoController implements Initializable {
         }
 
         //Insere o tabuleiro na tela
-        for (int i = 0; i < TelaPosicionamento.tamTabuleiro; i++) {
-            for (int j = 0; j < TelaPosicionamento.tamTabuleiro; j++) {
-                Rectangle r = new Rectangle(620 + i * TAM_CASA, 108 + j * TAM_CASA, TAM_CASA, TAM_CASA);
+        for (int i = 0; i < Main.tamTabuleiro; i++) {
+            for (int j = 0; j < Main.tamTabuleiro; j++) {
+                Rectangle r = new Rectangle(620 + i * TAM_CASA, j * TAM_CASA, TAM_CASA, TAM_CASA);
 
                 if ((i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 == 1)) {
                     r.setStyle("-fx-fill : red;");
@@ -197,7 +217,7 @@ public class TelaPosicionamentoController implements Initializable {
                     r.setStyle("-fx-fill : yellow;");
                 }
 
-                tabuleiro[i][j] = r;
+                Main.tabuleiro[i][j] = r;
                 panePrincipal.getChildren().add(r);
             }
         }
@@ -213,9 +233,9 @@ public class TelaPosicionamentoController implements Initializable {
                 per.setOpacity(0.5);
                 personagemSelecionado = per;
 
-                for (int j = TelaPosicionamento.tamTabuleiro / 2 - 1; j < TelaPosicionamento.tamTabuleiro; j++) {
-                    for (int i = 0; i < TelaPosicionamento.tamTabuleiro; i++) {
-                        tabuleiro[i][j].setOpacity(0.5);
+                for (int j = Main.tamTabuleiro / 2 - 1; j < Main.tamTabuleiro; j++) {
+                    for (int i = 0; i < Main.tamTabuleiro; i++) {
+                        Main.tabuleiro[i][j].setOpacity(0.5);
                     }
                 }
             });
@@ -232,27 +252,28 @@ public class TelaPosicionamentoController implements Initializable {
                 per.setOpacity(0.5);
                 personagemSelecionado = per;
 
-                for (int j = 0; j < TelaPosicionamento.tamTabuleiro / 2 + 1; j++) {
-                    for (int i = 0; i < TelaPosicionamento.tamTabuleiro; i++) {
-                        tabuleiro[i][j].setOpacity(0.5);
+                for (int j = 0; j < Main.tamTabuleiro / 2 + 1; j++) {
+                    for (int i = 0; i < Main.tamTabuleiro; i++) {
+                        Main.tabuleiro[i][j].setOpacity(0.5);
                     }
                 }
             });
         }
 
         //Criar o método de clicar em uma casa do tabuleiro
-        for (int i = 0; i < TelaPosicionamento.tamTabuleiro; i++) {
-            for (int j = 0; j < TelaPosicionamento.tamTabuleiro; j++) {
-                Rectangle r = tabuleiro[i][j];
-                tabuleiro[i][j].setOnMouseClicked(event -> {
+        for (int i = 0; i < Main.tamTabuleiro; i++) {
+            for (int j = 0; j < Main.tamTabuleiro; j++) {
+                Rectangle r = Main.tabuleiro[i][j];
+                int x = i;
+                int y = j;
+                
+                Main.tabuleiro[i][j].setOnMouseClicked(event -> {
                     if (!estahOcupado(r) && casaEhValida(r) && personagemSelecionado != null) {
-                        personagemSelecionado.setLayoutX(r.getX() + ESP_CASA_PERS);
-                        personagemSelecionado.setLayoutY(r.getY() + ESP_CASA_PERS);
-
-                        personagemSelecionado.fitWidthProperty().set(TAM_PERS_CASA);
-                        personagemSelecionado.fitHeightProperty().set(TAM_PERS_CASA);
-
-                        removerPers();
+                        if(ehVezDeJ1) {
+                            inserirNoTabuleiro(r, Main.j1, x, y);
+                        } else {
+                            inserirNoTabuleiro(r, Main.j2, x, y);
+                        }
                     }
                 });
             }

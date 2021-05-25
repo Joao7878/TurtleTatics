@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import turtletatics.classesJogo.funcionalidades.Main;
 
 import turtletatics.classesTelas.*;
 
@@ -55,9 +56,9 @@ public class TelaEscolhaPersonagensController implements Initializable {
         personagemSelecionado = null;
 
         if (ehVezDeJ1) {
-            labelJogadorAtual.setText(TelaEscolhaPersonagens.j1.getNome() + ", escolha um personagem");
+            labelJogadorAtual.setText(Main.j1.getNome() + ", escolha um personagem");
         } else {
-            labelJogadorAtual.setText(TelaEscolhaPersonagens.j2.getNome() + ", escolha um personagem");
+            labelJogadorAtual.setText(Main.j2.getNome() + ", escolha um personagem");
         }
     }
 
@@ -77,9 +78,7 @@ public class TelaEscolhaPersonagensController implements Initializable {
     }
 
     void iniciarFasePosicionamento() {
-        TelaPosicionamento tela = new TelaPosicionamento(TelaEscolhaPersonagens.j1,
-                TelaEscolhaPersonagens.j2,
-                TelaEscolhaPersonagens.tamTabuleiro);
+        TelaPosicionamento tela = new TelaPosicionamento();
 
         try {
             tela.start(new Stage());
@@ -97,6 +96,7 @@ public class TelaEscolhaPersonagensController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
+        //Inserir os personagens da tela na lista
         listaPersonagens.add(carcereiro);
         listaPersonagens.add(cavaleiro);
         listaPersonagens.add(cientistaMaluco);
@@ -108,79 +108,16 @@ public class TelaEscolhaPersonagensController implements Initializable {
         listaPersonagens.add(padre);
         listaPersonagens.add(pescador);
 
-        labelJogadorAtual.setText(TelaEscolhaPersonagens.j1.getNome() + ", escolha um personagem");
-        
-        //iniciarFasePosicionamento();//APAGA ESSA LINHA DEPOIS
-    }
+        labelJogadorAtual.setText(Main.j1.getNome() + ", escolha um personagem");
 
-    @FXML
-    private void acaoClicarCarcereiro(MouseEvent event) {
-        resetarTela();
-        carcereiro.opacityProperty().set(0.5);
-        personagemSelecionado = "carcereiro";
-    }
-
-    @FXML
-    private void acaoClicarCavaleiro(MouseEvent event) {
-        resetarTela();
-        cavaleiro.opacityProperty().set(0.5);
-        personagemSelecionado = "cavaleiro";
-    }
-
-    @FXML
-    private void acaoClicarCientistaMaluco(MouseEvent event) {
-        resetarTela();
-        cientistaMaluco.opacityProperty().set(0.5);
-        personagemSelecionado = "cientistaMaluco";
-    }
-
-    @FXML
-    private void acaoClicarComandante(MouseEvent event) {
-        resetarTela();
-        comandante.opacityProperty().set(0.5);
-        personagemSelecionado = "comandante";
-    }
-
-    @FXML
-    private void acaoClicarConstrutor(MouseEvent event) {
-        resetarTela();
-        construtor.opacityProperty().set(0.5);
-        personagemSelecionado = "construtor";
-    }
-
-    @FXML
-    private void acaoClicarCozinheiro(MouseEvent event) {
-        resetarTela();
-        cozinheiro.opacityProperty().set(0.5);
-        personagemSelecionado = "cozinheiro";
-    }
-
-    @FXML
-    private void acaoClicarEngenheiro(MouseEvent event) {
-        resetarTela();
-        engenheiro.opacityProperty().set(0.5);
-        personagemSelecionado = "engenheiro";
-    }
-
-    @FXML
-    private void acaoClicarEspiao(MouseEvent event) {
-        resetarTela();
-        espiao.opacityProperty().set(0.5);
-        personagemSelecionado = "espiao";
-    }
-
-    @FXML
-    private void acaoClicarPadre(MouseEvent event) {
-        resetarTela();
-        padre.opacityProperty().set(0.5);
-        personagemSelecionado = "padre";
-    }
-
-    @FXML
-    private void acaoClicarPescador(MouseEvent event) {
-        resetarTela();
-        pescador.opacityProperty().set(0.5);
-        personagemSelecionado = "pescador";
+        //Criar o método de clicar em um personagem
+        for (SplitPane p : listaPersonagens) {
+            p.setOnMouseClicked(event -> {
+                resetarTela();
+                p.opacityProperty().set(0.5);
+                personagemSelecionado = p.getId();
+            });
+        }
     }
 
     @FXML

@@ -7,7 +7,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="335.0" prefWidth="895.0" styleClass="planoDeFundo" stylesheets="@estiloTelas.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="turtletatics.controller.TelaRegrasController">
    <children>
-      <Button fx:id="botaoVerHabEsp" layoutX="213.0" layoutY="223.0" mnemonicParsing="false" onAction="#acaoClicarBotaoVerHabEsp" onKeyPressed="#acaoTeclarBotaoVerHabEsp" text="VER HABILIDADE ESPECIAL DOS PERSONAGENS">
+      <Button layoutX="213.0" layoutY="223.0" mnemonicParsing="false" onAction="#acaoClicarBotaoVerHabEsp" onKeyPressed="#acaoTeclarBotaoVerHabEsp" text="VER HABILIDADE ESPECIAL DOS PERSONAGENS">
          <font>
             <Font size="21.0" />
          </font>

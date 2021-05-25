@@ -1,4 +1,3 @@
-
 package turtletatics.classesTelas;
 
 import javafx.application.Application;
@@ -8,29 +7,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import turtletatics.classesJogo.funcionalidades.*;
 
 public class TelaPosicionamento extends Application {
-    public static Jogador j1;
-    public static Jogador j2;
-    public static int tamTabuleiro;
-    
-    public TelaPosicionamento(Jogador j1, Jogador j2, int tamTabuleiro) {
-        this.j1 = j1;
-        this.j2 = j2;
-        this.tamTabuleiro = tamTabuleiro;
-    }
-    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/turtletatics/view/TelaPosicionamento.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.getIcons().add(new Image("/turtletatics/view/imagens/IconeAbas.png"));
         stage.setTitle("Posicionamento");
         stage.setResizable(false);
+        stage.setFullScreen(true);
         stage.show();
     }
 
@@ -40,5 +29,5 @@ public class TelaPosicionamento extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
