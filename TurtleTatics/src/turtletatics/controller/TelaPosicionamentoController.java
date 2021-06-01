@@ -24,10 +24,9 @@ public class TelaPosicionamentoController implements Initializable {
     static final int TAM_CASA = 60;
     static final int TAM_PERS_CASA = 55;
     static final int ESP_CASA_PERS = (TAM_CASA - TAM_PERS_CASA) / 2;
+    static final int ESP_SUP_TAB = (Main.tamTabuleiro == 12) ? 15 : 25;
 
     boolean ehVezDeJ1 = true;
-    ArrayList<ImageView> persJ1 = new ArrayList<ImageView>();
-    ArrayList<ImageView> persJ2 = new ArrayList<ImageView>();
     ImageView personagemSelecionado = null;
 
     @FXML
@@ -44,21 +43,14 @@ public class TelaPosicionamentoController implements Initializable {
     }
 
     boolean estahOcupado(Rectangle casa) {
-        if (ehVezDeJ1) {
-            for (ImageView p : persJ1) {
-                if (p.getLayoutX() - ESP_CASA_PERS == casa.getX() && p.getLayoutY() - ESP_CASA_PERS == casa.getY()) {
-                    return true;
-                }
+        ArrayList<ImageView> persJogadorAtual = (ehVezDeJ1) ? Main.persJ1 : Main.persJ2;
+
+        for (ImageView p : persJogadorAtual) {
+            if (p.getLayoutX() - ESP_CASA_PERS == casa.getX() && p.getLayoutY() - ESP_CASA_PERS == casa.getY()) {
+                return true;
             }
-            return false;
-        } else {
-            for (ImageView p : persJ2) {
-                if (p.getLayoutX() - ESP_CASA_PERS == casa.getX() && p.getLayoutY() - ESP_CASA_PERS == casa.getY()) {
-                    return true;
-                }
-            }
-            return false;
         }
+        return false;
     }
 
     void resetarTela() {
@@ -71,32 +63,26 @@ public class TelaPosicionamentoController implements Initializable {
             }
         }
 
+        ArrayList<ImageView> persJogAtual;
+        ArrayList<ImageView> persJogProxRodada;
         if (ehVezDeJ1) {
+            persJogAtual = Main.persJ1;
+            persJogProxRodada = Main.persJ2;
             labelJogadorAtual.setText(Main.j1.getNome() + ", posicione um personagem");
-
-            for (ImageView im : persJ1) {
-                im.setOpacity(1);
-                im.disableProperty().set(false);
-            }
-            for (ImageView im : persJ2) {
-                if (!estahPosicionado(im)) {
-                    im.setOpacity(0.2);
-                    im.disableProperty().set(true);
-                }
-            }
         } else {
+            persJogAtual = Main.persJ2;
+            persJogProxRodada = Main.persJ1;
             labelJogadorAtual.setText(Main.j2.getNome() + ", posicione um personagem");
+        }
 
-            for (ImageView im : persJ2) {
-                im.setOpacity(1);
-                im.disableProperty().set(false);
-            }
-            for (ImageView im : persJ1) {
-                if (!estahPosicionado(im)) {
-                    im.setOpacity(0.2);
-                    im.disableProperty().set(true);
-                }
-
+        for (ImageView im : persJogAtual) {
+            im.setOpacity(1);
+            im.disableProperty().set(false);
+        }
+        for (ImageView im : persJogProxRodada) {
+            if (!estahPosicionado(im)) {
+                im.setOpacity(0.2);
+                im.disableProperty().set(true);
             }
         }
     }
@@ -106,12 +92,12 @@ public class TelaPosicionamentoController implements Initializable {
     }
 
     boolean terminouFasePosicionamento() {
-        for (ImageView p : persJ1) {
+        for (ImageView p : Main.persJ1) {
             if (!estahPosicionado(p)) {
                 return false;
             }
         }
-        for (ImageView p : persJ2) {
+        for (ImageView p : Main.persJ2) {
             if (!estahPosicionado(p)) {
                 return false;
             }
@@ -143,7 +129,7 @@ public class TelaPosicionamentoController implements Initializable {
                 break;
             }
         }
-
+        
         personagemSelecionado.setLayoutX(casa.getX() + ESP_CASA_PERS);
         personagemSelecionado.setLayoutY(casa.getY() + ESP_CASA_PERS);
 
@@ -173,6 +159,9 @@ public class TelaPosicionamentoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
+        panePrincipal.setPrefWidth(620 + TAM_CASA * (Main.tamTabuleiro - 1) + 80);
+        panePrincipal.setPrefHeight(50 + TAM_CASA * (Main.tamTabuleiro - 1) + 80);
+
         labelJ1.setText("Personagens de " + Main.j1.getNome() + ":");
         labelJ2.setText("Personagens de " + Main.j2.getNome() + ":");
 
@@ -188,7 +177,7 @@ public class TelaPosicionamentoController implements Initializable {
             im.layoutXProperty().set(29 + i * 113);
             im.layoutYProperty().set(125);
 
-            persJ1.add(im);
+            Main.persJ1.add(im);
             panePrincipal.getChildren().add(im);
         }
 
@@ -202,14 +191,14 @@ public class TelaPosicionamentoController implements Initializable {
             im.layoutXProperty().set(29 + i * 113);
             im.layoutYProperty().set(276);
 
-            persJ2.add(im);
+            Main.persJ2.add(im);
             panePrincipal.getChildren().add(im);
         }
 
         //Insere o tabuleiro na tela
         for (int i = 0; i < Main.tamTabuleiro; i++) {
             for (int j = 0; j < Main.tamTabuleiro; j++) {
-                Rectangle r = new Rectangle(620 + i * TAM_CASA, j * TAM_CASA, TAM_CASA, TAM_CASA);
+                Rectangle r = new Rectangle(620 + i * TAM_CASA, ESP_SUP_TAB + j * TAM_CASA, TAM_CASA, TAM_CASA);
 
                 if ((i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 == 1)) {
                     r.setStyle("-fx-fill : red;");
@@ -221,9 +210,11 @@ public class TelaPosicionamentoController implements Initializable {
                 panePrincipal.getChildren().add(r);
             }
         }
+        
+        resetarTela();
 
         //Criar o método de clicar em um personagem de J1
-        for (ImageView per : persJ1) {
+        for (ImageView per : Main.persJ1) {
             per.setOnMouseClicked(event -> {
                 if (estahPosicionado(per)) {
                     return;
@@ -242,7 +233,7 @@ public class TelaPosicionamentoController implements Initializable {
         }
 
         //Criar o método de clicar em um personagem de J2
-        for (ImageView per : persJ2) {
+        for (ImageView per : Main.persJ2) {
             per.setOnMouseClicked(event -> {
                 if (estahPosicionado(per)) {
                     return;
@@ -266,10 +257,10 @@ public class TelaPosicionamentoController implements Initializable {
                 Rectangle r = Main.tabuleiro[i][j];
                 int x = i;
                 int y = j;
-                
+
                 Main.tabuleiro[i][j].setOnMouseClicked(event -> {
                     if (!estahOcupado(r) && casaEhValida(r) && personagemSelecionado != null) {
-                        if(ehVezDeJ1) {
+                        if (ehVezDeJ1) {
                             inserirNoTabuleiro(r, Main.j1, x, y);
                         } else {
                             inserirNoTabuleiro(r, Main.j2, x, y);

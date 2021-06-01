@@ -3,6 +3,8 @@ package turtletatics.classesJogo.funcionalidades;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javax.swing.JOptionPane;
 import turtletatics.classesJogo.itens.Couraca;
@@ -21,6 +23,8 @@ public class Main {
     public static Jogador j2;
     public static int tamTabuleiro;
     public static Rectangle[][] tabuleiro;
+    public static ArrayList<ImageView> persJ1 = new ArrayList<ImageView>();
+    public static ArrayList<ImageView> persJ2 = new ArrayList<ImageView>();
 
     public static int calcularDistancia(int xAtual, int yAtual, int xNovo, int yNovo) {
         int deltaX = Math.abs(xNovo - xAtual), deltaY = Math.abs(yNovo - yAtual);

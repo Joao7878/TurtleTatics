@@ -22,7 +22,7 @@
 }
 
 .botaoComandante {
-    -fx-background-image: url("imagens/imagensPersonagens/Comandante.jpg");
+    -fx-background-image: url("imagens/imagensPersonagens/Comandante.png");
     -fx-background-size: 100% 100%;
     -fx-background-position: center;
 }

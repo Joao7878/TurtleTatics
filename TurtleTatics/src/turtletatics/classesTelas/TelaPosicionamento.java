@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import turtletatics.classesJogo.funcionalidades.Main;
 
 public class TelaPosicionamento extends Application {
     @Override
@@ -19,7 +20,9 @@ public class TelaPosicionamento extends Application {
         stage.getIcons().add(new Image("/turtletatics/view/imagens/IconeAbas.png"));
         stage.setTitle("Posicionamento");
         stage.setResizable(false);
-        stage.setFullScreen(true);
+        if(Main.tamTabuleiro == 12) {
+            stage.setFullScreen(true);
+        }
         stage.show();
     }
 

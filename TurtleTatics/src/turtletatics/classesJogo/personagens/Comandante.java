@@ -7,7 +7,7 @@ import turtletatics.classesJogo.funcionalidades.ExplosaoAtomica;
 
 public class Comandante extends Personagem {
   public Comandante() {
-    super("Comandante", 150, 20, 4, 30, new Image("turtletatics/view/imagens/imagensPersonagens/Comandante.jpg"));
+    super("Comandante", 150, 20, 4, 30, new Image("turtletatics/view/imagens/imagensPersonagens/Comandante.png"));
   }
 
   @Override

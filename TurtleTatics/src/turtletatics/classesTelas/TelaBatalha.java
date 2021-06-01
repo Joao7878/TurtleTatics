@@ -20,6 +20,9 @@ public class TelaBatalha extends Application {
         stage.getIcons().add(new Image("/turtletatics/view/imagens/IconeAbas.png"));
         stage.setTitle("Batalha");
         stage.setResizable(false);
+        /*if(Main.tamTabuleiro == 12) {
+            stage.setFullScreen(true);
+        }*/
         stage.show();
     }
 

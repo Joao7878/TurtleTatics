@@ -45,11 +45,26 @@ public class TelaInicialController implements Initializable {
     public boolean jogadorEhValido(Jogador j) {
         if (j.getNome() == null) { //Clicou no botão cancelar ou X para fechar a aba
             return false;
-        } else if (j.getNome().equals("")) { //Não digitou nada no nome
-            JOptionPane.showMessageDialog(null, "Campo não preenchido", "Erro", JOptionPane.ERROR_MESSAGE);
-            return false;
+        }
+        
+        boolean temApenasEspaco = true;
+        int tamNome = 0;
+
+        for (char ch : j.getNome().toCharArray()) {
+            tamNome++;
+
+            if (tamNome > 15) {
+                break;
+            }
+            if (ch != ' ') {
+                temApenasEspaco = false;
+            }
         }
 
+        if (temApenasEspaco || tamNome > 15) {
+            JOptionPane.showMessageDialog(null, "Campo não preenchido ou quantidade máxima de caracteres excedida", "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         return true;
     }
 
@@ -164,5 +179,4 @@ public class TelaInicialController implements Initializable {
             iniciarFasePosicionamento();
         }
     }
-
 }
