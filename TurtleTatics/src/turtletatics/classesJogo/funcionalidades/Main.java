@@ -18,13 +18,14 @@ import turtletatics.classesJogo.personagens.*;
 /*Equipe: Guilherme Martinho Chumbinho De Andrade,Luan Machado Silva Vidal, Antonio Mesquita da Silveiro Neto,
 Rafael Santos de Jesus,João Pedro Moreira de Almeida Santos*/
 public class Main {
-    
+
     public static Jogador j1;
     public static Jogador j2;
     public static int tamTabuleiro;
     public static Rectangle[][] tabuleiro;
     public static ArrayList<ImageView> persJ1 = new ArrayList<ImageView>();
     public static ArrayList<ImageView> persJ2 = new ArrayList<ImageView>();
+    public static ExplosaoAtomica explosao = new ExplosaoAtomica(-1, -1);
 
     public static int calcularDistancia(int xAtual, int yAtual, int xNovo, int yNovo) {
         int deltaX = Math.abs(xNovo - xAtual), deltaY = Math.abs(yNovo - yAtual);
@@ -39,7 +40,7 @@ public class Main {
     public static int calcularDistanciaPersonagens(Personagem p1, Personagem p2) {
         return calcularDistancia(p1.getX(), p1.getY(), p2.getX(), p2.getY());
     }
-    
+
     public static void pegarItensSalvos(Jogador j) throws IOException {
         FileReader arqR;
         BufferedReader leitor;
@@ -90,9 +91,5 @@ public class Main {
 
         arqR.close();
         leitor.close();
-    }
-    
-    public static void main(String[] args) {
-
     }
 }

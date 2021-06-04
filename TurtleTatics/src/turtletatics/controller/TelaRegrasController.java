@@ -28,11 +28,11 @@ public class TelaRegrasController implements Initializable {
         // TODO
     }
 
-    public void fecharTela() {
+    void fecharTela() {
         ((Stage) botaoVoltarTelaIni.getScene().getWindow()).close();
     }
 
-    public boolean abrirTelaInicial() {
+    boolean abrirTelaInicial() {
         TelaInicial tela = new TelaInicial();
         try {
             tela.start(new Stage());
@@ -43,7 +43,7 @@ public class TelaRegrasController implements Initializable {
         }
     }
 
-    public boolean abrirTelaHabEspPers() {
+    boolean abrirTelaHabEspPers() {
         TelaHabEspPers tela = new TelaHabEspPers();
         try {
             tela.start(new Stage());

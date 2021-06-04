@@ -1,11 +1,9 @@
 package turtletatics.classesJogo.personagens;
 
+import java.util.ArrayList;
 import java.util.Random;
 import javafx.scene.image.Image;
 import javax.swing.JOptionPane;
-
-import turtletatics.classesJogo.funcionalidades.Jogador;
-import turtletatics.classesJogo.funcionalidades.Main;
 
 public class Padre extends Personagem {
   private int quantTentativas;
@@ -20,51 +18,34 @@ public class Padre extends Personagem {
   }
 
   @Override
-  public int atkEspecial(Jogador inimigos, Jogador aliados) {
-    if (this.quantTentativas >= 5) {
-      JOptionPane.showMessageDialog(null, "O padre pode tentar converter o inimigo apenas 5 vezes");
-      return 0;
-    }
-
-    int i = 0, opcPersonagemInt;
-    String opcPersonagem;
-
-    for (Personagem p : inimigos.getPersonagens()) {
-      System.out.println(i + " - " + p.getNome());
-      i++;
-    }
-    opcPersonagem = JOptionPane.showInputDialog(null,
-        aliados.getNome() + " escolha um herege para o padre tentar converter.");
-    try {
-      opcPersonagemInt = Integer.parseInt(opcPersonagem);
-      if (!((opcPersonagemInt >= 0 && opcPersonagemInt < inimigos.getPersonagens().size()))) {
-        JOptionPane.showMessageDialog(null, "Não existem personagens nessa posição");
-        return 0;
-      }
-    } catch (Exception ex) {
-      JOptionPane.showMessageDialog(null, "Entrada inválida");
-      return 0;
-    }
-    if (Main.calcularDistanciaPersonagens(this, inimigos.getPersonagens().get(opcPersonagemInt)) > this.getAlcance()) {
-      JOptionPane.showMessageDialog(null, "Alcance insuficiente");
-      return 0;
-    }
+  public boolean atkEspecial(Personagem pAtacado, ArrayList<Personagem> aliados, ArrayList<Personagem> inimigos) {
     Random gerador = new Random();
     double numReal = gerador.nextDouble();
-    System.out.print("\nresultado do gerador: " + numReal + "\n");
+    
     if (numReal <= 0.25) {// Conversão realizada com sucesso
+      //JOptionPane.showMessageDialog(null, "O " + this.getNome() + " conseguiu converter o "
+      //    + inimigos.getPersonagens().get(opcPersonagemInt).getNome());
       JOptionPane.showMessageDialog(null, "O " + this.getNome() + " conseguiu converter o "
-          + inimigos.getPersonagens().get(opcPersonagemInt).getNome());
-      aliados.inserirPersonagem(inimigos.getPersonagens().get(opcPersonagemInt));
-      inimigos.getPersonagens().remove(opcPersonagemInt);
-      this.setCargaEspecial(-1);
-      return 1;
+          + pAtacado.getNome(), pAtacado.getNome() + " atacado", JOptionPane.INFORMATION_MESSAGE);
+      aliados.add(pAtacado);
+      inimigos.remove(pAtacado);
+      this.setCargaEspecial(-2);
+      
+      return true;
     } else {// Conversão falhou
       this.quantTentativas++;
-      JOptionPane.showMessageDialog(null,
-          "A tentativa de conversão falhou. Tentativas restantes: " + (5 - this.getQuantTentativas()));
+      if(this.quantTentativas == 5) {
+          this.setCargaEspecial(-1);
+          JOptionPane.showMessageDialog(null, "A tentativa de conversão falhou. Não restam mais tentativas", pAtacado.getNome() + " atacado", JOptionPane.INFORMATION_MESSAGE);
+          return false;
+      }
+      
+      //JOptionPane.showMessageDialog(null,
+      //    "A tentativa de conversão falhou. Tentativas restantes: " + (5 - this.getQuantTentativas()));
+      JOptionPane.showMessageDialog(null, "A tentativa de conversão falhou. Tentativas restantes: " + (5 - this.getQuantTentativas()), pAtacado.getNome() + " atacado", JOptionPane.INFORMATION_MESSAGE);
       this.setCargaEspecial(4);
-      return 1;
+      
+      return false;
     }
   }
 }

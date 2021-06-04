@@ -3,48 +3,21 @@ package turtletatics.classesJogo.personagens;
 import javafx.scene.image.Image;
 import javax.swing.JOptionPane;
 
-import turtletatics.classesJogo.funcionalidades.Jogador;
-
 public class Cozinheiro extends Personagem {
-  public Cozinheiro() {
-    super("Cozinheiro", 220, 50, 1, 20, new Image("turtletatics/view/imagens/imagensPersonagens/Cozinheiro.png"));
-  }
 
-  @Override
-  public int atkEspecial(Jogador aliados) {
-    int i = 0, opcPersonagemInt;
-    String opcPersonagem;
-
-    for (Personagem p : aliados.getPersonagens()) {
-      System.out.println(i + " - " + p.getNome());
-      i++;
-    }
-    opcPersonagem = JOptionPane.showInputDialog(null,
-        aliados.getNome() + " escolha um personagem para ser alimentado pela gororoba do Cozinheiro.");
-    try {
-      opcPersonagemInt = Integer.parseInt(opcPersonagem);
-      if (!(opcPersonagemInt >= 0 && opcPersonagemInt < aliados.getPersonagens().size())) {
-        JOptionPane.showMessageDialog(null, "Não existem personagens nessa posição");
-        return 0;
-      }
-    } catch (Exception ex) {
-      JOptionPane.showMessageDialog(null, "Entrada inválida");
-      return 0;
+    public Cozinheiro() {
+        super("Cozinheiro", 220, 50, 1, 20, new Image("turtletatics/view/imagens/imagensPersonagens/Cozinheiro.png"));
     }
 
-    aliados.getPersonagens().get(opcPersonagemInt)
-        .setQuantVital(aliados.getPersonagens().get(opcPersonagemInt).getQuantVital() + 20);
-    aliados.getPersonagens().get(opcPersonagemInt)
-        .setValorDefesa(aliados.getPersonagens().get(opcPersonagemInt).getValorDefesa() + 5);
+    @Override
+    public void atkEspecial(Personagem pAliado) {
+        pAliado.setQuantVital(pAliado.getQuantVital() + 20);
+        pAliado.setValorDefesa(pAliado.getValorDefesa() + 5);
 
-    JOptionPane.showMessageDialog(null,
-        "O " + aliados.getPersonagens().get(opcPersonagemInt).getNome() + " ganhou 20 de vida e 5 de defesa.");
+        JOptionPane.showMessageDialog(null, "O " + pAliado.getNome() + " ganhou 20 de vida e 5 de defesa.", pAliado.getNome() + " curado", JOptionPane.INFORMATION_MESSAGE);
 
-    this.setCargaEspecial(4);
-
-    aliados.getPersonagens().get(opcPersonagemInt).printStatus();
-    return 1;
-  }
+        this.setCargaEspecial(4);
+    }
 }
 // habilidade especial: Dar a gororoba a si mesmo ou a um aliado, dando 20
 // pontos de vida e 5 pontos de defesa. Não existe limite de alcançe para esse

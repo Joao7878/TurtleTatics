@@ -1,5 +1,6 @@
 package turtletatics.classesJogo.personagens;
 
+import java.util.ArrayList;
 import java.util.Random;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -127,6 +128,10 @@ public abstract class Personagem {
 
   public void atkEspecial(Personagem pAtacado, Personagem pAliado) {
 
+  }
+  
+  public boolean atkEspecial(Personagem pAtacado, ArrayList<Personagem> aliados, ArrayList<Personagem> inimigos) {
+      return false;
   }
 
   public void atkEspecial(Personagem pAtacado, ExplosaoAtomica explosao) {

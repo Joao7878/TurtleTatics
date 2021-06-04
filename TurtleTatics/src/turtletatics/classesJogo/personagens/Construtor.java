@@ -4,51 +4,27 @@ import java.util.Random;
 import javafx.scene.image.Image;
 import javax.swing.JOptionPane;
 
-import turtletatics.classesJogo.funcionalidades.Jogador;
-
 public class Construtor extends Personagem {
-  public Construtor() {
-    super("Construtor", 120, 25, 2, 30, new Image("turtletatics/view/imagens/imagensPersonagens/Construtor.png"));
-  }
 
-  @Override
-  public int atkEspecial(Jogador aliados) {
-    int i = 0, opcPersonagemInt;
-    String opcPersonagem;
-
-    for (Personagem p : aliados.getPersonagens()) {
-      System.out.println(i + " - " + p.getNome());
-      i++;
-    }
-    opcPersonagem = JOptionPane.showInputDialog(null,
-        aliados.getNome() + " escolha um personagem para o Construtor forjar uma arma.");
-    try {
-      opcPersonagemInt = Integer.parseInt(opcPersonagem);
-      if (!((opcPersonagemInt >= 0 && opcPersonagemInt < aliados.getPersonagens().size()))) {
-        JOptionPane.showMessageDialog(null, "Não existem personagens nessa posição");
-        return 0;
-      }
-    } catch (Exception ex) {
-      JOptionPane.showMessageDialog(null, "Entrada inválida");
-      return 0;
+    public Construtor() {
+        super("Construtor", 120, 25, 2, 30, new Image("turtletatics/view/imagens/imagensPersonagens/Construtor.png"));
     }
 
-    Random gerador = new Random();
-    double numReal = gerador.nextDouble();
-    if (numReal > 0.5) {
-      aliados.getPersonagens().get(opcPersonagemInt)
-          .setQuantVital(aliados.getPersonagens().get(opcPersonagemInt).getQuantAtaque() + 15);
-      JOptionPane.showMessageDialog(null, "O " + aliados.getPersonagens().get(opcPersonagemInt).getNome()
-          + " teve suas armas melhoradas, ganhando 15 de ataque.");
-    } else {
-      aliados.getPersonagens().get(opcPersonagemInt)
-          .setValorDefesa(aliados.getPersonagens().get(opcPersonagemInt).getValorDefesa() + 10);
-      JOptionPane.showMessageDialog(null, "O " + aliados.getPersonagens().get(opcPersonagemInt).getNome()
-          + " teve suas armadura melhorada, ganhando 10 de defesa.");
+    @Override
+    public void atkEspecial(Personagem pAliado) {
+        Random gerador = new Random();
+        double numReal = gerador.nextDouble();
+        if (numReal > 0.5) {
+            pAliado.setQuantAtaque(pAliado.getQuantAtaque() + 15);
+            //JOptionPane.showMessageDialog(null, "O " + aliados.getPersonagens().get(opcPersonagemInt).getNome()
+            //    + " teve suas armas melhoradas, ganhando 15 de ataque.");
+            JOptionPane.showMessageDialog(null, "O " + pAliado.getNome() + " teve suas armas melhoradas, ganhando 15 de ataque.", pAliado.getNome() + " ganhou ataque", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            pAliado.setValorDefesa(pAliado.getValorDefesa() + 10);
+            //JOptionPane.showMessageDialog(null, "O " + aliados.getPersonagens().get(opcPersonagemInt).getNome()
+            //    + " teve suas armadura melhorada, ganhando 10 de defesa.");
+            JOptionPane.showMessageDialog(null, "O " + pAliado.getNome() + " teve sua armadura melhorada, ganhando 10 de defesa.", pAliado.getNome() + " ganhou ataque", JOptionPane.INFORMATION_MESSAGE);
+        }
+        this.setCargaEspecial(8);
     }
-    this.setCargaEspecial(8);
-
-    aliados.getPersonagens().get(opcPersonagemInt).printStatus();
-    return 1;
-  }
 }

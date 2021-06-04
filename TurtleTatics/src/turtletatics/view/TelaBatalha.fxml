@@ -12,17 +12,17 @@
             <Font name="Impact" size="40.0" />
          </font>
       </Label>
-      <Button layoutX="14.0" layoutY="131.0" mnemonicParsing="false" onAction="#acaoClicarBotaoMovimentar" prefHeight="44.0" prefWidth="189.0" text="MOVIMENTAR">
+      <Button layoutX="14.0" layoutY="131.0" mnemonicParsing="false" onAction="#acaoClicarBotaoMovimentar" onKeyPressed="#acaoTeclarBotaoMovimentar" prefHeight="44.0" prefWidth="189.0" text="MOVIMENTAR">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" layoutY="180.0" mnemonicParsing="false" onAction="#acaoClicarBotaoAtqBas" prefHeight="44.0" prefWidth="189.0" text="ATAQUE BÁSICO">
+      <Button layoutX="14.0" layoutY="180.0" mnemonicParsing="false" onAction="#acaoClicarBotaoAtqBas" onKeyPressed="#acaoTeclarBotaoAtqBas" prefHeight="44.0" prefWidth="189.0" text="ATAQUE BÁSICO">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" layoutY="229.0" mnemonicParsing="false" onAction="#acaoClicarBotaoAtqEsp" text="ATAQUE ESPECIAL">
+      <Button layoutX="14.0" layoutY="229.0" mnemonicParsing="false" onAction="#acaoClicarBotaoAtqEsp" onKeyPressed="#acaoTeclarBotaoAtqEsp" text="ATAQUE ESPECIAL">
          <font>
             <Font size="20.0" />
          </font>

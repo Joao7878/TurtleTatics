@@ -9,10 +9,11 @@ public class Carcereiro extends Personagem {
   }
 
   @Override
-  public void atkEspecial(Personagem Patacado) {
-    Patacado.setValorDefesa(Patacado.getValorDefesa() / 2);
-    Patacado.setQuantVital(Patacado.getQuantVital() - 30);
-    JOptionPane.showMessageDialog(null, Patacado.getNome() + " foi encarcerado por " + this.getNome());
+  public void atkEspecial(Personagem pAtacado) {
+    pAtacado.setValorDefesa(pAtacado.getValorDefesa() / 2);
+    pAtacado.setQuantVital(pAtacado.getQuantVital() - 30);
+    //JOptionPane.showMessageDialog(null, Patacado.getNome() + " foi encarcerado por " + this.getNome());
+    JOptionPane.showMessageDialog(null, pAtacado.getNome() + " foi encarcerado por " + this.getNome(), pAtacado.getNome() + " atacado", JOptionPane.INFORMATION_MESSAGE);
     this.setCargaEspecial(3);
   }
 }

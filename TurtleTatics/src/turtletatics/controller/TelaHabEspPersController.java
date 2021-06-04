@@ -27,11 +27,11 @@ public class TelaHabEspPersController implements Initializable {
         // TODO
     }
 
-    public void fecharTela() {
+    void fecharTela() {
         ((Stage) botaoVoltarTelaIni.getScene().getWindow()).close();
     }
 
-    public boolean abrirTelaInicial() {
+    boolean abrirTelaInicial() {
         TelaInicial tela = new TelaInicial();
         try {
             tela.start(new Stage());

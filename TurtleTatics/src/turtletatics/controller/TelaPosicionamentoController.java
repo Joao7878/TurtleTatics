@@ -21,10 +21,10 @@ import turtletatics.classesTelas.*;
 
 public class TelaPosicionamentoController implements Initializable {
 
-    static final int TAM_CASA = 60;
-    static final int TAM_PERS_CASA = 55;
-    static final int ESP_CASA_PERS = (TAM_CASA - TAM_PERS_CASA) / 2;
-    static final int ESP_SUP_TAB = (Main.tamTabuleiro == 12) ? 15 : 25;
+    static final int TAM_CASA = 60; //Tamanho de cada casa do tabuleiro
+    static final int TAM_PERS_CASA = 55; //Tamanho da imagem de cada personagem dentro da casa
+    static final int ESP_CASA_PERS = (TAM_CASA - TAM_PERS_CASA) / 2; //Espaço entre a borda da casa e a imagem do personagem
+    static final int ESP_VERT_TAB = (Main.tamTabuleiro == 12) ? 15 : 25; //Distância vertical entre o tabuleiro e as bordas do tabuleiro
 
     boolean ehVezDeJ1 = true;
     ImageView personagemSelecionado = null;
@@ -38,10 +38,12 @@ public class TelaPosicionamentoController implements Initializable {
     @FXML
     private Label labelJogadorAtual;
 
+    //Verifica se um personagem já está posicionado no tabuleiro
     boolean estahPosicionado(ImageView pers) {
         return pers.getFitWidth() == TAM_PERS_CASA;
     }
 
+    //Verifica se uma casa do tabuleiro já está ocupada
     boolean estahOcupado(Rectangle casa) {
         ArrayList<ImageView> persJogadorAtual = (ehVezDeJ1) ? Main.persJ1 : Main.persJ2;
 
@@ -87,6 +89,7 @@ public class TelaPosicionamentoController implements Initializable {
         }
     }
 
+    //Verifica se uma casa é selecionável
     boolean casaEhValida(Rectangle casa) {
         return casa.getOpacity() == 1;
     }
@@ -121,7 +124,9 @@ public class TelaPosicionamentoController implements Initializable {
         }
     }
 
+    //Insere um personagem no tabuleiro
     void inserirNoTabuleiro(Rectangle casa, Jogador j, int x, int y) {
+        //Busca o personagem a partir da sua imagem contida em 'personagemSelecionado'
         for (Personagem p : j.getPersonagens()) {
             if (p.getImagem().equals(personagemSelecionado)) {
                 p.setX(x);
@@ -160,7 +165,7 @@ public class TelaPosicionamentoController implements Initializable {
         // TODO
 
         panePrincipal.setPrefWidth(620 + TAM_CASA * (Main.tamTabuleiro - 1) + 80);
-        panePrincipal.setPrefHeight(50 + TAM_CASA * (Main.tamTabuleiro - 1) + 80);
+        panePrincipal.setPrefHeight(2 * ESP_VERT_TAB + TAM_CASA * Main.tamTabuleiro);
 
         labelJ1.setText("Personagens de " + Main.j1.getNome() + ":");
         labelJ2.setText("Personagens de " + Main.j2.getNome() + ":");
@@ -198,7 +203,7 @@ public class TelaPosicionamentoController implements Initializable {
         //Insere o tabuleiro na tela
         for (int i = 0; i < Main.tamTabuleiro; i++) {
             for (int j = 0; j < Main.tamTabuleiro; j++) {
-                Rectangle r = new Rectangle(620 + i * TAM_CASA, ESP_SUP_TAB + j * TAM_CASA, TAM_CASA, TAM_CASA);
+                Rectangle r = new Rectangle(620 + i * TAM_CASA, ESP_VERT_TAB + j * TAM_CASA, TAM_CASA, TAM_CASA);
 
                 if ((i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 == 1)) {
                     r.setStyle("-fx-fill : red;");
@@ -259,7 +264,15 @@ public class TelaPosicionamentoController implements Initializable {
                 int y = j;
 
                 Main.tabuleiro[i][j].setOnMouseClicked(event -> {
-                    if (!estahOcupado(r) && casaEhValida(r) && personagemSelecionado != null) {
+                    if(estahOcupado(r)) {
+                        JOptionPane.showMessageDialog(null, "A posião já está ocupada", "Erro", 0);
+                        return;
+                    } else if(personagemSelecionado == null) {
+                        JOptionPane.showMessageDialog(null, "Nenhum personagem selecionado", "Erro", 0);
+                        return;
+                    }
+                    
+                    if (casaEhValida(r)) {
                         if (ehVezDeJ1) {
                             inserirNoTabuleiro(r, Main.j1, x, y);
                         } else {
@@ -269,7 +282,6 @@ public class TelaPosicionamentoController implements Initializable {
                 });
             }
         }
-
         resetarTela();
     }
 }

@@ -5,62 +5,67 @@ import javax.swing.JOptionPane;
 import turtletatics.classesJogo.personagens.Personagem;
 
 public class ExplosaoAtomica {
-  private int x, y;
-  private double radioatividade;
 
-  public ExplosaoAtomica(int x, int y) {
-    this.x = x;
-    this.y = y;
-    radioatividade = 5.0;
-  }
+    private int x, y;
+    private double radioatividade;
 
-  public void setX(int x) {
-    this.x = x;
-  }
-
-  public void setY(int y) {
-    this.y = y;
-  }
-
-  public int getX() {
-    return this.x;
-  }
-
-  public int getY() {
-    return this.y;
-  }
-
-  public void darDanoArea(Tabuleiro tabuleiro, Jogador j1, Jogador j2) {
-    int i;
-    Personagem p;
-
-    i = 0;
-    for (i = 0; i < j1.getPersonagens().size(); i++) {
-      p = (Personagem) j1.getPersonagens().get(i);
-      if (Main.calcularDistancia(p.getX(), p.getY(), this.x, this.y) <= 1) {
-        JOptionPane.showMessageDialog(null, p.getNome() + " levou dano da radiação");
-        p.setQuantVital(p.getQuantVital() - 10 * this.radioatividade);
-        if (p.getQuantVital() <= 0) {
-          tabuleiro.removerDoTabuleiro(p);
-          j1.removerPersonagem(i);
-          i--;
-        }
-      }
+    public ExplosaoAtomica(int x, int y) {
+        this.x = x;
+        this.y = y;
+        radioatividade = 5.0;
     }
 
-    i = 0;
-    for (i = 0; i < j2.getPersonagens().size(); i++) {
-      p = (Personagem) j2.getPersonagens().get(i);
-      if (Main.calcularDistancia(p.getX(), p.getY(), this.x, this.y) <= 1) {
-        JOptionPane.showMessageDialog(null, p.getNome() + " levou dano da radiação");
-        p.setQuantVital(p.getQuantVital() - 10 * this.radioatividade);
-        if (p.getQuantVital() <= 0) {
-          tabuleiro.removerDoTabuleiro(p);
-          j2.removerPersonagem(i);
-          i--;
-        }
-      }
+    public void setX(int x) {
+        this.x = x;
     }
-    this.radioatividade /= 1.07;
-  }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
+    public void darDanoArea() {
+        int i;
+        Personagem p;
+
+        for (i = 0; i < Main.j1.getPersonagens().size(); i++) {
+            p = Main.j1.getPersonagens().get(i);
+            if (Main.calcularDistancia(p.getX(), p.getY(), this.x, this.y) <= 1) {
+                //JOptionPane.showMessageDialog(null, p.getNome() + " levou dano da radiação");
+                JOptionPane.showMessageDialog(null, p.getNome() + " recebeu dano de radiação", "Radiação", JOptionPane.INFORMATION_MESSAGE);
+                p.setQuantVital(p.getQuantVital() - 10 * this.radioatividade);
+                if (p.getQuantVital() <= 0) {
+                    JOptionPane.showMessageDialog(null, p.getNome() + " morreu", "Radiação", JOptionPane.INFORMATION_MESSAGE);
+                    p.getImagem().setVisible(false);
+                    p.getImagem().disableProperty().set(true);
+                    Main.persJ1.remove(p.getImagem());
+                    Main.j1.getPersonagens().remove(p);
+                }
+            }
+        }
+
+        for (i = 0; i < Main.j2.getPersonagens().size(); i++) {
+            p = Main.j2.getPersonagens().get(i);
+            if (Main.calcularDistancia(p.getX(), p.getY(), this.x, this.y) <= 1) {
+                //JOptionPane.showMessageDialog(null, p.getNome() + " levou dano da radiação");
+                JOptionPane.showMessageDialog(null, p.getNome() + " recebeu dano de radiação", "Radiação", JOptionPane.INFORMATION_MESSAGE);
+                p.setQuantVital(p.getQuantVital() - 10 * this.radioatividade);
+                if (p.getQuantVital() <= 0) {
+                    JOptionPane.showMessageDialog(null, p.getNome() + " morreu", "Radiação", JOptionPane.INFORMATION_MESSAGE);
+                    p.getImagem().setVisible(false);
+                    p.getImagem().disableProperty().set(true);
+                    Main.persJ2.remove(p.getImagem());
+                    Main.j2.getPersonagens().remove(p);
+                }
+            }
+        }
+        this.radioatividade /= 1.07;
+    }
 }

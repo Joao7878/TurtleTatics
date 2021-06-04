@@ -27,11 +27,11 @@ public class TelaInicialController implements Initializable {
         // TODO
     }
 
-    public void fecharTela() {
+    void fecharTela() {
         ((Stage) botaoRegras.getScene().getWindow()).close();
     }
 
-    public boolean abrirTelaRegras() {
+    boolean abrirTelaRegras() {
         TelaRegras tela = new TelaRegras();
         try {
             tela.start(new Stage());
@@ -42,7 +42,7 @@ public class TelaInicialController implements Initializable {
         }
     }
 
-    public boolean jogadorEhValido(Jogador j) {
+    boolean jogadorEhValido(Jogador j) {
         if (j.getNome() == null) { //Clicou no botão cancelar ou X para fechar a aba
             return false;
         }
@@ -53,7 +53,7 @@ public class TelaInicialController implements Initializable {
         for (char ch : j.getNome().toCharArray()) {
             tamNome++;
 
-            if (tamNome > 15) {
+            if (tamNome > 10) {
                 break;
             }
             if (ch != ' ') {
@@ -61,14 +61,14 @@ public class TelaInicialController implements Initializable {
             }
         }
 
-        if (temApenasEspaco || tamNome > 15) {
-            JOptionPane.showMessageDialog(null, "Campo não preenchido ou quantidade máxima de caracteres excedida", "Erro", JOptionPane.ERROR_MESSAGE);
+        if (temApenasEspaco || tamNome > 10) {
+            JOptionPane.showMessageDialog(null, "Campo não preenchido ou quantidade máxima de 10 caracteres excedida", "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
     }
 
-    public boolean dadosEstaoCorretas(String nomeJ1, String nomeJ2, int tamTabuleiro) {
+    boolean dadosEstaoCorretas(String nomeJ1, String nomeJ2, int tamTabuleiro) {
         int resposta = JOptionPane.showConfirmDialog(null,
                 "Os dados estão corretos?\n"
                 + "Nome do 1º jogador..: " + nomeJ1 + "\n"
@@ -79,7 +79,7 @@ public class TelaInicialController implements Initializable {
         return resposta == 0;
     }
 
-    public void iniciarFasePosicionamento() throws IOException {
+    void iniciarFasePosicionamento() throws IOException {
         Jogador j1 = new Jogador(JOptionPane.showInputDialog(null, "Insira o nome do 1º jogador", "Inserir nome", JOptionPane.INFORMATION_MESSAGE));
         if (!jogadorEhValido(j1)) {
             return;
@@ -88,7 +88,7 @@ public class TelaInicialController implements Initializable {
         if (!jogadorEhValido(j2)) {
             return;
         } else if (j2.getNome().equals(j1.getNome())) {
-            JOptionPane.showMessageDialog(null, "O nome dos jogadores não podem ser iguais", "Erro", 0);
+            JOptionPane.showMessageDialog(null, "O nome dos jogadores não podem ser iguais", "Erro", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
