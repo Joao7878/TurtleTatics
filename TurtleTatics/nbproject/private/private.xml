@@ -4,7 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/rafas/Documents/NetBeansProjects/TurtleTatics/src/turtletatics/controller/TelaBatalhaController.java</file>
-            <file>file:/C:/Users/rafas/Documents/NetBeansProjects/TurtleTatics/src/turtletatics/classesJogo/funcionalidades/Main.java</file>
+            <file>file:/C:/Users/rafas/Documents/NetBeansProjects/TurtleTatics/src/turtletatics/classesJogo/itens/Veneno.java</file>
+            <file>file:/C:/Users/rafas/Documents/NetBeansProjects/TurtleTatics/src/turtletatics/classesJogo/personagens/Pescador.java</file>
+            <file>file:/C:/Users/rafas/Documents/NetBeansProjects/TurtleTatics/src/turtletatics/classesJogo/personagens/Personagem.java</file>
         </group>
     </open-files>
 </project-private>

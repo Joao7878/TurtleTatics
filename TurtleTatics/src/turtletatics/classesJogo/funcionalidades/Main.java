@@ -2,7 +2,9 @@ package turtletatics.classesJogo.funcionalidades;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
@@ -10,6 +12,7 @@ import javax.swing.JOptionPane;
 import turtletatics.classesJogo.itens.Couraca;
 import turtletatics.classesJogo.itens.Espada;
 import turtletatics.classesJogo.itens.Estilingue;
+import turtletatics.classesJogo.itens.Item;
 import turtletatics.classesJogo.itens.Pocao;
 import turtletatics.classesJogo.itens.Porrete;
 import turtletatics.classesJogo.itens.Veneno;
@@ -60,13 +63,13 @@ public class Main {
                     String itensSalvos[] = linha.split(",");
 
                     for (String item : itensSalvos) {
-                        if (item.equals("Couraça")) {
+                        if (/*item.equals("Couraça")*/item.equals("CouraÃ§a")) {
                             j.inserirItem(new Couraca());
                         } else if (item.equals("Espada")) {
                             j.inserirItem(new Espada());
                         } else if (item.equals("Estilingue")) {
                             j.inserirItem(new Estilingue());
-                        } else if (item.equals("Poção de Cura")) {
+                        } else if (/*item.equals("Poção de Cura")*/item.equals("PoÃ§Ã£o de Cura")) {
                             j.inserirItem(new Pocao());
                         } else if (item.equals("Porrete")) {
                             j.inserirItem(new Porrete());
@@ -84,12 +87,76 @@ public class Main {
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            JOptionPane.showMessageDialog(null, "Falha durante a leiruta do arquivo", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Falha durante a leitura do arquivo", "Erro", JOptionPane.ERROR_MESSAGE);
             arqR.close();
             leitor.close();
         }
 
         arqR.close();
         leitor.close();
+    }
+
+    public static void salvarGanhadorArquivo(Jogador ganhador, Item itemGanhado) throws IOException {
+        FileReader arqR;
+        BufferedReader leitor;
+
+        try {
+            arqR = new FileReader("arqJogadores.txt");
+            leitor = new BufferedReader(arqR);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Falha ao tentar abrir o arquivo");
+            return;
+        }
+
+        ArrayList<String> nomeJogadores = new ArrayList<String>();
+        ArrayList<String> itensJogadores = new ArrayList<String>();
+        String linha = "";
+        boolean jogadorExiste = false;
+
+        try {
+            linha = leitor.readLine();
+            while (linha != null) {
+                nomeJogadores.add(linha);
+                if (linha.equals(ganhador.getNome())) {
+                    linha = leitor.readLine() + "," + itemGanhado.getNome();
+                    jogadorExiste = true;
+                } else {
+                    linha = leitor.readLine();
+                }
+
+                itensJogadores.add(linha);
+                linha = leitor.readLine();
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Falha durante a leitura do arquivo");
+            leitor.close();
+        }
+        leitor.close();
+        arqR.close();
+
+        FileWriter arqW;
+        PrintWriter gravador;
+
+        try {
+            arqW = new FileWriter("arqJogadores.txt");
+            gravador = new PrintWriter(arqW);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Falha ao tentar abrir o arquivo");
+            return;
+        }
+
+        int i = 0;
+        for (String nome : nomeJogadores) {
+            gravador.println(nome);
+            gravador.println(itensJogadores.get(i));
+            i++;
+        }
+        if (!jogadorExiste) {
+            gravador.println(ganhador.getNome());
+            gravador.println(itemGanhado.getNome());
+        }
+        gravador.close();
+        arqW.close();
     }
 }

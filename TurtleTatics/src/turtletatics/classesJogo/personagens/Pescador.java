@@ -1,4 +1,3 @@
-
 package turtletatics.classesJogo.personagens;
 
 import javafx.scene.image.Image;
@@ -8,45 +7,17 @@ import turtletatics.classesJogo.funcionalidades.Jogador;
 import turtletatics.classesJogo.itens.Item;
 
 public class Pescador extends Personagem {
-  public Pescador() {
-    super("Pescador", 150, 18, 5, 25, new Image("turtletatics/view/imagens/imagensPersonagens/Pescador.png"));
-  }
 
-  @Override
-  public int atkEspecial(Jogador itensInimigo) {
-    if (itensInimigo.getInventario().size() == 0) {
-      JOptionPane.showMessageDialog(null, "O inventário do inimigo está vazio");
-      return 0;
+    public Pescador() {
+        super("Pescador", 150, 18, 5, 25, new Image("turtletatics/view/imagens/imagensPersonagens/Pescador.png"));
     }
 
-    int j = 0;
-    String opcItem;
-
-    for (Item i : itensInimigo.getInventario()) {
-      System.out.println(j + " - " + i.getNome());
-      j++;
-    }
-    opcItem = JOptionPane.showInputDialog(null,
-        itensInimigo.getNome() + " escolha um item para o " + this.getNome() + " fisgar");
-
-    try {
-      int opcItemInt = Integer.parseInt(opcItem);
-
-      if (opcItemInt >= 0 && opcItemInt < itensInimigo.getInventario().size()) {
-        itensInimigo.removerItem(opcItemInt);
-        JOptionPane.showMessageDialog(null, "Item " + itensInimigo.getInventario().get(opcItemInt).getNome()
-            + " removido do inventário do " + itensInimigo.getNome());
+    @Override
+    public void atkEspecial(Item itemAtacado, Jogador jogAtacado) {
+        jogAtacado.getInventario().remove(itemAtacado);
+        JOptionPane.showMessageDialog(null, "O pescador fisgou " + itemAtacado.getNome() + ", destruindo esse item", "Ataque especial", JOptionPane.INFORMATION_MESSAGE);
         this.setCargaEspecial(12);
-        return 1;
-      } else {
-        JOptionPane.showMessageDialog(null, "Não existem personagens nessa posição");
-        return 0;
-      }
-    } catch (Exception ex) {
-      JOptionPane.showMessageDialog(null, "Entrada inválida");
-      return 0;
     }
-  }
 }
 /*
  * habilidade especial: Lançar a vara no inigimo e destruir um item escolhido

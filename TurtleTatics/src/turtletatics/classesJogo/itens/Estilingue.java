@@ -1,5 +1,6 @@
 package turtletatics.classesJogo.itens;
 
+import javax.swing.JOptionPane;
 import turtletatics.classesJogo.personagens.Personagem;
 
 public class Estilingue extends Item {
@@ -8,7 +9,9 @@ public class Estilingue extends Item {
   }
 
   @Override
-  public void efeito(Personagem atacado) {
-    atacado.setQuantAtaque(atacado.getQuantAtaque() + 10);
+  public void efeito(Personagem Pafetado) {
+    JOptionPane.showMessageDialog(null, Pafetado.getNome() + " recebeu 10 pontos de ataque", "Utilização de item", JOptionPane.INFORMATION_MESSAGE);
+    Pafetado.setQuantAtaque(Pafetado.getQuantAtaque() + 10);
+    this.setDurabilidade(this.getDurabilidade() - 1);
   }
 }

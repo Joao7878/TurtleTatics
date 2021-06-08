@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import turtletatics.classesJogo.funcionalidades.*;
+import turtletatics.classesJogo.itens.Item;
 
 public abstract class Personagem {
   private String nome;
@@ -140,5 +141,9 @@ public abstract class Personagem {
 
   public int atkEspecial(Jogador inimigos, Jogador aliados) {
     return 0;
+  }
+  
+  public void atkEspecial(Item itemAtacado, Jogador jogAtacado) {
+      
   }
 }

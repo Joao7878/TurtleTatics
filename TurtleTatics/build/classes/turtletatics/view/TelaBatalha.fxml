@@ -32,5 +32,10 @@
             <Font size="20.0" />
          </font>
       </Label>
+      <Button layoutX="14.0" layoutY="278.0" mnemonicParsing="false" onAction="#acaoClicarBotaoUsarItem" onKeyPressed="#acaoTeclarBotaoUsarItem" prefHeight="44.0" prefWidth="189.0" text="USAR ITEM">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

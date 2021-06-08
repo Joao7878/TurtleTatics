@@ -1,0 +1,4 @@
+Zecol
+Couraça,Estilingue,Porrete
+Juam
+Espada,Poção de Cura,Veneno

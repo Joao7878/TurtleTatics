@@ -1,8 +1,12 @@
 package turtletatics.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,9 +16,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
 import turtletatics.classesJogo.funcionalidades.*;
+import turtletatics.classesJogo.itens.*;
 import turtletatics.classesJogo.personagens.*;
 import static turtletatics.controller.TelaPosicionamentoController.*;
 
@@ -24,6 +30,7 @@ public class TelaBatalhaController implements Initializable {
     Personagem persSelecionado = null;
     Personagem persAtacado = null;
     ImageView imPersSelecionado = null;
+    Item itemSelecionado = null;
 
     boolean acaoPosicionamento = false;
     boolean acaoAtqBasico = false;
@@ -35,6 +42,8 @@ public class TelaBatalhaController implements Initializable {
     boolean acaoAtqEspecialPad = false;
     boolean especialEspiao = false;
     boolean acaoAtqEspecialCie = false;
+    boolean acaoUsarItem = false;
+    boolean usouItem = false;
 
     @FXML
     private Label labelJogadorAtual;
@@ -74,10 +83,12 @@ public class TelaBatalhaController implements Initializable {
         acaoAtqEspecialCom = false;
         acaoAtqEspecialPad = false;
         acaoAtqEspecialCie = false;
+        //acaoUsarItem = false;
 
         imPersSelecionado = null;
         persAtacado = null;
         persSelecionado = null;
+        itemSelecionado = null;
 
         ArrayList<ImageView> persJogAtual;
         ArrayList<ImageView> persJogProxRodada;
@@ -114,12 +125,77 @@ public class TelaBatalhaController implements Initializable {
     }
 
     boolean terminouBatalha() {
-        //...
-        return false;
+        return (Main.j1.getPersonagens().isEmpty() || Main.j2.getPersonagens().isEmpty());
+    }
+    
+    void fecharTela() {
+        ((Stage) panePrincipal.getScene().getWindow()).close();
+    }
+
+    void terminarJogo() throws IOException {
+        Random gerador = new Random();
+        int sorteioItem = gerador.nextInt(6);
+        switch (sorteioItem) {
+            case 0:
+                itemSelecionado = new Couraca();
+                break;
+            case 1:
+                itemSelecionado = new Espada();
+                break;
+            case 2:
+                itemSelecionado = new Estilingue();
+                break;
+            case 3:
+                itemSelecionado = new Pocao();
+                break;
+            case 4:
+                itemSelecionado = new Porrete();
+                break;
+            case 5:
+                itemSelecionado = new Veneno();
+                break;
+        }
+        
+        Jogador ganhador = (Main.j1.getPersonagens().isEmpty()) ? Main.j2 : Main.j1;
+        JOptionPane.showMessageDialog(null, "Parabéns " + ganhador.getNome() + ", você é o vencedor!!!", "Vencedor", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Por ter vencido, " + ganhador.getNome() + " recebeu o item " + itemSelecionado.getNome(), "Premiação", JOptionPane.INFORMATION_MESSAGE);
+        
+        Main.salvarGanhadorArquivo(ganhador, itemSelecionado);
+        fecharTela();
+    }
+
+    void usarItem(Jogador j) {
+        String[] opcsItem = new String[j.getInventario().size()];
+        for (int i = 0; i < j.getInventario().size(); i++) {
+            opcsItem[i] = j.getInventario().get(i).getNome();
+        }
+        int itemEscolhido = JOptionPane.showOptionDialog(null, "Selecione o item",
+                "Itens", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                null, opcsItem, opcsItem[0]);
+        if (itemEscolhido == -1) {
+            return;
+        }
+
+        itemSelecionado = j.getInventario().get(itemEscolhido);
+        if (itemSelecionado.getNome().equals("Porrete") || itemSelecionado.getNome().equals("Veneno")) {
+            ArrayList<ImageView> persJogAtual = (ehVezDeJ1) ? Main.persJ1 : Main.persJ2;
+            ArrayList<ImageView> persJogProxRodada = (ehVezDeJ1) ? Main.persJ2 : Main.persJ1;
+            for (ImageView im : persJogAtual) {
+                im.setOpacity(0.5);
+                im.disableProperty().set(true);
+            }
+            for (ImageView im : persJogProxRodada) {
+                im.setOpacity(1);
+                im.disableProperty().set(false);
+            }
+        }
+
+        acaoUsarItem = true;
+        JOptionPane.showMessageDialog(null, "Selecione um personagem para receber o efeito do item", "Utilizar item", JOptionPane.INFORMATION_MESSAGE);
     }
 
     //Atualiza os dados da partida após um turno se passar
-    void atualizarDados() {
+    void atualizarDados() throws IOException {
         for (Personagem p : Main.j1.getPersonagens()) {
             if (p.getCargaEspecial() != 0) {
                 p.setCargaEspecial(p.getCargaEspecial() - 1);
@@ -134,31 +210,62 @@ public class TelaBatalhaController implements Initializable {
             Main.explosao.darDanoArea();
 
             if (terminouBatalha()) {
-                //...
+                terminarJogo();
             }
         }
         if (especialEspiao) {
             ehVezDeJ1 = !ehVezDeJ1;
             especialEspiao = false;
         }
+
+        usouItem = false;
     }
 
     void iniciarMetodosPersJ1() {
         for (Personagem p : Main.j1.getPersonagens()) {
             p.getImagem().setOnMouseClicked(event -> {
-                //Ação de ser atacado por ataque básico
-                if (!ehVezDeJ1 && p.getImagem().getOpacity() == 1 && acaoAtqBasico) {
-                    ataqueBasico(p);
+                //Ação de receber efeito de item selecionado
+                if (/*ehVezDeJ1 &&*/p.getImagem().getOpacity() == 1 && acaoUsarItem) {
+                    itemSelecionado.efeito(p);
+                    if (itemSelecionado.getDurabilidade() == 0) {
+                        JOptionPane.showMessageDialog(null, itemSelecionado.getNome() + " quebrou", "Item quebrou", JOptionPane.INFORMATION_MESSAGE);
+                        if (itemSelecionado.getNome().equals("Porrente") || itemSelecionado.getNome().equals("Veneno")) {
+                            Main.j2.getInventario().remove(itemSelecionado);
+                        } else {
+                            Main.j1.getInventario().remove(itemSelecionado);
+                        }
+                    }
+
+                    acaoUsarItem = false;
+                    usouItem = true;
+                    resetarTela();
+                    return;
+
+                    //Ação de ser atacado por ataque básico
+                } else if (/*!ehVezDeJ1 &&*/p.getImagem().getOpacity() == 1 && acaoAtqBasico) {
+                    try {
+                        ataqueBasico(p);
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     return;
 
                     //Ação de ser atacado por ataque especial de carcereiro ou cavaleiro
                 } else if (!ehVezDeJ1 && p.getImagem().getOpacity() == 1 && acaoAtqEspecialCarCav) {
-                    ataqueEspecialCarCav(p);
+                    try {
+                        ataqueEspecialCarCav(p);
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     return;
 
                     //Ação de utilizar o ataque especial do cozinheiro ou construtor
                 } else if (ehVezDeJ1 && p.getImagem().getOpacity() == 1 && acaoAtqEspecialCozCon) {
-                    ataqueEspecialCozCon(p);
+                    try {
+                        ataqueEspecialCozCon(p);
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     return;
 
                     //Ação de ser atacado por ataque especial do engenheiro
@@ -181,22 +288,38 @@ public class TelaBatalhaController implements Initializable {
 
                     //Ação de receber buff do ataque especial do engenheiro
                 } else if (ehVezDeJ1 && p.getImagem().getOpacity() == 1 && acaoAtqEspecialEngEscAliado) {
-                    ataqueEspecialEng(persAtacado, p);
+                    try {
+                        ataqueEspecialEng(persAtacado, p);
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     return;
 
                     //Ação de ser atacado por ataque especial do comandante
                 } else if (!ehVezDeJ1 && p.getImagem().getOpacity() == 1 && acaoAtqEspecialCom) {
-                    ataqueEspecialCom(p);
+                    try {
+                        ataqueEspecialCom(p);
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     return;
 
                     //Ação de ser atacado por ataque especial do padre
                 } else if (!ehVezDeJ1 && p.getImagem().getOpacity() == 1 && acaoAtqEspecialPad) {
-                    ataqueEspecialPad(p, Main.j2, Main.j1);
+                    try {
+                        ataqueEspecialPad(p, Main.j2, Main.j1);
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     return;
-                    
-                   //Ação de ser atacado por ataque especial do cientista maluco
+
+                    //Ação de ser atacado por ataque especial do cientista maluco
                 } else if (!ehVezDeJ1 && p.getImagem().getOpacity() == 1 && acaoAtqEspecialCie) {
-                    ataqueEspecialCie(p);
+                    try {
+                        ataqueEspecialCie(p);
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     return;
                 }
 
@@ -210,19 +333,48 @@ public class TelaBatalhaController implements Initializable {
     void iniciarMetodosPersJ2() {
         for (Personagem p : Main.j2.getPersonagens()) {
             p.getImagem().setOnMouseClicked(event -> {
-                //Ação de ser atacado por ataque básico
-                if (ehVezDeJ1 && p.getImagem().getOpacity() == 1 && acaoAtqBasico) {
-                    ataqueBasico(p);
+                //Ação de receber efeito de item selecionado
+                if (/*!ehVezDeJ1 &&*/p.getImagem().getOpacity() == 1 && acaoUsarItem) {
+                    itemSelecionado.efeito(p);
+                    if (itemSelecionado.getDurabilidade() == 0) {
+                        JOptionPane.showMessageDialog(null, itemSelecionado.getNome() + " quebrou", "Item quebrou", JOptionPane.INFORMATION_MESSAGE);
+                        if (itemSelecionado.getNome().equals("Porrente") || itemSelecionado.getNome().equals("Veneno")) {
+                            Main.j1.getInventario().remove(itemSelecionado);
+                        } else {
+                            Main.j2.getInventario().remove(itemSelecionado);
+                        }
+                    }
+
+                    acaoUsarItem = false;
+                    usouItem = true;
+                    resetarTela();
+                    return;
+
+                    //Ação de ser atacado por ataque básico
+                } else if (ehVezDeJ1 && p.getImagem().getOpacity() == 1 && acaoAtqBasico) {
+                    try {
+                        ataqueBasico(p);
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     return;
 
                     //Ação de ser atacado por ataque especial de carcereiro ou cavaleiro
                 } else if (ehVezDeJ1 && p.getImagem().getOpacity() == 1 && acaoAtqEspecialCarCav) {
-                    ataqueEspecialCarCav(p);
+                    try {
+                        ataqueEspecialCarCav(p);
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     return;
 
                     //Ação de utilizar o ataque especial do cozinheiro ou construtor
                 } else if (!ehVezDeJ1 && p.getImagem().getOpacity() == 1 && acaoAtqEspecialCozCon) {
-                    ataqueEspecialCozCon(p);
+                    try {
+                        ataqueEspecialCozCon(p);
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     return;
 
                     //Ação de ser atacado por ataque especial do engenheiro
@@ -245,22 +397,38 @@ public class TelaBatalhaController implements Initializable {
 
                     //Ação de receber buff do ataque especial do engenheiro
                 } else if (!ehVezDeJ1 && p.getImagem().getOpacity() == 1 && acaoAtqEspecialEngEscAliado) {
-                    ataqueEspecialEng(persAtacado, p);
+                    try {
+                        ataqueEspecialEng(persAtacado, p);
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     return;
 
                     //Ação de ser atacado por ataque especial do comandante
                 } else if (ehVezDeJ1 && p.getImagem().getOpacity() == 1 && acaoAtqEspecialCom) {
-                    ataqueEspecialCom(p);
+                    try {
+                        ataqueEspecialCom(p);
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     return;
 
                     //Ação de ser atacado por ataque especial do padre
                 } else if (ehVezDeJ1 && p.getImagem().getOpacity() == 1 && acaoAtqEspecialPad) {
-                    ataqueEspecialPad(p, Main.j1, Main.j2);
+                    try {
+                        ataqueEspecialPad(p, Main.j1, Main.j2);
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     return;
-                    
+
                     //Ação de ser atacado por ataque especial do cientista maluco
                 } else if (ehVezDeJ1 && p.getImagem().getOpacity() == 1 && acaoAtqEspecialCie) {
-                    ataqueEspecialCie(p);
+                    try {
+                        ataqueEspecialCie(p);
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     return;
                 }
 
@@ -271,7 +439,7 @@ public class TelaBatalhaController implements Initializable {
         }
     }
 
-    void ataqueBasico(Personagem pAtacado) {
+    void ataqueBasico(Personagem pAtacado) throws IOException {
         Jogador jogAtacado = (ehVezDeJ1) ? Main.j1 : Main.j2;
         ArrayList<ImageView> imPersAtacado = (ehVezDeJ1) ? Main.persJ1 : Main.persJ2;
 
@@ -288,7 +456,7 @@ public class TelaBatalhaController implements Initializable {
             jogAtacado.getPersonagens().remove(pAtacado);
 
             if (terminouBatalha()) {
-                //...
+                terminarJogo();
             }
         }
         ehVezDeJ1 = !ehVezDeJ1;
@@ -297,7 +465,7 @@ public class TelaBatalhaController implements Initializable {
     }
 
     //Ataque especial dos personagens que dão dano em um inimigo ao alcance
-    void ataqueEspecialCarCav(Personagem pAtacado) {
+    void ataqueEspecialCarCav(Personagem pAtacado) throws IOException {
         Jogador jogAtacado = (ehVezDeJ1) ? Main.j1 : Main.j2;
         ArrayList<ImageView> imPersAtacado = (ehVezDeJ1) ? Main.persJ1 : Main.persJ2;
 
@@ -322,7 +490,7 @@ public class TelaBatalhaController implements Initializable {
     }
 
     //Ataque especial dos personagens que dão buff em aliado em qualquer posição
-    void ataqueEspecialCozCon(Personagem pAliado) {
+    void ataqueEspecialCozCon(Personagem pAliado) throws IOException {
         persSelecionado.atkEspecial(pAliado);
 
         ehVezDeJ1 = !ehVezDeJ1;
@@ -330,7 +498,7 @@ public class TelaBatalhaController implements Initializable {
         resetarTela();
     }
 
-    void ataqueEspecialEng(Personagem pAtacado, Personagem pAliado) {
+    void ataqueEspecialEng(Personagem pAtacado, Personagem pAliado) throws IOException {
         Jogador jogAtacado = (ehVezDeJ1) ? Main.j1 : Main.j2;
         ArrayList<ImageView> imPersAtacado = (ehVezDeJ1) ? Main.persJ1 : Main.persJ2;
 
@@ -355,7 +523,7 @@ public class TelaBatalhaController implements Initializable {
         resetarTela();
     }
 
-    void ataqueEspecialCom(Personagem pAtacado) {
+    void ataqueEspecialCom(Personagem pAtacado) throws IOException {
         Jogador jogAtacado = (ehVezDeJ1) ? Main.j1 : Main.j2;
         ArrayList<ImageView> imPersAtacado = (ehVezDeJ1) ? Main.persJ1 : Main.persJ2;
 
@@ -392,7 +560,7 @@ public class TelaBatalhaController implements Initializable {
         resetarTela();
     }
 
-    void ataqueEspecialPad(Personagem pAtacado, Jogador jogAliados, Jogador jogInimigos) {
+    void ataqueEspecialPad(Personagem pAtacado, Jogador jogAliados, Jogador jogInimigos) throws IOException {
         if (persSelecionado.atkEspecial(pAtacado, jogAliados.getPersonagens(), jogInimigos.getPersonagens())) { // Conversão realizada com sucesso
             ArrayList<ImageView> persJogAliados = (ehVezDeJ1) ? Main.persJ1 : Main.persJ2;
             ArrayList<ImageView> persJogProxRodada = (ehVezDeJ1) ? Main.persJ2 : Main.persJ1;
@@ -421,8 +589,8 @@ public class TelaBatalhaController implements Initializable {
         atualizarDados();
         resetarTela();
     }
-    
-    void ataqueEspecialCie(Personagem pAtacado) {
+
+    void ataqueEspecialCie(Personagem pAtacado) throws IOException {
         Jogador jogAtacado = (ehVezDeJ1) ? Main.j1 : Main.j2;
         ArrayList<ImageView> imPersAtacado = (ehVezDeJ1) ? Main.persJ1 : Main.persJ2;
 
@@ -438,10 +606,10 @@ public class TelaBatalhaController implements Initializable {
             jogAtacado.getPersonagens().remove(pAtacado);
 
             if (terminouBatalha()) {
-                //...
+                terminarJogo();
             }
         }
-        
+
         ehVezDeJ1 = !ehVezDeJ1;
         atualizarDados();
         resetarTela();
@@ -485,7 +653,11 @@ public class TelaBatalhaController implements Initializable {
                         imPersSelecionado.setLayoutY(casa.getY() + ESP_CASA_PERS);
 
                         ehVezDeJ1 = !ehVezDeJ1;
-                        atualizarDados();
+                        try {
+                            atualizarDados();
+                        } catch (IOException ex) {
+                            Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         resetarTela();
                     }
                 });
@@ -503,7 +675,7 @@ public class TelaBatalhaController implements Initializable {
         //Cria o método de clicar nos personagens de J1
         iniciarMetodosPersJ1();
 
-        //Insere os personagens de J2 na tela e cria o método de clicar neles
+        //Insere os personagens de J2 na tela
         for (Personagem p : Main.j2.getPersonagens()) {
             p.getImagem().setLayoutX(Main.tabuleiro[p.getX()][p.getY()].getX() + ESP_CASA_PERS);
             p.getImagem().setLayoutY(Main.tabuleiro[p.getX()][p.getY()].getY() + ESP_CASA_PERS);
@@ -513,7 +685,25 @@ public class TelaBatalhaController implements Initializable {
         //Cria o método de clicar nos personagens de J2
         iniciarMetodosPersJ2();
 
+        try {
+            atualizarDados();
+        } catch (IOException ex) {
+            Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         resetarTela();
+
+        /*if (itemSelecionado != null && (itemSelecionado.getNome().equals("Porrete") || itemSelecionado.getNome().equals("Veneno"))) {
+            ArrayList<ImageView> persJogAtual = (ehVezDeJ1) ? Main.persJ1 : Main.persJ2;
+            ArrayList<ImageView> persJogProxRodada = (ehVezDeJ1) ? Main.persJ2 : Main.persJ1;
+            for (ImageView im : persJogAtual) {
+                im.setOpacity(0.5);
+                im.disableProperty().set(true);
+            }
+            for (ImageView im : persJogProxRodada) {
+                im.setOpacity(1);
+                im.disableProperty().set(false);
+            }
+        }*/
     }
 
     @FXML
@@ -575,7 +765,7 @@ public class TelaBatalhaController implements Initializable {
     }
 
     @FXML
-    private void acaoClicarBotaoAtqEsp(ActionEvent event) {
+    private void acaoClicarBotaoAtqEsp(ActionEvent event) throws IOException {
         if (imPersSelecionado == null) {
             JOptionPane.showMessageDialog(null, "Nenhum personagem selecionado", "Erro", 0);
             return;
@@ -713,7 +903,45 @@ public class TelaBatalhaController implements Initializable {
             acaoAtqEspecialCie = true;
             JOptionPane.showMessageDialog(null, "Selecione um personagem para atacar", "Ataque especial", JOptionPane.INFORMATION_MESSAGE);
 
+        } else { //persSelecionado instanceof Pescador
+            Jogador jogProxRodada = (ehVezDeJ1) ? Main.j2 : Main.j1;
+            if (jogProxRodada.getInventario().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "O inimigo não possui itens", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String[] opcsItem = new String[jogProxRodada.getInventario().size()];
+            for (int i = 0; i < jogProxRodada.getInventario().size(); i++) {
+                opcsItem[i] = jogProxRodada.getInventario().get(i).getNome();
+            }
+            int itemEscolhido = JOptionPane.showOptionDialog(null, "Selecione o item para fisgar",
+                    "Itens do inimigo", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                    null, opcsItem, opcsItem[0]);
+            if (itemEscolhido == -1) {
+                return;
+            }
+
+            itemSelecionado = jogProxRodada.getInventario().get(itemEscolhido);
+            persSelecionado.atkEspecial(itemSelecionado, jogProxRodada);
+
+            ehVezDeJ1 = !ehVezDeJ1;
+            atualizarDados();
+            resetarTela();
         }
+    }
+
+    @FXML
+    private void acaoClicarBotaoUsarItem(ActionEvent event) {
+        Jogador jogAtual = (ehVezDeJ1) ? Main.j1 : Main.j2;
+        if (jogAtual.getInventario().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Você não possui itens", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (usouItem) {
+            JOptionPane.showMessageDialog(null, "Você só pode usar 1 item por rodada", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        usarItem(jogAtual);
     }
 
     @FXML
@@ -731,10 +959,16 @@ public class TelaBatalhaController implements Initializable {
     }
 
     @FXML
-    private void acaoTeclarBotaoAtqEsp(KeyEvent event) {
+    private void acaoTeclarBotaoAtqEsp(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.ENTER) {
             acaoClicarBotaoAtqEsp(new ActionEvent());
         }
     }
 
+    @FXML
+    private void acaoTeclarBotaoUsarItem(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            acaoClicarBotaoUsarItem(new ActionEvent());
+        }
+    }
 }
