@@ -40,13 +40,14 @@ public class ExplosaoAtomica {
             if (Main.calcularDistancia(p.getX(), p.getY(), this.x, this.y) <= 1) {
                 //JOptionPane.showMessageDialog(null, p.getNome() + " levou dano da radiação");
                 JOptionPane.showMessageDialog(null, p.getNome() + " recebeu dano de radiação", "Radiação", JOptionPane.INFORMATION_MESSAGE);
-                p.setQuantVital(p.getQuantVital() - 10 * this.radioatividade);
+                p.setQuantVital(p.getQuantVital() - 6 * this.radioatividade);
                 if (p.getQuantVital() <= 0) {
                     JOptionPane.showMessageDialog(null, p.getNome() + " morreu", "Radiação", JOptionPane.INFORMATION_MESSAGE);
                     p.getImagem().setVisible(false);
                     p.getImagem().disableProperty().set(true);
                     Main.persJ1.remove(p.getImagem());
                     Main.j1.getPersonagens().remove(p);
+                    i--;
                 }
             }
         }
@@ -56,13 +57,14 @@ public class ExplosaoAtomica {
             if (Main.calcularDistancia(p.getX(), p.getY(), this.x, this.y) <= 1) {
                 //JOptionPane.showMessageDialog(null, p.getNome() + " levou dano da radiação");
                 JOptionPane.showMessageDialog(null, p.getNome() + " recebeu dano de radiação", "Radiação", JOptionPane.INFORMATION_MESSAGE);
-                p.setQuantVital(p.getQuantVital() - 10 * this.radioatividade);
+                p.setQuantVital(p.getQuantVital() - 6 * this.radioatividade);
                 if (p.getQuantVital() <= 0) {
                     JOptionPane.showMessageDialog(null, p.getNome() + " morreu", "Radiação", JOptionPane.INFORMATION_MESSAGE);
                     p.getImagem().setVisible(false);
                     p.getImagem().disableProperty().set(true);
                     Main.persJ2.remove(p.getImagem());
                     Main.j2.getPersonagens().remove(p);
+                    i--;
                 }
             }
         }

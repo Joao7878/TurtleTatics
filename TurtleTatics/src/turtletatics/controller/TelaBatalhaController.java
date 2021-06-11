@@ -62,6 +62,11 @@ public class TelaBatalhaController implements Initializable {
                 return true;
             }
         }
+        for (Obstaculo o : Main.obstaculos) {
+            if (o.getX() == x && o.getY() == y) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -127,7 +132,7 @@ public class TelaBatalhaController implements Initializable {
     boolean terminouBatalha() {
         return (Main.j1.getPersonagens().isEmpty() || Main.j2.getPersonagens().isEmpty());
     }
-    
+
     void fecharTela() {
         ((Stage) panePrincipal.getScene().getWindow()).close();
     }
@@ -155,11 +160,11 @@ public class TelaBatalhaController implements Initializable {
                 itemSelecionado = new Veneno();
                 break;
         }
-        
+
         Jogador ganhador = (Main.j1.getPersonagens().isEmpty()) ? Main.j2 : Main.j1;
         JOptionPane.showMessageDialog(null, "Parabéns " + ganhador.getNome() + ", você é o vencedor!!!", "Vencedor", JOptionPane.INFORMATION_MESSAGE);
         JOptionPane.showMessageDialog(null, "Por ter vencido, " + ganhador.getNome() + " recebeu o item " + itemSelecionado.getNome(), "Premiação", JOptionPane.INFORMATION_MESSAGE);
-        
+
         Main.salvarGanhadorArquivo(ganhador, itemSelecionado);
         fecharTela();
     }
@@ -177,14 +182,23 @@ public class TelaBatalhaController implements Initializable {
         }
 
         itemSelecionado = j.getInventario().get(itemEscolhido);
+        ArrayList<ImageView> persJogAtual = (ehVezDeJ1) ? Main.persJ1 : Main.persJ2;
+        ArrayList<ImageView> persJogProxRodada = (ehVezDeJ1) ? Main.persJ2 : Main.persJ1;
         if (itemSelecionado.getNome().equals("Porrete") || itemSelecionado.getNome().equals("Veneno")) {
-            ArrayList<ImageView> persJogAtual = (ehVezDeJ1) ? Main.persJ1 : Main.persJ2;
-            ArrayList<ImageView> persJogProxRodada = (ehVezDeJ1) ? Main.persJ2 : Main.persJ1;
             for (ImageView im : persJogAtual) {
                 im.setOpacity(0.5);
                 im.disableProperty().set(true);
             }
             for (ImageView im : persJogProxRodada) {
+                im.setOpacity(1);
+                im.disableProperty().set(false);
+            }
+        } else {
+            for (ImageView im : persJogProxRodada) {
+                im.setOpacity(0.5);
+                im.disableProperty().set(true);
+            }
+            for (ImageView im : persJogAtual) {
                 im.setOpacity(1);
                 im.disableProperty().set(false);
             }
@@ -481,7 +495,7 @@ public class TelaBatalhaController implements Initializable {
             jogAtacado.getPersonagens().remove(pAtacado);
 
             if (terminouBatalha()) {
-                //...
+                terminarJogo();
             }
         }
         ehVezDeJ1 = !ehVezDeJ1;
@@ -514,7 +528,7 @@ public class TelaBatalhaController implements Initializable {
             jogAtacado.getPersonagens().remove(pAtacado);
 
             if (terminouBatalha()) {
-                //...
+                terminarJogo();
             }
         }
 
@@ -539,7 +553,7 @@ public class TelaBatalhaController implements Initializable {
             jogAtacado.getPersonagens().remove(pAtacado);
 
             if (terminouBatalha()) {
-                //...
+                terminarJogo();
             }
         }
 
@@ -581,7 +595,7 @@ public class TelaBatalhaController implements Initializable {
             }
 
             if (terminouBatalha()) {
-                //...
+                terminarJogo();
             }
         }
 
@@ -663,6 +677,14 @@ public class TelaBatalhaController implements Initializable {
                 });
 
             }
+        }
+
+        //Insere os obstáculos na tela
+        for(Obstaculo o : Main.obstaculos) {
+            o.getImagem().setLayoutX(Main.tabuleiro[o.getX()][o.getY()].getX() + ESP_CASA_PERS);
+            o.getImagem().setLayoutY(Main.tabuleiro[o.getX()][o.getY()].getY() + ESP_CASA_PERS);
+            
+            panePrincipal.getChildren().add(o.getImagem());
         }
 
         //Insere os personagens de J1 na tela

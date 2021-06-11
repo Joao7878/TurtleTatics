@@ -2,19 +2,21 @@ package turtletatics.controller;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import turtletatics.classesJogo.funcionalidades.Jogador;
-import turtletatics.classesJogo.funcionalidades.Main;
+
+import turtletatics.classesJogo.funcionalidades.*;
 import turtletatics.classesJogo.personagens.Personagem;
 
 import turtletatics.classesTelas.*;
@@ -49,6 +51,11 @@ public class TelaPosicionamentoController implements Initializable {
 
         for (ImageView p : persJogadorAtual) {
             if (p.getLayoutX() - ESP_CASA_PERS == casa.getX() && p.getLayoutY() - ESP_CASA_PERS == casa.getY()) {
+                return true;
+            }
+        }
+        for (Obstaculo o : Main.obstaculos) {
+            if (casa.getOpacity() == 1 && o.getImagem().getLayoutX() - ESP_CASA_PERS == casa.getX() && o.getImagem().getLayoutY() - ESP_CASA_PERS == casa.getY()) {
                 return true;
             }
         }
@@ -90,8 +97,8 @@ public class TelaPosicionamentoController implements Initializable {
     }
 
     //Verifica se uma casa é selecionável
-    boolean casaEhValida(Rectangle casa) {
-        return casa.getOpacity() == 1;
+    boolean casaEhValida(Rectangle r) {
+        return r.getOpacity() == 1;
     }
 
     boolean terminouFasePosicionamento() {
@@ -134,7 +141,7 @@ public class TelaPosicionamentoController implements Initializable {
                 break;
             }
         }
-        
+
         personagemSelecionado.setLayoutX(casa.getX() + ESP_CASA_PERS);
         personagemSelecionado.setLayoutY(casa.getY() + ESP_CASA_PERS);
 
@@ -215,7 +222,98 @@ public class TelaPosicionamentoController implements Initializable {
                 panePrincipal.getChildren().add(r);
             }
         }
-        
+
+        //Inserir obstaculos
+        if (Main.tamTabuleiro == 10) {
+            Random r = new Random();
+            int sorteio;
+            Obstaculo obstaculo;
+            for (int i = 2; i < 8; i++) {
+                sorteio = r.nextInt(2);
+                if (sorteio == 0) {
+                    obstaculo = new Obstaculo(i, 3, new ImageView("turtletatics/view/imagens/Obstaculo1.png"));
+                } else {
+                    obstaculo = new Obstaculo(i, 3, new ImageView("turtletatics/view/imagens/Obstaculo2.png"));
+                }
+                obstaculo.getImagem().setLayoutX(Main.tabuleiro[i][3].getX() + ESP_CASA_PERS);
+                obstaculo.getImagem().setLayoutY(Main.tabuleiro[i][3].getY() + ESP_CASA_PERS);
+                obstaculo.getImagem().fitWidthProperty().set(TAM_PERS_CASA);
+                obstaculo.getImagem().fitHeightProperty().set(TAM_PERS_CASA);
+                Main.obstaculos.add(obstaculo);
+                panePrincipal.getChildren().add(obstaculo.getImagem());
+
+                sorteio = r.nextInt(2);
+                if (sorteio == 0) {
+                    obstaculo = new Obstaculo(i, 6, new ImageView("turtletatics/view/imagens/Obstaculo1.png"));
+                } else {
+                    obstaculo = new Obstaculo(i, 6, new ImageView("turtletatics/view/imagens/Obstaculo2.png"));
+                }
+                obstaculo.getImagem().setLayoutX(Main.tabuleiro[i][6].getX() + ESP_CASA_PERS);
+                obstaculo.getImagem().setLayoutY(Main.tabuleiro[i][6].getY() + ESP_CASA_PERS);
+                obstaculo.getImagem().fitWidthProperty().set(TAM_PERS_CASA);
+                obstaculo.getImagem().fitHeightProperty().set(TAM_PERS_CASA);
+                Main.obstaculos.add(obstaculo);
+                panePrincipal.getChildren().add(obstaculo.getImagem());
+            }
+        } else if (Main.tamTabuleiro == 12) {
+            Random r = new Random();
+            int sorteio;
+            Obstaculo obstaculo;
+            for (int i = 2; i < 10; i++) {
+                sorteio = r.nextInt(2);
+                if (sorteio == 0) {
+                    obstaculo = new Obstaculo(5, i, new ImageView("turtletatics/view/imagens/Obstaculo1.png"));
+                } else {
+                    obstaculo = new Obstaculo(5, i, new ImageView("turtletatics/view/imagens/Obstaculo2.png"));
+                }
+                obstaculo.getImagem().setLayoutX(Main.tabuleiro[5][i].getX() + ESP_CASA_PERS);
+                obstaculo.getImagem().setLayoutY(Main.tabuleiro[5][i].getY() + ESP_CASA_PERS);
+                obstaculo.getImagem().fitWidthProperty().set(TAM_PERS_CASA);
+                obstaculo.getImagem().fitHeightProperty().set(TAM_PERS_CASA);
+                Main.obstaculos.add(obstaculo);
+                panePrincipal.getChildren().add(obstaculo.getImagem());
+                
+                sorteio = r.nextInt(2);
+                if (sorteio == 0) {
+                    obstaculo = new Obstaculo(6, i, new ImageView("turtletatics/view/imagens/Obstaculo1.png"));
+                } else {
+                    obstaculo = new Obstaculo(6, i, new ImageView("turtletatics/view/imagens/Obstaculo2.png"));
+                }
+                obstaculo.getImagem().setLayoutX(Main.tabuleiro[6][i].getX() + ESP_CASA_PERS);
+                obstaculo.getImagem().setLayoutY(Main.tabuleiro[6][i].getY() + ESP_CASA_PERS);
+                obstaculo.getImagem().fitWidthProperty().set(TAM_PERS_CASA);
+                obstaculo.getImagem().fitHeightProperty().set(TAM_PERS_CASA);
+                Main.obstaculos.add(obstaculo);
+                panePrincipal.getChildren().add(obstaculo.getImagem());
+                
+                sorteio = r.nextInt(2);
+                if (sorteio == 0) {
+                    obstaculo = new Obstaculo(i, 5, new ImageView("turtletatics/view/imagens/Obstaculo1.png"));
+                } else {
+                    obstaculo = new Obstaculo(i, 5, new ImageView("turtletatics/view/imagens/Obstaculo2.png"));
+                }
+                obstaculo.getImagem().setLayoutX(Main.tabuleiro[i][5].getX() + ESP_CASA_PERS);
+                obstaculo.getImagem().setLayoutY(Main.tabuleiro[i][5].getY() + ESP_CASA_PERS);
+                obstaculo.getImagem().fitWidthProperty().set(TAM_PERS_CASA);
+                obstaculo.getImagem().fitHeightProperty().set(TAM_PERS_CASA);
+                Main.obstaculos.add(obstaculo);
+                panePrincipal.getChildren().add(obstaculo.getImagem());
+                
+                sorteio = r.nextInt(2);
+                if (sorteio == 0) {
+                    obstaculo = new Obstaculo(i, 6, new ImageView("turtletatics/view/imagens/Obstaculo1.png"));
+                } else {
+                    obstaculo = new Obstaculo(i, 6, new ImageView("turtletatics/view/imagens/Obstaculo2.png"));
+                }
+                obstaculo.getImagem().setLayoutX(Main.tabuleiro[i][6].getX() + ESP_CASA_PERS);
+                obstaculo.getImagem().setLayoutY(Main.tabuleiro[i][6].getY() + ESP_CASA_PERS);
+                obstaculo.getImagem().fitWidthProperty().set(TAM_PERS_CASA);
+                obstaculo.getImagem().fitHeightProperty().set(TAM_PERS_CASA);
+                Main.obstaculos.add(obstaculo);
+                panePrincipal.getChildren().add(obstaculo.getImagem());
+            }
+        }
+
         resetarTela();
 
         //Criar o método de clicar em um personagem de J1
@@ -264,14 +362,14 @@ public class TelaPosicionamentoController implements Initializable {
                 int y = j;
 
                 Main.tabuleiro[i][j].setOnMouseClicked(event -> {
-                    if(estahOcupado(r)) {
-                        JOptionPane.showMessageDialog(null, "A posião já está ocupada", "Erro", 0);
+                    if (estahOcupado(r)) {
+                        JOptionPane.showMessageDialog(null, "A posição já está ocupada", "Erro", 0);
                         return;
-                    } else if(personagemSelecionado == null) {
+                    } else if (personagemSelecionado == null) {
                         JOptionPane.showMessageDialog(null, "Nenhum personagem selecionado", "Erro", 0);
                         return;
                     }
-                    
+
                     if (casaEhValida(r)) {
                         if (ehVezDeJ1) {
                             inserirNoTabuleiro(r, Main.j1, x, y);

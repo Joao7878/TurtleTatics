@@ -9,7 +9,7 @@ public class Padre extends Personagem {
   private int quantTentativas;
 
   public Padre() {
-    super("Padre", 90, 15, 4, 15, new Image("turtletatics/view/imagens/imagensPersonagens/Padre.png"));
+    super("Padre", 100, 15, 4, 15, new Image("turtletatics/view/imagens/imagensPersonagens/Padre.png"));
     quantTentativas = 0;
   }
 

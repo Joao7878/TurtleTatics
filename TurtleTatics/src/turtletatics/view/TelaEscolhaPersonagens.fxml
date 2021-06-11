@@ -91,17 +91,17 @@
                         <Font name="Impact" size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="9.0" layoutY="24.0" text="Quantidade vital: 100" textFill="#1c4d13">
+                  <Label layoutX="9.0" layoutY="24.0" text="Quantidade vital: 110" textFill="#1c4d13">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="9.0" layoutY="45.0" text="Defesa: 25" textFill="#1c4d13">
+                  <Label layoutX="9.0" layoutY="45.0" text="Defesa: 20" textFill="#1c4d13">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 3" textFill="#1c4d13">
+                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 2" textFill="#1c4d13">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -135,12 +135,12 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 4" textFill="#1c4d13">
+                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 3" textFill="#1c4d13">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 30" textFill="#1c4d13">
+                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 50" textFill="#1c4d13">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -174,7 +174,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 30" textFill="#1c4d13">
+                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 40" textFill="#1c4d13">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -271,7 +271,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 2" textFill="#1c4d13">
+                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 4" textFill="#1c4d13">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -295,7 +295,7 @@
                         <Font name="Impact" size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="9.0" layoutY="24.0" text="Quantidade vital: 90" textFill="#1c4d13">
+                  <Label layoutX="9.0" layoutY="24.0" text="Quantidade vital: 100" textFill="#1c4d13">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -334,17 +334,17 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="9.0" layoutY="45.0" text="Defesa: 18" textFill="#1c4d13">
+                  <Label layoutX="9.0" layoutY="45.0" text="Defesa: 22" textFill="#1c4d13">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 5" textFill="#1c4d13">
+                  <Label layoutX="9.0" layoutY="66.0" text="Alcance: 4" textFill="#1c4d13">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 25" textFill="#1c4d13">
+                  <Label layoutX="9.0" layoutY="87.0" text="Ataque: 39" textFill="#1c4d13">
                      <font>
                         <Font size="15.0" />
                      </font>

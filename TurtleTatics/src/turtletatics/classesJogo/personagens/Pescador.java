@@ -9,7 +9,7 @@ import turtletatics.classesJogo.itens.Item;
 public class Pescador extends Personagem {
 
     public Pescador() {
-        super("Pescador", 150, 18, 5, 25, new Image("turtletatics/view/imagens/imagensPersonagens/Pescador.png"));
+        super("Pescador", 150, 22, 4, 39, new Image("turtletatics/view/imagens/imagensPersonagens/Pescador.png"));
     }
 
     @Override

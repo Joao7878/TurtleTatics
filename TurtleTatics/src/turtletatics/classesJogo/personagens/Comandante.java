@@ -8,7 +8,7 @@ import turtletatics.classesJogo.funcionalidades.ExplosaoAtomica;
 public class Comandante extends Personagem {
 
     public Comandante() {
-        super("Comandante", 150, 20, 4, 30, new Image("turtletatics/view/imagens/imagensPersonagens/Comandante.png"));
+        super("Comandante", 150, 20, 3, 50, new Image("turtletatics/view/imagens/imagensPersonagens/Comandante.png"));
     }
 
     @Override
@@ -18,7 +18,7 @@ public class Comandante extends Personagem {
         JOptionPane.showMessageDialog(null, this.getNome() + " usou seu cargo do exército para lançar uma bomba atômica no "
                 + pAtacado.getNome() + ". Os arredores dessa zona estarão contaminados com radiação pelo resto da partida",
                 pAtacado.getNome() + " atacado", JOptionPane.INFORMATION_MESSAGE);
-        pAtacado.setQuantVital((pAtacado.getQuantVital() - 70));
+        pAtacado.setQuantVital((pAtacado.getQuantVital() - 60));
         explosao.setX(pAtacado.getX());
         explosao.setY(pAtacado.getY());
         this.setCargaEspecial(-1);

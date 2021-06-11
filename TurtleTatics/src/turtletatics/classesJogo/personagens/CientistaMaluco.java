@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 
 public class CientistaMaluco extends Personagem {
   public CientistaMaluco() {
-    super("Cientista Maluco", 100, 25, 3, 35, new Image("turtletatics/view/imagens/imagensPersonagens/CientistaMaluco.png"));
+    super("Cientista Maluco", 110, 20, 2, 35, new Image("turtletatics/view/imagens/imagensPersonagens/CientistaMaluco.png"));
   }
 
   @Override

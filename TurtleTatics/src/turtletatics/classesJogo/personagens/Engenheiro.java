@@ -11,6 +11,6 @@ public class Engenheiro extends Personagem {
   public void atkEspecial(Personagem pAtacado, Personagem pAliado) {
     pAliado.setQuantVital(pAliado.getQuantVital() + 20);
     pAtacado.setQuantVital(pAtacado.getQuantVital() - 20);
-    this.setCargaEspecial(3);
+    this.setCargaEspecial(6);
   }
 }

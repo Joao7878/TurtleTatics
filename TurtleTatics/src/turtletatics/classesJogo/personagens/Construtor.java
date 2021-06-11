@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 public class Construtor extends Personagem {
 
     public Construtor() {
-        super("Construtor", 120, 25, 2, 30, new Image("turtletatics/view/imagens/imagensPersonagens/Construtor.png"));
+        super("Construtor", 120, 25, 2, 40, new Image("turtletatics/view/imagens/imagensPersonagens/Construtor.png"));
     }
 
     @Override

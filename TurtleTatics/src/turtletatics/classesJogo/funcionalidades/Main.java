@@ -28,6 +28,7 @@ public class Main {
     public static Rectangle[][] tabuleiro;
     public static ArrayList<ImageView> persJ1 = new ArrayList<ImageView>();
     public static ArrayList<ImageView> persJ2 = new ArrayList<ImageView>();
+    public static ArrayList<Obstaculo> obstaculos = new ArrayList<Obstaculo>();
     public static ExplosaoAtomica explosao = new ExplosaoAtomica(-1, -1);
 
     public static int calcularDistancia(int xAtual, int yAtual, int xNovo, int yNovo) {
