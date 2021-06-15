@@ -3,29 +3,30 @@ package turtletatics.classesJogo.itens;
 import turtletatics.classesJogo.personagens.Personagem;
 
 public abstract class Item {
-  private String nome;
-  private int durabilidade;
 
-  public Item(String nome, int durabilidade) {
-    this.nome = nome;
-    this.durabilidade = durabilidade;
-  }
+    private String nome;
+    private int durabilidade;
 
-  public void setNome(String nome) {
-    this.nome = nome;
-  }
+    public Item(String nome, int durabilidade) {
+        this.nome = nome;
+        this.durabilidade = durabilidade;
+    }
 
-  public String getNome() {
-    return this.nome;
-  }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-  public void setDurabilidade(int durabilidade) {
-    this.durabilidade = durabilidade;
-  }
+    public String getNome() {
+        return this.nome;
+    }
 
-  public int getDurabilidade() {
-    return this.durabilidade;
-  }
+    public void setDurabilidade(int durabilidade) {
+        this.durabilidade = durabilidade;
+    }
 
-  public abstract void efeito(Personagem Pafetado);
+    public int getDurabilidade() {
+        return this.durabilidade;
+    }
+
+    public abstract void efeito(Personagem Pafetado);
 }

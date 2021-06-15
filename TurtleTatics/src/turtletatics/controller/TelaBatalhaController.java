@@ -77,8 +77,8 @@ public class TelaBatalhaController implements Initializable {
             }
         }
     }
-
-    void resetarTela() {
+    
+    void resetarVariaveisAcao() {
         acaoPosicionamento = false;
         acaoAtqBasico = false;
         acaoAtqEspecialCarCav = false;
@@ -88,7 +88,10 @@ public class TelaBatalhaController implements Initializable {
         acaoAtqEspecialCom = false;
         acaoAtqEspecialPad = false;
         acaoAtqEspecialCie = false;
-        //acaoUsarItem = false;
+    }
+
+    void resetarTela() {
+        resetarVariaveisAcao();
 
         imPersSelecionado = null;
         persAtacado = null;
@@ -112,10 +115,12 @@ public class TelaBatalhaController implements Initializable {
         for (ImageView im : persJogAtual) {
             im.disableProperty().set(false);
             im.setOpacity(1);
+            Main.removerEfeitoClicado(im);
         }
         for (ImageView im : persJogProxRodada) {
             im.disableProperty().set(true);
             im.setOpacity(0.3);
+            Main.removerEfeitoClicado(im);
         }
     }
 
@@ -187,19 +192,23 @@ public class TelaBatalhaController implements Initializable {
         if (itemSelecionado.getNome().equals("Porrete") || itemSelecionado.getNome().equals("Veneno")) {
             for (ImageView im : persJogAtual) {
                 im.setOpacity(0.5);
+                Main.removerEfeitoClicado(im);
                 im.disableProperty().set(true);
             }
             for (ImageView im : persJogProxRodada) {
                 im.setOpacity(1);
+                Main.removerEfeitoClicado(im);
                 im.disableProperty().set(false);
             }
         } else {
             for (ImageView im : persJogProxRodada) {
                 im.setOpacity(0.5);
+                Main.removerEfeitoClicado(im);
                 im.disableProperty().set(true);
             }
             for (ImageView im : persJogAtual) {
                 im.setOpacity(1);
+                Main.removerEfeitoClicado(im);
                 im.disableProperty().set(false);
             }
         }
@@ -239,7 +248,7 @@ public class TelaBatalhaController implements Initializable {
         for (Personagem p : Main.j1.getPersonagens()) {
             p.getImagem().setOnMouseClicked(event -> {
                 //Ação de receber efeito de item selecionado
-                if (/*ehVezDeJ1 &&*/p.getImagem().getOpacity() == 1 && acaoUsarItem) {
+                if (p.getImagem().getOpacity() == 1 && acaoUsarItem) {
                     itemSelecionado.efeito(p);
                     if (itemSelecionado.getDurabilidade() == 0) {
                         JOptionPane.showMessageDialog(null, itemSelecionado.getNome() + " quebrou", "Item quebrou", JOptionPane.INFORMATION_MESSAGE);
@@ -256,7 +265,7 @@ public class TelaBatalhaController implements Initializable {
                     return;
 
                     //Ação de ser atacado por ataque básico
-                } else if (/*!ehVezDeJ1 &&*/p.getImagem().getOpacity() == 1 && acaoAtqBasico) {
+                } else if (p.getImagem().getOpacity() == 1 && acaoAtqBasico) {
                     try {
                         ataqueBasico(p);
                     } catch (IOException ex) {
@@ -290,10 +299,12 @@ public class TelaBatalhaController implements Initializable {
 
                     for (ImageView im : Main.persJ1) {
                         im.setOpacity(0.2);
+                        Main.removerEfeitoClicado(im);
                         im.disableProperty().set(true);
                     }
                     for (ImageView im : Main.persJ2) {
                         im.setOpacity(1);
+                        Main.removerEfeitoClicado(im);
                         im.disableProperty().set(false);
                     }
 
@@ -338,7 +349,7 @@ public class TelaBatalhaController implements Initializable {
                 }
 
                 resetarTela();
-                p.getImagem().setOpacity(0.5);
+                Main.aplicarEfeitoClicado(p.getImagem());
                 imPersSelecionado = p.getImagem();
             });
         }
@@ -348,7 +359,7 @@ public class TelaBatalhaController implements Initializable {
         for (Personagem p : Main.j2.getPersonagens()) {
             p.getImagem().setOnMouseClicked(event -> {
                 //Ação de receber efeito de item selecionado
-                if (/*!ehVezDeJ1 &&*/p.getImagem().getOpacity() == 1 && acaoUsarItem) {
+                if (p.getImagem().getOpacity() == 1 && acaoUsarItem) {
                     itemSelecionado.efeito(p);
                     if (itemSelecionado.getDurabilidade() == 0) {
                         JOptionPane.showMessageDialog(null, itemSelecionado.getNome() + " quebrou", "Item quebrou", JOptionPane.INFORMATION_MESSAGE);
@@ -399,10 +410,12 @@ public class TelaBatalhaController implements Initializable {
 
                     for (ImageView im : Main.persJ2) {
                         im.setOpacity(0.2);
+                        Main.removerEfeitoClicado(im);
                         im.disableProperty().set(true);
                     }
                     for (ImageView im : Main.persJ1) {
                         im.setOpacity(1);
+                        Main.removerEfeitoClicado(im);
                         im.disableProperty().set(false);
                     }
 
@@ -447,7 +460,8 @@ public class TelaBatalhaController implements Initializable {
                 }
 
                 resetarTela();
-                p.getImagem().setOpacity(0.5);
+                //p.getImagem().setOpacity(0.5);
+                Main.aplicarEfeitoClicado(p.getImagem());
                 imPersSelecionado = p.getImagem();
             });
         }
@@ -680,10 +694,10 @@ public class TelaBatalhaController implements Initializable {
         }
 
         //Insere os obstáculos na tela
-        for(Obstaculo o : Main.obstaculos) {
+        for (Obstaculo o : Main.obstaculos) {
             o.getImagem().setLayoutX(Main.tabuleiro[o.getX()][o.getY()].getX() + ESP_CASA_PERS);
             o.getImagem().setLayoutY(Main.tabuleiro[o.getX()][o.getY()].getY() + ESP_CASA_PERS);
-            
+
             panePrincipal.getChildren().add(o.getImagem());
         }
 
@@ -713,19 +727,6 @@ public class TelaBatalhaController implements Initializable {
             Logger.getLogger(TelaBatalhaController.class.getName()).log(Level.SEVERE, null, ex);
         }
         resetarTela();
-
-        /*if (itemSelecionado != null && (itemSelecionado.getNome().equals("Porrete") || itemSelecionado.getNome().equals("Veneno"))) {
-            ArrayList<ImageView> persJogAtual = (ehVezDeJ1) ? Main.persJ1 : Main.persJ2;
-            ArrayList<ImageView> persJogProxRodada = (ehVezDeJ1) ? Main.persJ2 : Main.persJ1;
-            for (ImageView im : persJogAtual) {
-                im.setOpacity(0.5);
-                im.disableProperty().set(true);
-            }
-            for (ImageView im : persJogProxRodada) {
-                im.setOpacity(1);
-                im.disableProperty().set(false);
-            }
-        }*/
     }
 
     @FXML
@@ -735,6 +736,7 @@ public class TelaBatalhaController implements Initializable {
             return;
         }
 
+        resetarVariaveisAcao();
         Jogador jogAtual = (ehVezDeJ1) ? Main.j1 : Main.j2;
         persSelecionado = obterPersonagem(imPersSelecionado, jogAtual);
 
@@ -756,6 +758,7 @@ public class TelaBatalhaController implements Initializable {
             return;
         }
 
+        resetarVariaveisAcao();
         resetarTabuleiro();
 
         Jogador jogAtual = (ehVezDeJ1) ? Main.j1 : Main.j2;
@@ -766,11 +769,13 @@ public class TelaBatalhaController implements Initializable {
         boolean temInimigoAoAlcance = false;
         for (ImageView im : persJogAtual) {
             im.setOpacity(0.5);
+            Main.removerEfeitoClicado(im);
         }
         for (ImageView im : persJogProxRodada) {
             persAtacado = obterPersonagem(im, jogProxRodada);
             if (Main.calcularDistanciaPersonagens(persAtacado, persSelecionado) <= persSelecionado.getAlcance()) {
                 im.setOpacity(1);
+                Main.removerEfeitoClicado(im);
                 im.disableProperty().set(false);
                 temInimigoAoAlcance = true;
             }
@@ -793,6 +798,7 @@ public class TelaBatalhaController implements Initializable {
             return;
         }
 
+        resetarVariaveisAcao();
         resetarTabuleiro();
 
         Jogador jogAtual = (ehVezDeJ1) ? Main.j1 : Main.j2;
@@ -821,11 +827,13 @@ public class TelaBatalhaController implements Initializable {
             boolean temInimigoAoAlcance = false;
             for (ImageView im : persJogAtual) {
                 im.setOpacity(0.5);
+                Main.removerEfeitoClicado(im);
             }
             for (ImageView im : persJogProxRodada) {
                 persAtacado = obterPersonagem(im, jogProxRodada);
                 if (Main.calcularDistanciaPersonagens(persAtacado, persSelecionado) <= persSelecionado.getAlcance()) {
                     im.setOpacity(1);
+                    Main.removerEfeitoClicado(im);
                     im.disableProperty().set(false);
                     temInimigoAoAlcance = true;
                 }
@@ -845,6 +853,7 @@ public class TelaBatalhaController implements Initializable {
 
             for (ImageView im : persJogAtual) {
                 im.setOpacity(1);
+                Main.removerEfeitoClicado(im);
             }
 
             acaoAtqEspecialCozCon = true;
@@ -855,10 +864,12 @@ public class TelaBatalhaController implements Initializable {
 
             for (ImageView im : persJogAtual) {
                 im.setOpacity(0.5);
+                Main.removerEfeitoClicado(im);
                 //im.disableProperty().set(true);
             }
             for (ImageView im : persJogProxRodada) {
                 im.setOpacity(1);
+                Main.removerEfeitoClicado(im);
                 im.disableProperty().set(false);
             }
 
@@ -870,10 +881,12 @@ public class TelaBatalhaController implements Initializable {
 
             for (ImageView im : persJogAtual) {
                 im.setOpacity(0.5);
+                Main.removerEfeitoClicado(im);
                 //im.disableProperty().set(true);
             }
             for (ImageView im : persJogProxRodada) {
                 im.setOpacity(1);
+                Main.removerEfeitoClicado(im);
                 im.disableProperty().set(false);
             }
 
@@ -886,11 +899,13 @@ public class TelaBatalhaController implements Initializable {
             boolean temInimigoAoAlcance = false;
             for (ImageView im : persJogAtual) {
                 im.setOpacity(0.5);
+                Main.removerEfeitoClicado(im);
             }
             for (ImageView im : persJogProxRodada) {
                 persAtacado = obterPersonagem(im, jogProxRodada);
                 if (Main.calcularDistanciaPersonagens(persAtacado, persSelecionado) <= persSelecionado.getAlcance()) {
                     im.setOpacity(1);
+                    Main.removerEfeitoClicado(im);
                     im.disableProperty().set(false);
                     temInimigoAoAlcance = true;
                 }
@@ -915,9 +930,11 @@ public class TelaBatalhaController implements Initializable {
             boolean temInimigoAoAlcance = false;
             for (ImageView im : persJogAtual) {
                 im.setOpacity(0.5);
+                Main.removerEfeitoClicado(im);
             }
             for (ImageView im : persJogProxRodada) {
                 im.setOpacity(1);
+                Main.removerEfeitoClicado(im);
                 im.disableProperty().set(false);
                 temInimigoAoAlcance = true;
             }
@@ -954,6 +971,7 @@ public class TelaBatalhaController implements Initializable {
 
     @FXML
     private void acaoClicarBotaoUsarItem(ActionEvent event) {
+        resetarVariaveisAcao();
         Jogador jogAtual = (ehVezDeJ1) ? Main.j1 : Main.j2;
         if (jogAtual.getInventario().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Você não possui itens", "Erro", JOptionPane.ERROR_MESSAGE);

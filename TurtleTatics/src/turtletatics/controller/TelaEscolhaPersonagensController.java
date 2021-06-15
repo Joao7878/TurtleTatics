@@ -15,8 +15,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import turtletatics.classesJogo.funcionalidades.Main;
 
+import turtletatics.classesJogo.funcionalidades.Main;
 import turtletatics.classesTelas.*;
 
 public class TelaEscolhaPersonagensController implements Initializable {
@@ -50,7 +50,7 @@ public class TelaEscolhaPersonagensController implements Initializable {
 
     void resetarTela() {
         for (SplitPane sp : listaPersonagens) {
-            sp.opacityProperty().set(1);
+            Main.removerEfeitoClicado(sp);
         }
 
         personagemSelecionado = null;
@@ -110,11 +110,13 @@ public class TelaEscolhaPersonagensController implements Initializable {
 
         labelJogadorAtual.setText(Main.j1.getNome() + ", escolha um personagem");
 
-        //Criar o método de clicar em um personagem
+        //Inicia personagems e criar o método de clicar
         for (SplitPane p : listaPersonagens) {
+            Main.efeito.setChoke(0);
+            p.effectProperty().set(Main.efeito);
             p.setOnMouseClicked(event -> {
                 resetarTela();
-                p.opacityProperty().set(0.5);
+                Main.aplicarEfeitoClicado(p);
                 personagemSelecionado = p.getId();
             });
         }

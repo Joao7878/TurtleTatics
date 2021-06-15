@@ -1,4 +1,3 @@
-
 package turtletatics.classesTelas;
 
 import javafx.application.Application;
@@ -10,19 +9,17 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class TelaBatalha extends Application {
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/turtletatics/view/TelaBatalha.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.getIcons().add(new Image("/turtletatics/view/imagens/IconeAbas.png"));
         stage.setTitle("Batalha");
         stage.setResizable(false);
-        /*if(Main.tamTabuleiro == 12) {
-            stage.setFullScreen(true);
-        }*/
         stage.show();
     }
 
@@ -32,5 +29,5 @@ public class TelaBatalha extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

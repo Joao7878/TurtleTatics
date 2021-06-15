@@ -38,7 +38,6 @@ public class ExplosaoAtomica {
         for (i = 0; i < Main.j1.getPersonagens().size(); i++) {
             p = Main.j1.getPersonagens().get(i);
             if (Main.calcularDistancia(p.getX(), p.getY(), this.x, this.y) <= 1) {
-                //JOptionPane.showMessageDialog(null, p.getNome() + " levou dano da radiação");
                 JOptionPane.showMessageDialog(null, p.getNome() + " recebeu dano de radiação", "Radiação", JOptionPane.INFORMATION_MESSAGE);
                 p.setQuantVital(p.getQuantVital() - 6 * this.radioatividade);
                 if (p.getQuantVital() <= 0) {
@@ -55,7 +54,6 @@ public class ExplosaoAtomica {
         for (i = 0; i < Main.j2.getPersonagens().size(); i++) {
             p = Main.j2.getPersonagens().get(i);
             if (Main.calcularDistancia(p.getX(), p.getY(), this.x, this.y) <= 1) {
-                //JOptionPane.showMessageDialog(null, p.getNome() + " levou dano da radiação");
                 JOptionPane.showMessageDialog(null, p.getNome() + " recebeu dano de radiação", "Radiação", JOptionPane.INFORMATION_MESSAGE);
                 p.setQuantVital(p.getQuantVital() - 6 * this.radioatividade);
                 if (p.getQuantVital() <= 0) {

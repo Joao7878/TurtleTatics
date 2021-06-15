@@ -16,15 +16,14 @@ public class Construtor extends Personagem {
         double numReal = gerador.nextDouble();
         if (numReal > 0.5) {
             pAliado.setQuantAtaque(pAliado.getQuantAtaque() + 15);
-            //JOptionPane.showMessageDialog(null, "O " + aliados.getPersonagens().get(opcPersonagemInt).getNome()
-            //    + " teve suas armas melhoradas, ganhando 15 de ataque.");
             JOptionPane.showMessageDialog(null, "O " + pAliado.getNome() + " teve suas armas melhoradas, ganhando 15 de ataque.", pAliado.getNome() + " ganhou ataque", JOptionPane.INFORMATION_MESSAGE);
         } else {
             pAliado.setValorDefesa(pAliado.getValorDefesa() + 10);
-            //JOptionPane.showMessageDialog(null, "O " + aliados.getPersonagens().get(opcPersonagemInt).getNome()
-            //    + " teve suas armadura melhorada, ganhando 10 de defesa.");
             JOptionPane.showMessageDialog(null, "O " + pAliado.getNome() + " teve sua armadura melhorada, ganhando 10 de defesa.", pAliado.getNome() + " ganhou ataque", JOptionPane.INFORMATION_MESSAGE);
         }
         this.setCargaEspecial(8);
     }
 }
+
+// habilidade especial: Tem 50% de chance de dar ataque ou
+// defesa para o aliado selecionado

@@ -21,8 +21,6 @@ public class Cavaleiro extends Personagem {
 
   @Override
   public void atkEspecial(Personagem pAtacado) {
-    //JOptionPane.showMessageDialog(null, this.getNome() + " desembainhou a Samehada e atacou: " + pAtacado.getNome()
-    //    + ". A Samehada consumiu chakra, seu próximo ataque especial dará mais dano");
     JOptionPane.showMessageDialog(null, this.getNome() + " desembainhou a Samehada e atacou o " + pAtacado.getNome()
                                   + ". A Samehada consumiu chakra, seu próximo ataque especial dará mais dano",
                                   pAtacado.getNome() + " atacado", JOptionPane.INFORMATION_MESSAGE);

@@ -6,20 +6,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javafx.scene.control.SplitPane;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javax.swing.JOptionPane;
-import turtletatics.classesJogo.itens.Couraca;
-import turtletatics.classesJogo.itens.Espada;
-import turtletatics.classesJogo.itens.Estilingue;
-import turtletatics.classesJogo.itens.Item;
-import turtletatics.classesJogo.itens.Pocao;
-import turtletatics.classesJogo.itens.Porrete;
-import turtletatics.classesJogo.itens.Veneno;
+
+import turtletatics.classesJogo.itens.*;
 import turtletatics.classesJogo.personagens.*;
 
-/*Equipe: Guilherme Martinho Chumbinho De Andrade,Luan Machado Silva Vidal, Antonio Mesquita da Silveiro Neto,
-Rafael Santos de Jesus,João Pedro Moreira de Almeida Santos*/
 public class Main {
 
     public static Jogador j1;
@@ -30,6 +27,31 @@ public class Main {
     public static ArrayList<ImageView> persJ2 = new ArrayList<ImageView>();
     public static ArrayList<Obstaculo> obstaculos = new ArrayList<Obstaculo>();
     public static ExplosaoAtomica explosao = new ExplosaoAtomica(-1, -1);
+    public static InnerShadow efeito = new InnerShadow();
+
+    public static void aplicarEfeitoClicado(SplitPane sp) {
+        efeito = new InnerShadow();
+        efeito.setChoke(0.5);
+        sp.effectProperty().set(efeito);
+    }
+    
+    public static void aplicarEfeitoClicado(ImageView iv) {
+        efeito = new InnerShadow();
+        efeito.setChoke(0.5);
+        iv.effectProperty().set(efeito);
+    }
+    
+    public static void removerEfeitoClicado(SplitPane sp) {
+        efeito = new InnerShadow();
+        efeito.setChoke(0);
+        sp.effectProperty().set(efeito);
+    }
+    
+    public static void removerEfeitoClicado(ImageView iv) {
+        efeito = new InnerShadow();
+        efeito.setChoke(0);
+        iv.effectProperty().set(efeito);
+    }
 
     public static int calcularDistancia(int xAtual, int yAtual, int xNovo, int yNovo) {
         int deltaX = Math.abs(xNovo - xAtual), deltaY = Math.abs(yNovo - yAtual);

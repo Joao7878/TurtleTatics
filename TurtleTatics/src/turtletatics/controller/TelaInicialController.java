@@ -46,7 +46,7 @@ public class TelaInicialController implements Initializable {
         if (j.getNome() == null) { //Clicou no botão cancelar ou X para fechar a aba
             return false;
         }
-        
+
         boolean temApenasEspaco = true;
         int tamNome = 0;
 

@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
@@ -18,7 +17,6 @@ import javax.swing.JOptionPane;
 
 import turtletatics.classesJogo.funcionalidades.*;
 import turtletatics.classesJogo.personagens.Personagem;
-
 import turtletatics.classesTelas.*;
 
 public class TelaPosicionamentoController implements Initializable {
@@ -86,9 +84,11 @@ public class TelaPosicionamentoController implements Initializable {
 
         for (ImageView im : persJogAtual) {
             im.setOpacity(1);
+            Main.removerEfeitoClicado(im);
             im.disableProperty().set(false);
         }
         for (ImageView im : persJogProxRodada) {
+            Main.removerEfeitoClicado(im);
             if (!estahPosicionado(im)) {
                 im.setOpacity(0.2);
                 im.disableProperty().set(true);
@@ -182,6 +182,8 @@ public class TelaPosicionamentoController implements Initializable {
         //Insere os personagens de J1
         for (int i = 0; i < 5; i++) {
             ImageView im = Main.j1.getPersonagens().get(i).getImagem();
+            
+            im.effectProperty().set(Main.efeito);
 
             im.fitWidthProperty().set(109);
             im.fitHeightProperty().set(113);
@@ -196,6 +198,8 @@ public class TelaPosicionamentoController implements Initializable {
         //Insere os personagens de J2
         for (int i = 0; i < 5; i++) {
             ImageView im = Main.j2.getPersonagens().get(i).getImagem();
+            
+            im.effectProperty().set(Main.efeito);
 
             im.fitWidthProperty().set(109);
             im.fitHeightProperty().set(113);
@@ -272,7 +276,7 @@ public class TelaPosicionamentoController implements Initializable {
                 obstaculo.getImagem().fitHeightProperty().set(TAM_PERS_CASA);
                 Main.obstaculos.add(obstaculo);
                 panePrincipal.getChildren().add(obstaculo.getImagem());
-                
+
                 sorteio = r.nextInt(2);
                 if (sorteio == 0) {
                     obstaculo = new Obstaculo(6, i, new ImageView("turtletatics/view/imagens/Obstaculo1.png"));
@@ -285,7 +289,7 @@ public class TelaPosicionamentoController implements Initializable {
                 obstaculo.getImagem().fitHeightProperty().set(TAM_PERS_CASA);
                 Main.obstaculos.add(obstaculo);
                 panePrincipal.getChildren().add(obstaculo.getImagem());
-                
+
                 sorteio = r.nextInt(2);
                 if (sorteio == 0) {
                     obstaculo = new Obstaculo(i, 5, new ImageView("turtletatics/view/imagens/Obstaculo1.png"));
@@ -298,7 +302,7 @@ public class TelaPosicionamentoController implements Initializable {
                 obstaculo.getImagem().fitHeightProperty().set(TAM_PERS_CASA);
                 Main.obstaculos.add(obstaculo);
                 panePrincipal.getChildren().add(obstaculo.getImagem());
-                
+
                 sorteio = r.nextInt(2);
                 if (sorteio == 0) {
                     obstaculo = new Obstaculo(i, 6, new ImageView("turtletatics/view/imagens/Obstaculo1.png"));
@@ -324,7 +328,7 @@ public class TelaPosicionamentoController implements Initializable {
                 }
 
                 resetarTela();
-                per.setOpacity(0.5);
+                Main.aplicarEfeitoClicado(per);
                 personagemSelecionado = per;
 
                 for (int j = Main.tamTabuleiro / 2 - 1; j < Main.tamTabuleiro; j++) {
@@ -343,7 +347,7 @@ public class TelaPosicionamentoController implements Initializable {
                 }
 
                 resetarTela();
-                per.setOpacity(0.5);
+                Main.aplicarEfeitoClicado(per);
                 personagemSelecionado = per;
 
                 for (int j = 0; j < Main.tamTabuleiro / 2 + 1; j++) {

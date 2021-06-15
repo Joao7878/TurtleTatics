@@ -13,15 +13,15 @@ public class Obstaculo {
         this.y = y;
         this.imagem = im;
     }
-    
+
     public int getX() {
         return this.x;
     }
-    
+
     public int getY() {
         return this.y;
     }
-    
+
     public ImageView getImagem() {
         return this.imagem;
     }

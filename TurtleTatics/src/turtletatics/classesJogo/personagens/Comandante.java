@@ -13,8 +13,6 @@ public class Comandante extends Personagem {
 
     @Override
     public void atkEspecial(Personagem pAtacado, ExplosaoAtomica explosao) {
-        //JOptionPane.showMessageDialog(null, this.getNome() + " usou seu cargo do exército para lançar uma bomba atômica no "
-        //    + pAtacado.getNome() + ". Os arredores dessa zona estarão contaminados com radiação pelo resto da partida");
         JOptionPane.showMessageDialog(null, this.getNome() + " usou seu cargo do exército para lançar uma bomba atômica no "
                 + pAtacado.getNome() + ". Os arredores dessa zona estarão contaminados com radiação pelo resto da partida",
                 pAtacado.getNome() + " atacado", JOptionPane.INFORMATION_MESSAGE);
